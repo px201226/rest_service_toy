@@ -8,9 +8,20 @@ logging:
 spring:
   messages:
     basename: messages
+  datasource:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    show-sql: true
+
+
+#  security:
+#    user:
+#      name: username
+#      password: password
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+
