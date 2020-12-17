@@ -10,12 +10,7 @@ import java.util.List;
 @Service
 public class UserDaoService {
     private static List<User> users = new ArrayList<>();
-    private static int userCount = 3 ;
-    static {
-        users.add(new User(1,"홍길동", LocalDateTime.now(),"pass1","701010-1001234", new ArrayList<>()));
-        users.add(new User(2,"박명수", LocalDateTime.now(),"pass2","801010-1001234", new ArrayList<>()));
-        users.add(new User(3,"유재석", LocalDateTime.now(),"pass3","901010-1001234", new ArrayList<>()));
-    }
+    private static int userCount = 0;
 
     public List<User> findAll(){
         return users;
