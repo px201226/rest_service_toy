@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)         //jwt token으로 인증하므로 세션을 생성안함.
             .and()
                 .authorizeRequests()    // 다음 리퀘스트에 대한 사용권한 체크
-                    .antMatchers("/*/signin","/*/signup").permitAll()       //가입 및 인증 주소는 누구나 가능
+                    .antMatchers("/*/join","/*/login","/h2-console/**").permitAll()       //가입 및 인증 주소는 누구나 가능
                     .anyRequest().hasRole("USER")
             .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),       // UsernamePasswordAuth..filter 전에
@@ -59,6 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
        web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
-               "/swagger-ui.html","/webjars/**", "/swagger/**");
+               "/swagger-ui.html","/webjars/**", "/swagger/**","/h2-console/**");
     }
 }

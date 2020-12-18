@@ -1,8 +1,8 @@
 package com.example.restapi.user;
 
+import com.example.restapi.domain.user.User;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +47,6 @@ public class UserDaoService {
     public User modifyById(Integer id, User user){
         User modifyUser = findById(id);
         modifyUser.setName(user.getName());
-        modifyUser.setJoinDate(user.getJoinDate());
         return modifyUser;
     }
 }

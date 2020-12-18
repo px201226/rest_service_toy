@@ -1,12 +1,12 @@
-package com.example.restapi.common.response;
+package com.example.restapi.domain.response;
 
 
 import lombok.*;
 
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ResponseData<T> {
     int resultCode;
     String resultMsg;

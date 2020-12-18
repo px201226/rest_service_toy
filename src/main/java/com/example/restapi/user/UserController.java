@@ -1,11 +1,10 @@
 package com.example.restapi.user;
 
+import com.example.restapi.domain.user.User;
 import com.example.restapi.exception.UserNotFoundException;
-import org.hibernate.EntityMode;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 

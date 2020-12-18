@@ -1,5 +1,6 @@
 package com.example.restapi.exception;
 
+import com.example.restapi.domain.response.ResponseData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

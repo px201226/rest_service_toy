@@ -1,9 +1,12 @@
 package com.example.restapi.exception;
 
+import com.example.restapi.domain.response.ResponseData;
+import com.example.restapi.domain.response.ResponseService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,12 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @RestController
 @ControllerAdvice           // 모든 컨트롤러가 실행되기 전에 이 컨트롤러가 실행된다.
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+
+    private final ResponseService responseService;
+
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -40,7 +46,11 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
 
-        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(EmailSigninFailedException.class)
@@ -49,6 +59,10 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
 
-        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
