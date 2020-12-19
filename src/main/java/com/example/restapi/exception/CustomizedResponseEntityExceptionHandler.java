@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -43,6 +44,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(UserNotFoundException.class)      // UserNotFoundException 클래스가 발생하면 실행된다.
     public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){
+
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
 
@@ -55,7 +57,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(EmailSigninFailedException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected ResponseEntity<Object> emailSigninFailed(WebRequest request, EmailSigninFailedException e) {
+    protected ResponseEntity emailSigninFailed(WebRequest request, EmailSigninFailedException e) {
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
 
@@ -64,5 +66,18 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(CAuthenticationEntryPointException.class)
+    public ResponseEntity authenticationEntryPointException(HttpServletRequest request, CAuthenticationEntryPointException e) {
+
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), "100", "권한이 없습니다");
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.UNKNOWN_ERROR,
+                exceptionResponse);
+        System.out.println("완료");
+        return new ResponseEntity(responseData, HttpStatus.BAD_REQUEST);
     }
 }

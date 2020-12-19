@@ -1,3 +1,4 @@
+/*
 package com.example.restapi.web;
 
 
@@ -14,6 +15,8 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity save(PostsSaveRequestDto postsSaveRequestDto){
+        return null;
 
     }
 }
+*/

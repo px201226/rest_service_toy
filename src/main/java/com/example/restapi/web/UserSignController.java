@@ -9,12 +9,14 @@ import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.UserResource;
 import com.example.restapi.exception.EmailSigninFailedException;
-import com.example.restapi.user.UserService;
+import com.example.restapi.exception.UserNotFoundException;
+import com.example.restapi.service.user.UserService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +46,7 @@ public class UserSignController {
         if (!passwordEncoder.matches(password, user.getPassword()))
             throw new EmailSigninFailedException("아이디/비밀번호가 틀립니다.");
 
-        String jwtToken = jwtTokenProvider.createToken(String.valueOf(user.getId()), user.getRoles());
+        String jwtToken = jwtTokenProvider.createToken(user.getEmail(), user.getRoles());
         Token token = Token.builder()
                 .jwtToken(jwtToken)
                 .build();
@@ -69,5 +71,17 @@ public class UserSignController {
         UserResource userResource = new UserResource(createUser);
         ResponseData<UserResource> response = responseService.create(ResponseStatus.SUCCESS, userResource);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/profile")
+    public ResponseEntity getUserProfile(){
+        System.out.println("qqqqqqqqqq");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String id = authentication.getName();
+        System.out.println("qqqqqqqqqq" + id);
+        ResponseData rsponseData = responseService.create(
+                ResponseStatus.SUCCESS
+                ,userRepository.findByEmail(id).orElseThrow(UserNotFoundException::new));
+        return ResponseEntity.ok(rsponseData);
     }
 }

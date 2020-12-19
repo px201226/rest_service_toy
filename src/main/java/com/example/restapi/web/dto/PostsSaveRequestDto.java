@@ -1,3 +1,4 @@
+/*
 package com.example.restapi.web.dto;
 
 
@@ -15,7 +16,6 @@ import lombok.NoArgsConstructor;
 public class PostsSaveRequestDto {
 
     private String content;
-    private String userName;
     private String userEmail;
 
     public Posts toEntity(User user){
@@ -25,3 +25,4 @@ public class PostsSaveRequestDto {
                 .build();
     }
 }
+*/

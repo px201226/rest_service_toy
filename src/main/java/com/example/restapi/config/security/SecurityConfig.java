@@ -42,23 +42,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         super.configure(http);*/
 
         http
-            .httpBasic().disable()          // REST API 이므로 기본설정 안함. 기본설정은 비인증시 로그인폼 화면으로 리다이렉트된다
-            .csrf().disable()               // Rest API 이므로 crsf 보안이 필요없다.
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)         //jwt token으로 인증하므로 세션을 생성안함.
-            .and()
-                .authorizeRequests()    // 다음 리퀘스트에 대한 사용권한 체크
-                    .antMatchers("/*/join","/*/login","/h2-console/**").permitAll()       //가입 및 인증 주소는 누구나 가능
+                .httpBasic().disable()          // REST API 이므로 기본설정 안함. 기본설정은 비인증시 로그인폼 화면으로 리다이렉트된다
+                .csrf().disable()               // Rest API 이므로 crsf 보안이 필요없다.
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)         //jwt token으로 인증하므로 세션을 생성안함.
+                .and()
+                    .authorizeRequests()    // 다음 리퀘스트에 대한 사용권한 체크
+                    .antMatchers("/*/join", "/*/login", "/h2-console/**","/exception/**").permitAll()       //가입 및 인증 주소는 누구나 가능
                     .anyRequest().hasRole("USER")
-            .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),       // UsernamePasswordAuth..filter 전에
-                        UsernamePasswordAuthenticationFilter.class);                   // JwtAuthenticationFilter 추가
+                .and()
+                    .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
+                  .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),       // UsernamePasswordAuth..filter 전에
+                         UsernamePasswordAuthenticationFilter.class);                   // JwtAuthenticationFilter 추가
     }
 
 
     // ignore check swagger resource
     @Override
     public void configure(WebSecurity web) throws Exception {
-       web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
-               "/swagger-ui.html","/webjars/**", "/swagger/**","/h2-console/**");
+        web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
+                "/swagger-ui.html", "/webjars/**", "/swagger/**", "/h2-console/**");
     }
 }

@@ -1,4 +1,4 @@
-package com.example.restapi.user;
+package com.example.restapi.service.user;
 
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
@@ -19,11 +19,12 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    //loadUserByUserEmail
     @Override
-    public UserDetails loadUserByUsername(String userPk) throws UsernameNotFoundException {
-        return userRepository.findById(Integer.valueOf(userPk))
+    public User loadUserByUsername(String userPk) throws UsernameNotFoundException {
+        return userRepository.findByEmail(userPk)
                 .orElseThrow(
-                        () -> new UserNotFoundException(String.format("사용자(%d)를 찾을 수 없습니다", Integer.valueOf(userPk)))
+                        () -> new UserNotFoundException(String.format("사용자(%s)를 찾을 수 없습니다", userPk))
                 );
     }
 

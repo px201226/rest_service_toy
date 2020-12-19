@@ -4,24 +4,19 @@ package com.example.restapi.domain.comment;
 import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.user.User;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data
 @Entity
 public class Comment extends LocalDateTimeEntity {
 
-    @Id
+    @Id                                                         // jpa가 자동으로 테이블을 만들기 위해 선언해야됨
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotEmpty
     private String content;

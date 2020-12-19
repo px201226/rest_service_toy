@@ -31,7 +31,7 @@ public class User extends LocalDateTimeEntity implements UserDetails {
 
     @Id                                                         // jpa가 자동으로 테이블을 만들기 위해 선언해야됨
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Email(message="이메일 형식이 올바르지 않습니다.")
     @Column(nullable = false, unique = true)
@@ -43,9 +43,11 @@ public class User extends LocalDateTimeEntity implements UserDetails {
 
     @NotEmpty
     private String name;
+/*
 
     @OneToMany(mappedBy = "user")
     private List<Posts> posts;
+*/
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
@@ -61,7 +63,7 @@ public class User extends LocalDateTimeEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.name;
+        return this.getEmail();
     }
 
     @Override

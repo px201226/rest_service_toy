@@ -1,6 +1,8 @@
 package com.example.restapi.config.security;
 
 
+import com.example.restapi.domain.user.User;
+import com.example.restapi.service.user.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -30,7 +32,7 @@ public class JwtTokenProvider {
 
     private long tokenValidMilisecond = 1000L * 60 * 60;         // 1시간만 토근 유효
 
-    private final UserDetailsService userDetailsService;
+    private final UserService userService;
 
     @PostConstruct
     protected void init(){
@@ -54,8 +56,8 @@ public class JwtTokenProvider {
 
     // Jwt 토근으로 인증 정보를 조회
     public Authentication getAuthentication(String token){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(getUserPk(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "",userDetails.getAuthorities());
+        User User = userService.loadUserByUsername(getUserPk(token));
+        return new UsernamePasswordAuthenticationToken(User, "",User.getAuthorities());
     }
 
     // Jwt 토근에서 회원 구별 정보 추출
@@ -65,7 +67,7 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 파싱 ("X-AUTH-TOKEN: jwt token")
     public String resolveToken(HttpServletRequest req){
-        return req.getHeader("X-AUTH-TOEKN");
+        return req.getHeader("X-AUTH-TOKEN");
     }
 
     // JWT 토큰의 유혀성 + 만료일자 확인

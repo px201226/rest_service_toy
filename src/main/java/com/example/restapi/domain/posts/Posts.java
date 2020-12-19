@@ -18,13 +18,13 @@ public class Posts extends LocalDateTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotEmpty(message = "내용을 입력하세요.")
     private String content;
 
     @NotEmpty(message = "내용을 입력하세요.")
-    private Integer like;
+    private Integer likes;
 
     //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)      // post : user = n : 1
