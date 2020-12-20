@@ -2,8 +2,14 @@ package com.example.restapi.exception;
 
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
+import com.example.restapi.exception.exceptions.CAuthenticationEntryPointException;
+import com.example.restapi.exception.exceptions.EmailSigninFailedException;
+import com.example.restapi.exception.exceptions.UserNotFoundException;
+import com.example.restapi.exception.high.InvalidRequestParamaterException;
+import com.example.restapi.exception.high.NotExistDataException;
+import com.example.restapi.exception.high.NotExistParameterException;
+import com.example.restapi.exception.high.ServiceAcessDeniedException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +31,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     private final ResponseService responseService;
 
-
+    // validation exception
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
@@ -42,6 +48,59 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
             return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(InvalidRequestParamaterException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity invalidRequestParamaterException(WebRequest request, InvalidRequestParamaterException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.INVALID_REQUEST_PARAMETER_ERROR,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NotExistDataException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity notExistDataException(WebRequest request, NotExistDataException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NotExistParameterException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity notExistParameterException(WebRequest request, NotExistParameterException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_PARAMETER_ERROR,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ServiceAcessDeniedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity serviceAcessDeniedException(WebRequest request, ServiceAcessDeniedException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.SERVICE_ACCESS_DENIED_ERROR,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+/*
     @ExceptionHandler(UserNotFoundException.class)      // UserNotFoundException 클래스가 발생하면 실행된다.
     public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){
 
@@ -79,5 +138,5 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 exceptionResponse);
         System.out.println("완료");
         return new ResponseEntity(responseData, HttpStatus.BAD_REQUEST);
-    }
+    }*/
 }

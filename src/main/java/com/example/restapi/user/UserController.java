@@ -1,7 +1,7 @@
 //package com.example.restapi.user;
 //
 //import com.example.restapi.domain.user.User;
-//import com.example.restapi.exception.UserNotFoundException;
+//import com.example.restapi.exception.exceptions.UserNotFoundException;
 //import org.springframework.hateoas.EntityModel;
 //import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 //import org.springframework.http.ResponseEntity;

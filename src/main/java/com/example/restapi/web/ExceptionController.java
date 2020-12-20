@@ -1,7 +1,6 @@
 package com.example.restapi.web;
 
-import com.example.restapi.domain.response.ResponseData;
-import com.example.restapi.exception.CAuthenticationEntryPointException;
+import com.example.restapi.exception.exceptions.CAuthenticationEntryPointException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

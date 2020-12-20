@@ -1,5 +1,8 @@
-package com.example.restapi.exception;
-public class EmailSigninFailedException extends RuntimeException {
+package com.example.restapi.exception.exceptions;
+
+import com.example.restapi.exception.high.NotExistDataException;
+
+public class EmailSigninFailedException extends NotExistDataException {
     public EmailSigninFailedException(String msg, Throwable t) {
         super(msg, t);
     }

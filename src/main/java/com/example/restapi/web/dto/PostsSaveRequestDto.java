@@ -1,4 +1,3 @@
-/*
 package com.example.restapi.web.dto;
 
 
@@ -25,4 +24,3 @@ public class PostsSaveRequestDto {
                 .build();
     }
 }
-*/

@@ -1,7 +1,7 @@
 //package com.example.restapi.user;
 //
 //import com.example.restapi.domain.user.User;
-//import com.example.restapi.exception.UserNotFoundException;
+//import com.example.restapi.exception.exceptions.UserNotFoundException;
 //import com.fasterxml.jackson.databind.ser.FilterProvider;
 //import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 //import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;

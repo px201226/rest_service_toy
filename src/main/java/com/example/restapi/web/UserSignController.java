@@ -1,5 +1,6 @@
 package com.example.restapi.web;
 
+import com.example.restapi.config.AuthUser;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.config.security.JwtTokenProvider;
@@ -8,8 +9,8 @@ import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.UserResource;
-import com.example.restapi.exception.EmailSigninFailedException;
-import com.example.restapi.exception.UserNotFoundException;
+import com.example.restapi.exception.exceptions.EmailSigninFailedException;
+import com.example.restapi.exception.exceptions.UserNotFoundException;
 import com.example.restapi.service.user.UserService;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
@@ -74,7 +75,8 @@ public class UserSignController {
     }
 
     @GetMapping("/user/profile")
-    public ResponseEntity getUserProfile(){
+    public ResponseEntity getUserProfile(@AuthUser User user){
+        System.out.println("mmmm" + user.getEmail());
         System.out.println("qqqqqqqqqq");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String id = authentication.getName();

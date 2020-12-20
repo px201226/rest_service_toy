@@ -1,4 +1,3 @@
-/*
 package com.example.restapi.web.dto;
 
 import com.example.restapi.domain.posts.Posts;
@@ -25,4 +24,3 @@ public class PostsResponseDto {
         this.writerEmail = entity.getUser().getEmail();
     }
 }
-*/

@@ -3,7 +3,7 @@
 //
 //import com.example.restapi.domain.user.User;
 //import com.example.restapi.domain.user.UserRepository;
-//import com.example.restapi.exception.UserNotFoundException;
+//import com.example.restapi.exception.exceptions.UserNotFoundException;
 //import com.example.restapi.post.Post;
 //import com.example.restapi.post.PostRepository;
 //import lombok.RequiredArgsConstructor;

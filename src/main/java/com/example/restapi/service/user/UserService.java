@@ -1,8 +1,9 @@
 package com.example.restapi.service.user;
 
 import com.example.restapi.domain.user.User;
+import com.example.restapi.domain.user.UserAdapter;
 import com.example.restapi.domain.user.UserRepository;
-import com.example.restapi.exception.UserNotFoundException;
+import com.example.restapi.exception.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,11 +22,12 @@ public class UserService implements UserDetailsService {
 
     //loadUserByUserEmail
     @Override
-    public User loadUserByUsername(String userPk) throws UsernameNotFoundException {
-        return userRepository.findByEmail(userPk)
+    public UserDetails loadUserByUsername(String userPk) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(userPk)
                 .orElseThrow(
                         () -> new UserNotFoundException(String.format("사용자(%s)를 찾을 수 없습니다", userPk))
                 );
+        return new UserAdapter(user);
     }
 
     public User join(User user){

@@ -1,7 +1,9 @@
-package com.example.restapi.exception;
+package com.example.restapi.exception.exceptions;
 
 
-public class CAuthenticationEntryPointException extends RuntimeException {
+import com.example.restapi.exception.high.ServiceAcessDeniedException;
+
+public class CAuthenticationEntryPointException extends ServiceAcessDeniedException {
     public CAuthenticationEntryPointException(String msg, Throwable t) {
         super(msg, t);
     }

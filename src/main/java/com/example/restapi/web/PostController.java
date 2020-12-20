@@ -1,4 +1,3 @@
-/*
 package com.example.restapi.web;
 
 
@@ -19,4 +18,3 @@ public class PostController {
 
     }
 }
-*/

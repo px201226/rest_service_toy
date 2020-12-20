@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")        // swagger2
 @Entity                                                         // jpa가 자동으로 테이블로 만들기 위해 선언해야됨
-public class User extends LocalDateTimeEntity implements UserDetails {
+public class User extends LocalDateTimeEntity {
 
     @Id                                                         // jpa가 자동으로 테이블을 만들기 위해 선언해야됨
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +43,9 @@ public class User extends LocalDateTimeEntity implements UserDetails {
 
     @NotEmpty
     private String name;
-/*
 
     @OneToMany(mappedBy = "user")
     private List<Posts> posts;
-*/
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
@@ -56,33 +54,4 @@ public class User extends LocalDateTimeEntity implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
