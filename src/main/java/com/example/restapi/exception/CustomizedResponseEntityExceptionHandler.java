@@ -43,7 +43,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(Exception.class)                  // Exception 클래스가 발생하면 실행된다.
     public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request){
             ExceptionResponse exceptionResponse =
-                    new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
+                    new ExceptionResponse(LocalDateTime.now(), ex.getMessage() +" dd" + ex.getCause(), request.getDescription(false));
 
             return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }

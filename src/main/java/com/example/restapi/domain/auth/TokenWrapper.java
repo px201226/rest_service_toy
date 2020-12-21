@@ -9,6 +9,6 @@ import javax.validation.constraints.NotNull;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Token {
+public class TokenWrapper {
     private String jwtToken;
 }

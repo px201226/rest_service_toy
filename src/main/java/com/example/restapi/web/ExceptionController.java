@@ -14,6 +14,6 @@ public class ExceptionController {
 
     @GetMapping(value = "/entrypoint")
     public ResponseEntity entrypointException() {
-        throw new CAuthenticationEntryPointException();
+        throw new CAuthenticationEntryPointException("권한이 없습니다");
     }
 }

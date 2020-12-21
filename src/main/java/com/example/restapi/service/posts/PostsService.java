@@ -1,4 +1,3 @@
-/*
 package com.example.restapi.service.posts;
 
 
@@ -6,6 +5,10 @@ import com.example.restapi.domain.posts.PostsRepository;
 import com.example.restapi.domain.posts.Posts;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
+import com.example.restapi.exception.exceptions.EmailSigninFailedException;
+import com.example.restapi.exception.exceptions.PostsNotFoundException;
+import com.example.restapi.exception.exceptions.UserNotFoundException;
+import com.example.restapi.exception.high.NotExistDataException;
 import com.example.restapi.web.dto.PostsListResponseDto;
 import com.example.restapi.web.dto.PostsResponseDto;
 import com.example.restapi.web.dto.PostsSaveRequestDto;
@@ -25,50 +28,44 @@ public class PostsService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long save(PostsSaveRequestDto requestDto){
-        User requestUser = userRepository.findByEmail(requestDto.getUserEmail()).orElseThrow(
-                () -> new IllegalArgumentException("회원이 아닙니다." + requestDto.getUserEmail()));
+    public Posts save(PostsSaveRequestDto requestDto, String userEmail){
+        User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
 
-        return postsRepository.save(requestDto.toEntity(requestUser)).getId();
+        return postsRepository.save(requestDto.toEntity(user));
     }
 
     @Transactional
-    public Long update(Long postId, PostsUpdateRequestDto requestDto) {
-        Posts post = postsRepository.findById(postId).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 없습니다 postId = " + postId));
+    public Posts update(Long postId, PostsUpdateRequestDto requestDto, String userEmail) {
+        Posts post = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
 
-        if(!isEqualUser(post,requestDto.getUserEmail())){
-            throw new IllegalArgumentException("게시물 작성자가 아닙니다");
+        if(!isEqualUser(post,userEmail)){
+            throw new EmailSigninFailedException();
         }
 
         post.update(requestDto.getContent());
 
-        return postId;
+        return post;
     }
 
     @Transactional
-    public PostsResponseDto findById(Long postId){
-        Posts entity = postsRepository.findById(postId).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 없습니다 postId = " + postId));
+    public Posts findById(Long postId){
+        Posts entity = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
 
-        return new PostsResponseDto(entity);
+        return entity;
     }
 
     @Transactional(readOnly = true)
-    public List<PostsListResponseDto> findAllDesc(){
-        return postsRepository.findAllDesc().stream()
-                .map(PostsListResponseDto::new)
-                .collect(Collectors.toList());
+    public List<Posts> findAllDesc(){
+        return postsRepository.findAllDesc();
     }
 
     @Transactional
     public void delete(Long postId, String userEmail){
-        Posts posts = postsRepository.findById(postId).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + postId)
+        Posts posts = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new
         );
 
         if(!isEqualUser(posts,userEmail)){
-            throw new IllegalArgumentException("Not Matched Writer to SessionUser");
+            throw new EmailSigninFailedException();
         }
 
         postsRepository.delete(posts);
@@ -79,4 +76,3 @@ public class PostsService {
         return userEmail.equals(posts.getUser().getEmail());
     }
 }
-*/

@@ -12,15 +12,14 @@ public class PostsResponseDto {
     private Long id;
     private String content;
     private String author;
+    private Long likes;
     private LocalDateTime modifiedDate;
-    private String writerEmail;
-
 
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();
         this.content = entity.getContent();
         this.author = entity.getUser().getName();
+        this.likes = entity.getLikes();
         this.modifiedDate = entity.getModifiedDate();
-        this.writerEmail = entity.getUser().getEmail();
     }
 }

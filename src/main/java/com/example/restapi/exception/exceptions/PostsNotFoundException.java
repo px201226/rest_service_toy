@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 // 4xx -> client error
 // 5xx -> server error
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class UserNotFoundException extends NotExistDataException {
-    public UserNotFoundException(String message) {
+
+public class PostsNotFoundException extends NotExistDataException {
+    public PostsNotFoundException(String message) {
         super(message);
     }
-    public UserNotFoundException(){
-        super("회원이 아닙니다");
+    public PostsNotFoundException(){
+        super("게시물이 존재하지 않습니다");
     }
 }

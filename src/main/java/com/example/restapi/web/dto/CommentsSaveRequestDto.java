@@ -1,12 +1,9 @@
 package com.example.restapi.web.dto;
 
-
+import com.example.restapi.domain.comments.Comments;
 import com.example.restapi.domain.posts.Posts;
 import com.example.restapi.domain.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -14,16 +11,16 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostsSaveRequestDto {
+public class CommentsSaveRequestDto {
 
     @NotEmpty
     private String content;
 
-    public Posts toEntity(User user){
-        return Posts.builder()
+    public Comments toEntity(User user, Posts posts){
+        return Comments.builder()
                 .content(content)
-                .likes(0L)
                 .user(user)
+                .posts(posts)
                 .build();
     }
 }

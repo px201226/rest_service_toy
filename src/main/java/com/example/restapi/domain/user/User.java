@@ -1,28 +1,20 @@
 package com.example.restapi.domain.user;
 
 import com.example.restapi.domain.LocalDateTimeEntity;
-import com.example.restapi.domain.comment.Comment;
+import com.example.restapi.domain.comments.Comments;
 import com.example.restapi.domain.posts.Posts;
 import io.swagger.annotations.ApiModel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 //@JsonIgnoreProperties(value = {"password"})
 //@JsonFilter("UserInfo")
 @Builder
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")        // swagger2
@@ -48,7 +40,7 @@ public class User extends LocalDateTimeEntity {
     private List<Posts> posts;
 
     @OneToMany(mappedBy = "user")
-    private List<Comment> comments;
+    private List<Comments> comments;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default

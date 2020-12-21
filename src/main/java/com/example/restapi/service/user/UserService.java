@@ -4,6 +4,7 @@ import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserAdapter;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
+import com.example.restapi.exception.high.RedundantDataException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -31,6 +33,11 @@ public class UserService implements UserDetailsService {
     }
 
     public User join(User user){
+        Optional<User> byEmail = userRepository.findByEmail(user.getEmail());
+        if(byEmail.isPresent()){
+            throw new RedundantDataException("이메일이 중복됩니다");
+        }
+
         return userRepository.save(User.builder()
                 .email(user.getEmail())
                 .name(user.getName())
