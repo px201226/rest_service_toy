@@ -2,10 +2,11 @@ package com.example.restapi.domain.user;
 
 import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.comments.Comments;
+import com.example.restapi.domain.matching.MatchingWaitEntity;
 import com.example.restapi.domain.posts.Posts;
-import io.swagger.annotations.ApiModel;
-import lombok.*;
+import com.example.restapi.domain.user.profile.*;
 
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -17,7 +18,6 @@ import javax.validation.constraints.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "사용자 상세 정보를 위한 도메인 객체")        // swagger2
 @Entity                                                         // jpa가 자동으로 테이블로 만들기 위해 선언해야됨
 public class User extends LocalDateTimeEntity {
 
@@ -45,5 +45,11 @@ public class User extends LocalDateTimeEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private MatchingWaitEntity matchingWaitEntity;
+
+    @EmbeddedId
+    private DreamProfile dreamProfile;                              // 이상형 프로필
 
 }

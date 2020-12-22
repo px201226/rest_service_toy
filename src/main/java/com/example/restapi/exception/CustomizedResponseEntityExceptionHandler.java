@@ -5,10 +5,7 @@ import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.exception.exceptions.CAuthenticationEntryPointException;
 import com.example.restapi.exception.exceptions.EmailSigninFailedException;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
-import com.example.restapi.exception.high.InvalidRequestParamaterException;
-import com.example.restapi.exception.high.NotExistDataException;
-import com.example.restapi.exception.high.NotExistParameterException;
-import com.example.restapi.exception.high.ServiceAcessDeniedException;
+import com.example.restapi.exception.high.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -100,6 +97,18 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(RedundantDataException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity redundantDataException(WebRequest request, RedundantDataException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.REDUNTANT_DATA_ERROR,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 /*
     @ExceptionHandler(UserNotFoundException.class)      // UserNotFoundException 클래스가 발생하면 실행된다.
     public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){
