@@ -21,14 +21,14 @@ public class MatchingResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//
-//    @OneToOne
-//    @JoinColumn(name="user_id", insertable = false, updatable = false)
-//    private User user;
-//
-//    @OneToOne
-//    @JoinColumn(name="another_user_id",insertable = false, updatable = false)
-//    private User anotherUser;
+
+    @OneToOne
+    @JoinColumn(name="user_id", insertable = false, updatable = false)
+    private User user;
+
+    @OneToOne
+    @JoinColumn(name="another_user_id",insertable = false, updatable = false)
+    private User anotherUser;
 
     private LocalDate matchingDate;
 }

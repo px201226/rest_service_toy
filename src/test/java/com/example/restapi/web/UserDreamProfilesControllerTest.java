@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserControllerTest extends BaseControllerTest {
+public class UserDreamProfilesControllerTest extends BaseControllerTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -52,9 +52,9 @@ public class UserControllerTest extends BaseControllerTest {
 
 
     @Test
-    public void successShowUserProfile() throws Exception {
+    public void successShowDreamProfile() throws Exception {
         // when && then
-        mockMvc.perform(get("/v1/user")
+        mockMvc.perform(get("/v1/user/dreamProfiles")
                 .header("X-AUTH-TOKEN", getJwtToken(loginUser))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)
@@ -62,18 +62,11 @@ public class UserControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.detailProfiles.name").value(loginUser.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.data.tallType").value(loginUser.getDreamProfiles().getTallType().toString()));
     }
 
     @Test
-    public void successUpdateUserProfile() throws Exception {
-        // given
-        DetailProfiles detailProfiles = DetailProfiles.builder()
-                .name("change")
-                .locationArea(LocationArea.SEOUL)
-                .tallType(TallType.TALL)
-                .bodyType(BodyType.SKINNY)
-                .build();
+    public void successUpdateDreamProfile() throws Exception {
         // given
         DreamProfiles dreamProfiles = DreamProfiles.builder()
                 .bodyType(BodyType.CHUBBY)
@@ -81,21 +74,17 @@ public class UserControllerTest extends BaseControllerTest {
                 .tallType(TallType.TALL)
                 .build();
 
-        User user = User.builder()
-                .detailProfiles(detailProfiles)
-                .dreamProfiles(dreamProfiles)
-                .build();
         // when && then
-        mockMvc.perform(put("/v1/user")
+        mockMvc.perform(put("/v1/user/dreamProfiles")
                 .header("X-AUTH-TOKEN", getJwtToken(loginUser))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(user))
+                .content(objectMapper.writeValueAsString(dreamProfiles))
                 .accept(MediaTypes.HAL_JSON)
         )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.detailProfiles.name").value(user.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.data.bodyType").value(dreamProfiles.getBodyType().toString()));
 
     }
 

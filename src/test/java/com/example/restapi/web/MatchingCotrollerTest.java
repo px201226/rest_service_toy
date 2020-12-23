@@ -6,6 +6,10 @@ import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
+import com.example.restapi.domain.user.profile.DetailProfiles;
+import com.example.restapi.domain.user.profile.category.BodyType;
+import com.example.restapi.domain.user.profile.category.LocationArea;
+import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.web.common.BaseControllerTest;
 import org.junit.After;
 import org.junit.Before;
@@ -45,23 +49,26 @@ public class MatchingCotrollerTest extends BaseControllerTest {
 
     private User loginUser;
 
+    public DetailProfiles detailProfiles() {
+        return DetailProfiles.builder()
+                .name("이기수 닉네임")
+                .bodyType(BodyType.CHUBBY)
+                .tallType(TallType.NORMAL)
+                .locationArea(LocationArea.BUSAN)
+                .build();
+    }
+
     @Before
     public void setup() throws Exception {
-        loginUser = User.builder()
-                .email("px2008@naver.com")
-                .password(passwordEncoder.encode("aa1aa1"))
-                .name("이기수")
-                .roles(Collections.singletonList("ROLE_USER"))
-                .build();
-        userRepository.save(loginUser);
+        loginUser = getAuthUser();
     }
+
     @After
     public void cleanUp() {
         this.userRepository.deleteAll();
     }
 
     @Test
-    @Order(1)
     public void expectSuccessApply() throws Exception {
         // when && then
         mockMvc.perform(post("/v1/matching")
@@ -74,7 +81,6 @@ public class MatchingCotrollerTest extends BaseControllerTest {
     }
 
     @Test
-    @Order(2)
     public void expectReduntApply() throws Exception {
         // given
         MatchingWaitEntity build = MatchingWaitEntity.builder()

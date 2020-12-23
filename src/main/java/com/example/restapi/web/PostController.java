@@ -41,8 +41,8 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id){
         Posts byId = postsService.findById(id);
-        PostsResource postsResource = new PostsResource(byId);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postsResource);
+        PostsResource resource = new PostsResource(byId);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, resource);
         return ResponseEntity.ok(responseData);
     }
 
@@ -58,8 +58,8 @@ public class PostController {
         }
 
         Posts save = postsService.save(postsSaveRequestDto, user.getEmail());
-        PostsResource postsResource = new PostsResource(save);
-        ResponseData<PostsResource> responseData = responseService.create(ResponseStatus.SUCCESS, postsResource);
+        PostsResource resource = new PostsResource(save);
+        ResponseData<PostsResource> responseData = responseService.create(ResponseStatus.SUCCESS, resource);
 
         return ResponseEntity.ok(responseData);
     }
@@ -67,8 +67,8 @@ public class PostController {
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable Long id,@Valid @RequestBody PostsUpdateRequestDto requestDto, @AuthUser User user){
         Posts update = postsService.update(id, requestDto, user.getEmail());
-        PostsResource postsResource = new PostsResource(update);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postsResource);
+        PostsResource resource = new PostsResource(update);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, requestDto);
         return ResponseEntity.ok(responseData);
     }
 

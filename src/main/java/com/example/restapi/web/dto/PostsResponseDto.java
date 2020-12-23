@@ -18,7 +18,7 @@ public class PostsResponseDto {
     public PostsResponseDto(Posts entity){
         this.id = entity.getId();
         this.content = entity.getContent();
-        this.author = entity.getUser().getName();
+        this.author = entity.getUser().getDetailProfiles().getName();
         this.likes = entity.getLikes();
         this.modifiedDate = entity.getModifiedDate();
     }

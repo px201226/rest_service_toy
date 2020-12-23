@@ -40,7 +40,8 @@ public class UserService implements UserDetailsService {
 
         return userRepository.save(User.builder()
                 .email(user.getEmail())
-                .name(user.getName())
+                .detailProfiles(user.getDetailProfiles())
+                .dreamProfiles(user.getDreamProfiles())
                 .password(passwordEncoder.encode(user.getPassword()))
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build());

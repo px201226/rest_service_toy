@@ -4,7 +4,6 @@ import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.profile.DetailProfiles;
-import com.example.restapi.domain.user.profile.DreamProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
 import com.example.restapi.domain.user.profile.category.LocationArea;
 import com.example.restapi.domain.user.profile.category.TallType;
@@ -22,8 +21,12 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserControllerTest extends BaseControllerTest {
+public class UserDetailProfilesControllerTest extends BaseControllerTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -52,9 +55,9 @@ public class UserControllerTest extends BaseControllerTest {
 
 
     @Test
-    public void successShowUserProfile() throws Exception {
+    public void successShowMyProfile() throws Exception {
         // when && then
-        mockMvc.perform(get("/v1/user")
+        mockMvc.perform(get("/v1/user/profiles")
                 .header("X-AUTH-TOKEN", getJwtToken(loginUser))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)
@@ -62,11 +65,11 @@ public class UserControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.detailProfiles.name").value(loginUser.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.data.name").value(loginUser.getDetailProfiles().getName()));
     }
 
     @Test
-    public void successUpdateUserProfile() throws Exception {
+    public void successUpdateMyProfile() throws Exception {
         // given
         DetailProfiles detailProfiles = DetailProfiles.builder()
                 .name("change")
@@ -74,28 +77,18 @@ public class UserControllerTest extends BaseControllerTest {
                 .tallType(TallType.TALL)
                 .bodyType(BodyType.SKINNY)
                 .build();
-        // given
-        DreamProfiles dreamProfiles = DreamProfiles.builder()
-                .bodyType(BodyType.CHUBBY)
-                .locationArea(LocationArea.SEOUL)
-                .tallType(TallType.TALL)
-                .build();
 
-        User user = User.builder()
-                .detailProfiles(detailProfiles)
-                .dreamProfiles(dreamProfiles)
-                .build();
         // when && then
-        mockMvc.perform(put("/v1/user")
+        mockMvc.perform(put("/v1/user/profiles")
                 .header("X-AUTH-TOKEN", getJwtToken(loginUser))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(user))
+                .content(objectMapper.writeValueAsString(detailProfiles))
                 .accept(MediaTypes.HAL_JSON)
         )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.detailProfiles.name").value(user.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.data.name").value(detailProfiles.getName()));
 
     }
 

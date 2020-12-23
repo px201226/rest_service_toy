@@ -6,6 +6,8 @@ import com.example.restapi.domain.matching.MatchingWaitEntity;
 import com.example.restapi.domain.posts.Posts;
 import com.example.restapi.domain.user.profile.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +31,8 @@ public class User extends LocalDateTimeEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // @JsonIgnore                                               //Json 응답에 숨김
     @Size(min = 2)
     private String password;
-
-    @NotEmpty
-    private String name;
 
     @OneToMany(mappedBy = "user")
     private List<Posts> posts;
@@ -42,14 +40,36 @@ public class User extends LocalDateTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<Comments> comments;
 
+    @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY )
     private MatchingWaitEntity matchingWaitEntity;
 
-    @EmbeddedId
-    private DreamProfile dreamProfile;                              // 이상형 프로필
+    @Embedded
+    private DetailProfiles detailProfiles;
 
+    @Embedded
+    private DreamProfiles dreamProfiles;                              // 이상형 프로필
+
+    private String kakaoId;
+
+    public User updateMyDetailProfiles(DetailProfiles detailProfiles){
+        this.detailProfiles = detailProfiles;
+        return this;
+    }
+
+    public User updateDreamProfiles(DreamProfiles dreamProfiles) {
+        this.dreamProfiles = dreamProfiles;
+        return this;
+    }
+
+    public User updateUser(User reqeustUpdateUserDto) {
+        this.dreamProfiles = reqeustUpdateUserDto.getDreamProfiles();
+        this.detailProfiles = reqeustUpdateUserDto.getDetailProfiles();
+        this.kakaoId = kakaoId;
+        return this;
+    }
 }
