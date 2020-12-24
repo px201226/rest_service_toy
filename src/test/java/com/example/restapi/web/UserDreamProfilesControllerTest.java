@@ -3,10 +3,9 @@ package com.example.restapi.web;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
-import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.DreamProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
-import com.example.restapi.domain.user.profile.category.LocationArea;
+import com.example.restapi.domain.user.profile.category.LocationCategory;
 import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.web.common.BaseControllerTest;
 import org.junit.After;
@@ -70,7 +69,7 @@ public class UserDreamProfilesControllerTest extends BaseControllerTest {
         // given
         DreamProfiles dreamProfiles = DreamProfiles.builder()
                 .bodyType(BodyType.CHUBBY)
-                .locationArea(LocationArea.SEOUL)
+                .locationCategory(LocationCategory.SEOUL)
                 .tallType(TallType.TALL)
                 .build();
 

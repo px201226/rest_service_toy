@@ -24,7 +24,7 @@ public class MatchingWaitEntity extends LocalDateTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JsonIgnore
     private User user;
 

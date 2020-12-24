@@ -1,71 +1,91 @@
 package com.example.restapi.domain.matching.component;
 
-import com.example.restapi.domain.user.User;
+import com.example.restapi.domain.matching.Identifiable;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
+@RequiredArgsConstructor
 @Component
 public class MatchingManager {
 
-    private final int MATCHING_DAY = 6;                         // SATURDAY
+    private final int MATCHING_DAY_OF_WEEK = 6;                         // SATURDAY(토요일)
+
+    private final MatchingCombinator matchingCombinator;
 
     // Pair<user_id,user_id>
-    public void getMatchedPair(List<User> users){
+    public void getMatchedPair(List<Identifiable> identifiables) {
+        List<Pair> pairs = matchingCombinator.getAllPairsAndShuffle(identifiables);
 
     }
 
-    public void getAllCombination(List<User> users, List<Pair<Long,Long>> allCombination, boolean isSelect[], int idx, int r){
+    public List<Pair> matchingRandom(List<Identifiable> identifiables) {
 
-        if(r==0){
-            Pair<Long,Long> pair = getResultCombPair(users, isSelect);
-            allCombination.add(pair);
-            return;
-        }
+        List<Pair> result = new ArrayList<>();
 
-        for(int i=idx; i<isSelect.length; i++){
-            isSelect[i] = true;
-            getAllCombination(users,allCombination,isSelect,i+1, r-1);
-            isSelect[i] = false;
-        }
-    }
+        Map<Identifiable, List<Identifiable>> pairsMapFrom = matchingCombinator.getPairsMapFrom(
+                matchingCombinator.getAllPairsFromLists(identifiables));
+        Map<Identifiable,Boolean> selectStatus = new HashMap<>();
 
-    public List<Pair<Long,Long>> shuffleList(List<Pair<Long,Long>> list){
-        Collections.shuffle(list);
-        return list;
-    }
+        int size = identifiables.size();
 
-    private Pair<Long,Long> getResultCombPair(List<User> users, boolean isSelect[]){
-        Long first = null, second = null;
-        boolean isFirstFlag = true;
+        Random random = new Random();
+        random.setSeed(System.currentTimeMillis());
 
-        for(int i=0; i<isSelect.length; i++){
-            if(isSelect[i]){
-                if(isFirstFlag){
-                    isFirstFlag = false;
-                    first = users.get(i).getId();
-                }else{
-                    second = users.get(i).getId();
-                    break;
-                }
+        for (Map.Entry<Identifiable, List<Identifiable>> entry : pairsMapFrom.entrySet()) {
+            Identifiable key = entry.getKey();
+            List<Identifiable> values = entry.getValue();
+
+            if(selectStatus.get(key) != null && selectStatus.get(key) == true) continue;
+
+            int randomPickIdx = random.nextInt(values.size());
+
+
+            Identifiable second = values.get(randomPickIdx);
+
+            selectStatus.put(key,true);
+
+            while (selectStatus.get(second) != null && selectStatus.get(second) == true) {
+                if (isAllSelect(selectStatus)) return result;
+                randomPickIdx = random.nextInt(values.size());
+                second =  values.get(randomPickIdx);
             }
+
+            selectStatus.put(second,true);
+
+            result.add(Pair.of(key, second));
         }
-        return Pair.of(first,second);
+
+
+        return result;
     }
+
 
     // 소개팅이 1주일에 특정 요일에 한번 열리므로, 다음 소개팅 날짜를 구한다.
-    public LocalDate getNextMatchingDate(LocalDate current){
-        int differ =  MATCHING_DAY - current.getDayOfWeek().getValue();
+    public LocalDate getNextMatchingDate(LocalDate current) {
+        int differ = MATCHING_DAY_OF_WEEK - current.getDayOfWeek().getValue();
         differ = differ < 0 ? 7 + differ : differ;
         int remindDay = differ == 0 ? 7 : differ;
 
         LocalDate nextMatchingDate = current.plusDays((long) remindDay);
         return nextMatchingDate;
+    }
+
+
+    // todo
+    // map key에 객체가 있어서 values만 있으면 존재한 값만 해서 완전탐색을 못하니까.
+    // select된 값을 카운트해서 하자
+    private boolean isAllSelect( Map<Identifiable,Boolean> isSelect) {
+
+        for(Boolean bool : isSelect.values())
+            if(bool.booleanValue() == false)
+                return false;
+
+        return true;
+
     }
 }

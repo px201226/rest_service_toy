@@ -5,7 +5,7 @@ import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
-import com.example.restapi.domain.user.profile.category.LocationArea;
+import com.example.restapi.domain.user.profile.category.LocationCategory;
 import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.web.common.BaseControllerTest;
 import org.junit.After;
@@ -21,12 +21,8 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,7 +69,7 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
         // given
         DetailProfiles detailProfiles = DetailProfiles.builder()
                 .name("change")
-                .locationArea(LocationArea.SEOUL)
+                .locationCategory(LocationCategory.SEOUL)
                 .tallType(TallType.TALL)
                 .bodyType(BodyType.SKINNY)
                 .build();

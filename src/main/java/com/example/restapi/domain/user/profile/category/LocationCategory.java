@@ -1,9 +1,7 @@
 package com.example.restapi.domain.user.profile.category;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Map;
 import java.util.Objects;
@@ -12,7 +10,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toMap;
 
 @Getter
-public enum LocationArea {
+public enum LocationCategory {
     SEOUL(0, "서울"),
     BUSAN(1, "부산"),
     DAEGU(2, "대구"),
@@ -31,19 +29,19 @@ public enum LocationArea {
     GYEONGBUK(16, "경북"),
     JEJU(17, "제주");
 
-    private static final Map<String, LocationArea> stringToEnum =
+    private static final Map<String, LocationCategory> stringToEnum =
             Stream.of(values()).collect(toMap(Objects::toString, e -> e));
 
     private int code;
     private String description;
 
-    LocationArea(int code, String description) {
+    LocationCategory(int code, String description) {
         this.code = code;
         this.description = description;
     }
 
     @JsonCreator
-    public static LocationArea fromText(String text){
+    public static LocationCategory fromText(String text){
         return stringToEnum.get(text);
     }
 
@@ -53,7 +51,7 @@ public enum LocationArea {
     /*
     * Todo
     * 현재는 같은 지역이면 100점, 아니면 0점을 주므로 추후에 정확한 점수를 구하는 알고리즘을 교체한다. */
-    public int getMatchingScore(LocationArea other){
+    public int getMatchingScore(LocationCategory other){
         return code == other.code ? 100 : 0;
     }
 

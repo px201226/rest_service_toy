@@ -1,9 +1,9 @@
 package com.example.restapi.domain.user.profile;
 
 
-import com.example.restapi.domain.user.User;
+import com.example.restapi.domain.matching.ObjectiveComparable;
 import com.example.restapi.domain.user.profile.category.BodyType;
-import com.example.restapi.domain.user.profile.category.LocationArea;
+import com.example.restapi.domain.user.profile.category.LocationCategory;
 import com.example.restapi.domain.user.profile.category.TallType;
 import lombok.*;
 
@@ -23,11 +23,12 @@ public class DetailProfiles {
 
     // 키, 몸무게, 사는곳
     @Enumerated(EnumType.STRING)
-    TallType tallType;
+    private TallType tallType;
 
     @Enumerated(EnumType.STRING)
-    BodyType bodyType;
+    private BodyType bodyType;
 
     @Enumerated(EnumType.STRING)
-    LocationArea locationArea;
+    private LocationCategory locationCategory;
+
 }

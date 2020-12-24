@@ -2,12 +2,13 @@ package com.example.restapi.domain.user;
 
 import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.comments.Comments;
+import com.example.restapi.domain.matching.Identifiable;
+import com.example.restapi.domain.matching.MatchingScoreComparable;
 import com.example.restapi.domain.matching.MatchingWaitEntity;
 import com.example.restapi.domain.posts.Posts;
 import com.example.restapi.domain.user.profile.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,8 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity                                                         // jpa가 자동으로 테이블로 만들기 위해 선언해야됨
-public class User extends LocalDateTimeEntity {
+public class User extends LocalDateTimeEntity
+        implements Identifiable<Long>, MatchingScoreComparable<User> {
 
     @Id                                                         // jpa가 자동으로 테이블을 만들기 위해 선언해야됨
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,5 +73,23 @@ public class User extends LocalDateTimeEntity {
         this.detailProfiles = reqeustUpdateUserDto.getDetailProfiles();
         this.kakaoId = kakaoId;
         return this;
+    }
+
+
+    // Identifiable interface 구현
+    @Override
+    public Long getIdentify() {
+        return getId();
+    }
+
+    @Override
+    public String toString() {
+        return getId().toString();
+    }
+
+    //MatchingScoreComparable interface 구현
+    @Override
+    public int compareObjective(User other) {
+        return dreamProfiles.compareObjective(other.detailProfiles);
     }
 }

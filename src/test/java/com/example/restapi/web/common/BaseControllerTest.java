@@ -6,7 +6,7 @@ import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.DreamProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
-import com.example.restapi.domain.user.profile.category.LocationArea;
+import com.example.restapi.domain.user.profile.category.LocationCategory;
 import com.example.restapi.domain.user.profile.category.TallType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Ignore;
@@ -23,8 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.swing.plaf.PanelUI;
-import javax.validation.constraints.Email;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -79,19 +78,38 @@ public class BaseControllerTest {
         return jwtTokenProvider.createToken(user.getEmail(),user.getRoles());
     }
 
+    public List<User> getAuthUsers(int size){
+        List<User> users = new ArrayList<>();
+        System.out.println("usercount="+ userRepository.findAll().size());
+        for (int i = 0; i < size; i++) {
+            User build = User.builder()
+                    .email("px100"+ i + "@naver.com")
+                    .password(passwordEncoder.encode(PASSWORD))
+                    .dreamProfiles(dreamProfiles())
+                    .detailProfiles(detailProfiles())
+                    .roles(ROLES)
+                    .build();
+            users.add(build);
+        }
+
+        userRepository.saveAll(users);
+        System.out.println("usercount="+ userRepository.findAll().size());
+        return users;
+    }
+
     public DetailProfiles detailProfiles() {
         return DetailProfiles.builder()
                 .name(NAME)
                 .bodyType(BodyType.SKINNY)
                 .tallType(TallType.NORMAL)
-                .locationArea(LocationArea.BUSAN)
+                .locationCategory(LocationCategory.BUSAN)
                 .build();
     }
 
     public DreamProfiles dreamProfiles(){
         return DreamProfiles.builder()
                 .bodyType(BodyType.SKINNY)
-                .locationArea(LocationArea.BUSAN)
+                .locationCategory(LocationCategory.BUSAN)
                 .tallType(TallType.SMALL)
                 .build();
     }

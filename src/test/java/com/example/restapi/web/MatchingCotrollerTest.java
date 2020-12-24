@@ -8,14 +8,13 @@ import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
-import com.example.restapi.domain.user.profile.category.LocationArea;
+import com.example.restapi.domain.user.profile.category.LocationCategory;
 import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.web.common.BaseControllerTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -54,7 +53,7 @@ public class MatchingCotrollerTest extends BaseControllerTest {
                 .name("이기수 닉네임")
                 .bodyType(BodyType.CHUBBY)
                 .tallType(TallType.NORMAL)
-                .locationArea(LocationArea.BUSAN)
+                .locationCategory(LocationCategory.BUSAN)
                 .build();
     }
 
@@ -80,6 +79,23 @@ public class MatchingCotrollerTest extends BaseControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void success_Multy_apply() throws Exception {
+        // givin
+        List<User> authUsers = getAuthUsers(10);
+
+        // when && then
+        for(int i=0; i<10; i++) {
+            User user = authUsers.get(i);
+            mockMvc.perform(post("/v1/matching")
+                    .header("X-AUTH-TOKEN", jwtTokenProvider.createToken(user.getEmail(), user.getRoles()))
+                    .contentType(MediaType.APPLICATION_JSON_VALUE)
+                    .accept(MediaTypes.HAL_JSON)
+            )
+                    .andDo(print())
+                    .andExpect(status().isOk());
+        }
+    }
     @Test
     public void expectReduntApply() throws Exception {
         // given
