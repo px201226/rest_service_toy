@@ -20,6 +20,10 @@ spring:
       name: username
       password: password
 
+  data:
+    rest:
+      base-path: /api
+
 management:
   endpoints:
     web:

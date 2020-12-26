@@ -23,7 +23,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @Entity                                                         // jpa가 자동으로 테이블로 만들기 위해 선언해야됨
 public class User extends LocalDateTimeEntity
-        implements Identifiable<Long>, MatchingScoreComparable<User> {
+        implements Comparable<User>, Identifiable<Long>, MatchingScoreComparable<User> {
 
     @Id                                                         // jpa가 자동으로 테이블을 만들기 위해 선언해야됨
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,7 +84,12 @@ public class User extends LocalDateTimeEntity
 
     @Override
     public String toString() {
-        return getId().toString();
+        return String.valueOf(getId());
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.getId().compareTo(o.id);
     }
 
     //MatchingScoreComparable interface 구현

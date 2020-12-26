@@ -15,35 +15,35 @@ import java.util.*;
 @Component
 public class MatchingCombinator {
 
-    public List<Pair> shufflePairs(List<Pair> pairs){
+    public <T extends Identifiable> List<Pair<T,T>> shufflePairs(List<Pair<T,T>> pairs){
         Collections.shuffle(pairs);
         return pairs;
     }
 
-    public List<Pair> getAllPairsFromLists(List<Identifiable> identifiables){
-        List<Pair> pairs = new ArrayList<>();
+    public <T extends Identifiable> List<Pair<T,T>> getAllPairsFromLists(List<T> identifiables){
+        List<Pair<T,T>> pairs = new ArrayList<>();
         getAllCombinations(identifiables,pairs, new boolean[identifiables.size()], 0 , 2);
         return pairs;
     }
 
-    public List<Pair> getAllPairsAndShuffle(List<Identifiable> identifiables){
+    public <T extends Identifiable> List<Pair<T,T>> getAllPairsAndShuffle(List<T> identifiables){
 
-        List<Pair> pairs = new ArrayList<>();
+        List<Pair<T,T>> pairs = new ArrayList<>();
         getAllCombinations(identifiables,pairs, new boolean[identifiables.size()], 0 , 2);
         shufflePairs(pairs);
         return pairs;
 
     }
 
-    public Map<Identifiable,List<Identifiable>> getPairsMapFrom(List<Pair> pairs){
+    public <T extends Identifiable> Map<T,List<T>> getPairsMapFrom(List<Pair<T,T>> pairs){
 
-        Map<Identifiable,List<Identifiable>> map = new HashMap<>();
+        Map<T,List<T>> map = new TreeMap<>();
 
-        Iterator<Pair> iterator = pairs.iterator();
+        Iterator<Pair<T,T>> iterator = pairs.iterator();
 
         while(iterator.hasNext()){
-            Pair<Identifiable,Identifiable> pair = iterator.next();
-            List<Identifiable> pairsFromMap = map.getOrDefault(pair.getFirst(), new ArrayList<>());
+            Pair<T,T> pair = iterator.next();
+            List<T> pairsFromMap = map.getOrDefault(pair.getFirst(), new ArrayList<>());
             pairsFromMap.add(pair.getSecond());
             map.put(pair.getFirst(), pairsFromMap );
         }
@@ -51,7 +51,7 @@ public class MatchingCombinator {
         return map;
     }
 
-    public void getAllCombinations(List<Identifiable> identifiables, List<Pair> combinations, boolean isSelect[], int idx, int r){
+    public <T extends Identifiable>  void getAllCombinations(List<T> identifiables, List<Pair<T,T>> combinations, boolean isSelect[], int idx, int r){
 
         if(r==0){
             Pair pair = getResultCombPair(identifiables, isSelect);
@@ -67,8 +67,8 @@ public class MatchingCombinator {
     }
 
     // getAllCombinations 로 탐색된 Pair를 return 한다.
-    private Pair<Identifiable,Identifiable> getResultCombPair(List<Identifiable> identifiables, boolean isSelect[]){
-        Identifiable first = null, second = null;
+    private <T extends Identifiable> Pair<T, T> getResultCombPair(List<T> identifiables, boolean isSelect[]){
+        T first = null, second = null;
         boolean isFirstFlag = true;
 
         for(int i=0; i<isSelect.length; i++){

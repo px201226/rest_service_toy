@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,25 +30,31 @@ public class MatchingService {
     public void matching() {
 
         List<MatchingWaitEntity> all = matchingWaitEntityRepository.findAll();
-        List<Identifiable> collect = all.stream().map((x) -> x.getUser()).collect(Collectors.toList());
-        List<Pair> pairs = matchingManager.matchingRandom(collect);
+        List<User> collect = all.stream().map((x) -> x.getUser()).collect(Collectors.toList());
+        List<Pair<User, User>> pairs = matchingManager.matchingRandom(collect);
+
         List<MatchingResult> matchingResults = new ArrayList<>();
         LocalDate nextMatchingDate = matchingManager.getNextMatchingDate(LocalDate.now());
-        System.out.println("22222");
 
-        Iterator<Pair> iterator = pairs.iterator();
+        Iterator<Pair<User, User>> iterator = pairs.iterator();
         while (iterator.hasNext()) {
-            Pair next = iterator.next();
+            Pair<User, User> next = iterator.next();
             MatchingResult build = MatchingResult.builder()
-                    .user(all.get(next.getFirst().hashCode()).getUser())
-                    .anotherUser(all.get(next.getSecond().hashCode()).getUser())
+                    .user(next.getFirst())
+                    .anotherUser(next.getSecond())
                     .matchingDate(nextMatchingDate)
                     .build();
 
             matchingResults.add(build);
         }
-        System.out.println("3333333");
-        matchingResultRepository.saveAll(matchingResults);
+
+
+        List<MatchingResult> matchingResults1 = matchingResultRepository.saveAll(matchingResults);
+
+        List<MatchingResult> all1 = matchingResultRepository.findAll();
+        System.out.println("matching----------");
+        System.out.println(Arrays.toString(matchingResults.toArray()));
+        System.out.println(Arrays.toString(all1.toArray()));
         matchingWaitEntityRepository.deleteAllInBatch();
     }
 }

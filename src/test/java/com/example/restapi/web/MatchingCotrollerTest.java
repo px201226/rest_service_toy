@@ -65,6 +65,7 @@ public class MatchingCotrollerTest extends BaseControllerTest {
     @After
     public void cleanUp() {
         this.userRepository.deleteAll();
+        this.matchingWaitEntityRepository.deleteAll();
     }
 
     @Test

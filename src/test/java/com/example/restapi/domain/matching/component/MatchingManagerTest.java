@@ -1,9 +1,7 @@
 package com.example.restapi.domain.matching.component;
 
-import com.example.restapi.domain.matching.Identifiable;
 import com.example.restapi.domain.user.User;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
@@ -32,26 +30,26 @@ public class MatchingManagerTest {
 
     @Test
     public void corret_random_matching(){
-        int size = 10;
-        for(int i=1; i<=10; i++){
-            System.out.println("size=" + 4);
-            List<Identifiable> identifies = getIdentifies(i);
-            List<Pair> pairs = matchingManager.matchingRandom(identifies);
-            System.out.println(Arrays.toString(pairs.toArray()));
-            assertEquals(identifies.size() / 2, pairs.size());
+        int size = 1010;
+       for(int i=1; i<=size; i++){
+            List<User> users = getUsers(size);
+            List<Pair<User,User>> pairs = matchingManager.matchingRandom(users);
+            //System.out.println(Arrays.toString(pairs.toArray()));
+           System.out.println(i);
+            assertEquals(users.size() / 2, pairs.size());
         }
 
     }
 
-    public List<Identifiable> getIdentifies(int size){
+    public List<User> getUsers(int size){
 
-        List<Identifiable> identifiables = new ArrayList<>();
+        List<User> users = new ArrayList<>();
 
         for(int i=1; i<=size; i++) {
-            identifiables.add(User.builder().id(Long.valueOf(i)).build());
+            users.add(User.builder().id(Long.valueOf(i)).build());
         }
 
-        return identifiables;
+        return users;
     }
 
 }

@@ -21,9 +21,9 @@ public class MatchingCombinatorTest {
     public void corret_shuffle_pairOfList(){
 
         // given
-        List<Pair> answers = new ArrayList<>();
+        List<Pair<User,User>> answers = new ArrayList<>();
         int size = 10;
-        List<Identifiable> users = getIdentifies(size);
+        List<User> users = getIdentifies(size);
 
         // when && then
         matchingCombinator.getAllCombinations(users,answers,new boolean[size],0,2 );
@@ -42,16 +42,16 @@ public class MatchingCombinatorTest {
     public void corret_listToMap(){
 
         // given
-        List<Pair> answers = new ArrayList<>();
+        List<Pair<User,User>> answers = new ArrayList<>();
 
         int size = 10;
-        List<Identifiable> users = getIdentifies(size);
+        List<User> users = getIdentifies(size);
 
         // when && then
         matchingCombinator.getAllCombinations(users,answers,new boolean[size],0,2 );
-        Map<Identifiable, List<Identifiable>> pairsMapFrom = matchingCombinator.getPairsMapFrom(answers);
+        Map<User, List<User>> pairsMapFrom = matchingCombinator.getPairsMapFrom(answers);
 
-        for(Map.Entry<Identifiable, List<Identifiable>>  e : pairsMapFrom.entrySet()){
+        for(Map.Entry<User, List<User>>  e : pairsMapFrom.entrySet()){
             System.out.print("key=" + e.getKey().getIdentify());
             System.out.println(" size = " + e.getValue().size());
             System.out.println(Arrays.toString(e.getValue().toArray()));
@@ -62,9 +62,9 @@ public class MatchingCombinatorTest {
     public void corret_AllComb_Count(){
 
         // given
-        List<Pair> answers = new ArrayList<>();
+        List<Pair<User,User>> answers = new ArrayList<>();
         int size = 10;
-        List<Identifiable> users = getIdentifies(size);
+        List<User> users = getIdentifies(size);
 
         // when
         matchingCombinator.getAllCombinations(users,answers,new boolean[size],0,2 );
@@ -74,9 +74,9 @@ public class MatchingCombinatorTest {
 
     }
 
-    public List<Identifiable> getIdentifies(int size){
+    public List<User> getIdentifies(int size){
 
-        List<Identifiable> identifiables = new ArrayList<>();
+        List<User> identifiables = new ArrayList<>();
 
         for(int i=1; i<=size; i++) {
             identifiables.add(User.builder().id(Long.valueOf(i)).build());

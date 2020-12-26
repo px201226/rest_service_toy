@@ -22,13 +22,19 @@ public class MatchingResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @OneToOne
-    @JoinColumn(name="user_id", insertable = false, updatable = false)
+    @JoinColumn(name="user_id")
     private User user;
 
     @OneToOne
-    @JoinColumn(name="another_user_id",insertable = false, updatable = false)
+    @JoinColumn(name="another_user_id")
     private User anotherUser;
 
     private LocalDate matchingDate;
+
+    @Override
+    public String toString() {
+        return String.format("(%d,%d)", user.getId(), anotherUser.getId());
+    }
 }

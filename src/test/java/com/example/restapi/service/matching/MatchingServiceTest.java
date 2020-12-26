@@ -1,5 +1,7 @@
 package com.example.restapi.service.matching;
 
+import com.example.restapi.domain.matching.MatchingResult;
+import com.example.restapi.domain.matching.MatchingResultRepository;
 import com.example.restapi.domain.matching.MatchingWaitEntity;
 import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
@@ -34,18 +36,24 @@ public class MatchingServiceTest extends BaseControllerTest {
     private MatchingWaitEntityRepository matchingWaitEntityRepository;
 
     @Autowired
+    private MatchingResultRepository matchingResultRepository;
+
+    @Autowired
     private MatchingService matchingService;
 
     @Autowired
     private MatchingManager matchingManager;
 
     private User loginUser;
+
+    // given
+    int size = 11;
+
     @Before
     public void userSetting() {
 
-        // given
-        int size = 10;
-        List<User> users = getAuthUsers(10);
+
+        List<User> users = getAuthUsers(size);
         userRepository.saveAll(users);
 
         List<MatchingWaitEntity> matchingWaitEntities = new ArrayList<>();
@@ -58,19 +66,30 @@ public class MatchingServiceTest extends BaseControllerTest {
             matchingWaitEntities.add(build);
         }
 
-        System.out.println("mmmmmmmmmmmmmmm1");
-        System.out.println("mmmmmmmmmmmmmmm2");
        matchingWaitEntityRepository.saveAll(matchingWaitEntities);
-        System.out.println("mmmmmmmmmmmmmmm3");
     }
 
     @Test
     public void matching() {
-        System.out.println("111111111111111");
-        matchingService.matching();
 
-        List<MatchingWaitEntity> all = matchingWaitEntityRepository.findAll();
+        //given
+        int expectMatchingResultEntities = size / 2;
+
+        matchingService.matching();
+        List<User> all = userRepository.findAll();
+        System.out.println("1111111111111111");
         System.out.println(Arrays.toString(all.toArray()));
+        List<MatchingWaitEntity> waits = matchingWaitEntityRepository.findAll();
+        List<MatchingResult> results = matchingResultRepository.findAll();
+        int afterWaitEntities = waits.size();
+        int afterMatchingEntity = results.size();
+
+        System.out.println("111111111111");
+        System.out.println(results.size());
+        System.out.println(Arrays.toString(results.toArray()));
+        System.out.println("11111111111111");
+        assertEquals(afterWaitEntities, 0);
+        assertEquals(afterMatchingEntity, expectMatchingResultEntities);
     }
 
 }
