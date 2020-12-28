@@ -1,7 +1,6 @@
 package com.example.restapi.web.dto;
 
-import com.example.restapi.domain.posts.Posts;
-import lombok.AllArgsConstructor;
+import com.example.restapi.domain.posts.Post;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,7 +14,7 @@ public class PostsResponseDto {
     private Long likes;
     private LocalDateTime modifiedDate;
 
-    public PostsResponseDto(Posts entity){
+    public PostsResponseDto(Post entity){
         this.id = entity.getId();
         this.content = entity.getContent();
         this.author = entity.getUser().getDetailProfiles().getName();

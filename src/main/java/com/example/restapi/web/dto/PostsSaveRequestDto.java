@@ -1,7 +1,7 @@
 package com.example.restapi.web.dto;
 
 
-import com.example.restapi.domain.posts.Posts;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +19,8 @@ public class PostsSaveRequestDto {
     @NotEmpty
     private String content;
 
-    public Posts toEntity(User user){
-        return Posts.builder()
+    public Post toEntity(User user){
+        return Post.builder()
                 .content(content)
                 .likes(0L)
                 .user(user)

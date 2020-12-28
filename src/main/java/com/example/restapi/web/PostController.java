@@ -2,25 +2,23 @@ package com.example.restapi.web;
 
 
 import com.example.restapi.config.AuthUser;
-import com.example.restapi.domain.posts.Posts;
-import com.example.restapi.domain.posts.PostsResource;
+import com.example.restapi.domain.posts.PostAssembler;
+import com.example.restapi.domain.posts.PostModel;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.service.posts.PostsService;
-import com.example.restapi.web.dto.PostsResponseDto;
 import com.example.restapi.web.dto.PostsSaveRequestDto;
 import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,20 +27,21 @@ public class PostController {
 
     private final ResponseService responseService;
     private final PostsService postsService;
+    private final PostAssembler postAssembler;
 
     @GetMapping
     public ResponseEntity getList(){
-        List<Posts> allDesc = postsService.findAllDesc();
-        List<PostsResource> collect = allDesc.stream().map(PostsResource::new).collect(Collectors.toList());
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, collect);
+
+        List<Post> allDesc = postsService.findAllDesc();
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postAssembler.toCollectionModel(allDesc));
         return ResponseEntity.ok(responseData);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity findById(@PathVariable Long id){
-        Posts byId = postsService.findById(id);
-        PostsResource resource = new PostsResource(byId);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, resource);
+
+        Post byId = postsService.findById(id);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postAssembler.toModel(byId));
         return ResponseEntity.ok(responseData);
     }
 
@@ -57,18 +56,18 @@ public class PostController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        Posts save = postsService.save(postsSaveRequestDto, user.getEmail());
-        PostsResource resource = new PostsResource(save);
-        ResponseData<PostsResource> responseData = responseService.create(ResponseStatus.SUCCESS, resource);
+        Post save = postsService.save(postsSaveRequestDto, user.getEmail());
+        PostModel model = postAssembler.toModel(save);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
 
         return ResponseEntity.ok(responseData);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable Long id,@Valid @RequestBody PostsUpdateRequestDto requestDto, @AuthUser User user){
-        Posts update = postsService.update(id, requestDto, user.getEmail());
-        PostsResource resource = new PostsResource(update);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, requestDto);
+        Post update = postsService.update(id, requestDto, user.getEmail());
+        PostModel model = postAssembler.toModel(update);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
         return ResponseEntity.ok(responseData);
     }
 

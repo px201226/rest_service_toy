@@ -24,6 +24,7 @@ public class UserDetailProfilesController {
 
     @GetMapping
     public ResponseEntity getUserProfile(@AuthUser User user){
+
         String userEmail = user.getEmail();
         User byEmail = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
 

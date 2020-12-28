@@ -51,7 +51,7 @@ public class MatchingCombinator {
         return map;
     }
 
-    public <T extends Identifiable>  void getAllCombinations(List<T> identifiables, List<Pair<T,T>> combinations, boolean isSelect[], int idx, int r){
+    private  <T extends Identifiable>  void getAllCombinations(List<T> identifiables, List<Pair<T,T>> combinations, boolean isSelect[], int idx, int r){
 
         if(r==0){
             Pair pair = getResultCombPair(identifiables, isSelect);

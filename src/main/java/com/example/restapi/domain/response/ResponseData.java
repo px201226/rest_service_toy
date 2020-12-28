@@ -1,6 +1,7 @@
 package com.example.restapi.domain.response;
 
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.*;
 
 @Getter
@@ -10,5 +11,7 @@ import lombok.*;
 public class ResponseData<T> {
     int resultCode;
     String resultMsg;
+
+    @JsonUnwrapped
     T data;
 }

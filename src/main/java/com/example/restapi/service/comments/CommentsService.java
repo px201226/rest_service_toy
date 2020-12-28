@@ -1,20 +1,17 @@
 package com.example.restapi.service.comments;
 
-import com.example.restapi.domain.comments.Comments;
-import com.example.restapi.domain.comments.CommentsRepository;
-import com.example.restapi.domain.posts.Posts;
-import com.example.restapi.domain.posts.PostsRepository;
+import com.example.restapi.domain.comments.Comment;
+import com.example.restapi.domain.comments.CommentRepository;
+import com.example.restapi.domain.posts.Post;
+import com.example.restapi.domain.posts.PostRepository;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.CommentNotFoundException;
 import com.example.restapi.exception.exceptions.EmailSigninFailedException;
 import com.example.restapi.exception.exceptions.PostsNotFoundException;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
-import com.example.restapi.exception.high.NotExistDataException;
 import com.example.restapi.web.dto.CommentsSaveRequestDto;
 import com.example.restapi.web.dto.CommentsUpdateRequestDto;
-import com.example.restapi.web.dto.PostsSaveRequestDto;
-import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,60 +23,60 @@ import java.util.List;
 @Service
 public class CommentsService {
 
-    private final CommentsRepository commentsRepository;
+    private final CommentRepository commentRepository;
     private final UserRepository userRepository;
-    private final PostsRepository postsRepository;
+    private final PostRepository postRepository;
 
     @Transactional
-    public Comments save(CommentsSaveRequestDto requestDto, Long postId, String userEmail){
+    public Comment save(CommentsSaveRequestDto requestDto, Long postId, String userEmail){
 
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
-        Posts posts = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
+        Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
 
-        return commentsRepository.save(requestDto.toEntity(user, posts));
+        return commentRepository.save(requestDto.toEntity(user, post));
     }
 
     @Transactional
-    public Comments update(CommentsUpdateRequestDto requestDto, Long postId, Long commentId, String userEmail) {
+    public Comment update(CommentsUpdateRequestDto requestDto, Long postId, Long commentId, String userEmail) {
 
-        Posts posts = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-        Comments comments = commentsRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+        Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
 
-        if(!isEqualUser(comments,userEmail)){
+        if(!isEqualUser(comment,userEmail)){
             throw new EmailSigninFailedException();
         }
-        comments.update(requestDto.getContent());
+        comment.update(requestDto.getContent());
 
-        return comments;
+        return comment;
     }
 
     @Transactional
-    public Comments findById(Long postId, Long commentId){
-        Posts posts = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-        Comments entity = commentsRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+    public Comment findById(Long postId, Long commentId){
+        Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
+        Comment entity = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
         return entity;
     }
 
     @Transactional(readOnly = true)
-    public List<Comments> findAllDesc(){
-        return commentsRepository.findAllDesc();
+    public List<Comment> findAllDesc(){
+        return commentRepository.findAllDesc();
     }
 
     @Transactional
     public void delete(Long postId, Long commentId, String userEmail){
 
-        Posts posts = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-        Comments comments = commentsRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
+        Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(CommentNotFoundException::new);
 
-        if(!isEqualUser(comments,userEmail)){
+        if(!isEqualUser(comment,userEmail)){
             throw new EmailSigninFailedException();
         }
 
-        commentsRepository.delete(comments);
+        commentRepository.delete(comment);
     }
 
     // Post 작성자와 접속user Id가 같은지
-    private boolean isEqualUser(Comments comments, String userEmail){
-        return userEmail.equals(comments.getUser().getEmail());
+    private boolean isEqualUser(Comment comment, String userEmail){
+        return userEmail.equals(comment.getUser().getEmail());
     }
 }

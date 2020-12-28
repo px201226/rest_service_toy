@@ -2,10 +2,9 @@ package com.example.restapi.web;
 
 
 import com.example.restapi.config.AuthUser;
-import com.example.restapi.domain.comments.Comments;
-import com.example.restapi.domain.comments.CommentsResource;
-import com.example.restapi.domain.posts.Posts;
-import com.example.restapi.domain.posts.PostsResource;
+import com.example.restapi.domain.comments.Comment;
+import com.example.restapi.domain.comments.CommentAssembler;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.domain.response.ResponseStatus;
@@ -14,16 +13,11 @@ import com.example.restapi.service.comments.CommentsService;
 import com.example.restapi.service.posts.PostsService;
 import com.example.restapi.web.dto.CommentsSaveRequestDto;
 import com.example.restapi.web.dto.CommentsUpdateRequestDto;
-import com.example.restapi.web.dto.PostsSaveRequestDto;
-import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.method.P;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Path;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,22 +29,21 @@ public class CommentsController {
     private final ResponseService responseService;
     private final CommentsService commentsService;
     private final PostsService postsService;
+    private final CommentAssembler commentAssembler;
 
     @GetMapping("/v1/posts/{postId}/comments")
     public ResponseEntity getList(@PathVariable Long postId) {
-        Posts posts = postsService.findById(postId);
-        List<Comments> allDesc = posts.getComments();
-        List<CommentsResource> collect = allDesc.stream().map(CommentsResource::new).collect(Collectors.toList());
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, collect);
+        Post post = postsService.findById(postId);
+        List<Comment> allDesc = post.getComments();
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toCollectionModel(allDesc));
         return ResponseEntity.ok(responseData);
     }
 
     @GetMapping("/v1/posts/{postId}/comments/{commentId}")
     public ResponseEntity getList(@PathVariable Long postId,
                                   @PathVariable Long commentId) {
-        Comments byId = commentsService.findById(postId, commentId);
-        CommentsResource resource = new CommentsResource(byId);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, resource);
+        Comment byId = commentsService.findById(postId, commentId);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(byId));
         return ResponseEntity.ok(responseData);
     }
 
@@ -65,9 +58,8 @@ public class CommentsController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        Comments save = commentsService.save(requestDto, postId, user.getEmail());
-        CommentsResource resource = new CommentsResource(save);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, resource);
+        Comment save = commentsService.save(requestDto, postId, user.getEmail());
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(save));
 
         return ResponseEntity.ok(responseData);
     }
@@ -84,9 +76,8 @@ public class CommentsController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        Comments update = commentsService.update(requestDto, postId, commentId, user.getEmail());
-        CommentsResource resource = new CommentsResource(update);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, resource);
+        Comment update = commentsService.update(requestDto, postId, commentId, user.getEmail());
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(update));
         return ResponseEntity.ok(responseData);
     }
 

@@ -1,8 +1,6 @@
 package com.example.restapi.domain.matching;
 
-import com.example.restapi.domain.posts.Posts;
 import com.example.restapi.web.MatchingCotroller;
-import com.example.restapi.web.PostController;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;

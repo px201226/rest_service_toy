@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class MatchingEntityService {
+public class MatchingApplyService {
 
     private final MatchingManager matchingManager;
     private final MatchingWaitEntityRepository matchingWaitEntityRepository;
@@ -38,6 +38,8 @@ public class MatchingEntityService {
                 .user(user)
                 .nextMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
                 .build();
+
+        user.updateLastMatchingDate(LocalDate.now());
 
         return matchingWaitEntityRepository.save(build);
     }

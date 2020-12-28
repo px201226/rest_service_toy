@@ -10,27 +10,23 @@ import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.web.common.BaseControllerTest;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MatchingServiceTest extends BaseControllerTest {
+public class MatchingService2Test extends BaseControllerTest {
 
     @Autowired
     private UserRepository userRepository;
@@ -54,10 +50,8 @@ public class MatchingServiceTest extends BaseControllerTest {
 
     @After
     public void clean(){
-        matchingResultRepository.deleteAllInBatch();
-        matchingWaitEntityRepository.deleteAllInBatch();
-//        userRepository.deleteAllInBatch();
-
+        matchingResultRepository.deleteAll();
+        userRepository.deleteAll();
     }
     @Before
     public void userSetting() {
@@ -76,10 +70,6 @@ public class MatchingServiceTest extends BaseControllerTest {
         }
 
        matchingWaitEntityRepository.saveAll(matchingWaitEntities);
-    }
-
-    @Test
-    public void matching() {
 
         //given
         int expectMatchingResultEntities = size / 2;
@@ -91,9 +81,13 @@ public class MatchingServiceTest extends BaseControllerTest {
         List<MatchingResult> results = matchingResultRepository.findAll();
         int afterWaitEntities = waits.size();
         int afterMatchingEntity = results.size();
-
-        assertEquals(afterWaitEntities, 0);
-        assertEquals(afterMatchingEntity, expectMatchingResultEntities);
     }
 
+
+    @Test
+    public void findMatchedResult(){
+        List<MatchingResult> all = matchingResultRepository.findAll();
+        System.out.println(matchingService.findMatchedResult("px1001@naver.com"));
+
+    }
 }

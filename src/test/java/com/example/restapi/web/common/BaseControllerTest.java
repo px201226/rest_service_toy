@@ -1,6 +1,7 @@
 package com.example.restapi.web.common;
 
 import com.example.restapi.config.security.JwtTokenProvider;
+import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.profile.DetailProfiles;
@@ -23,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,6 +52,8 @@ public class BaseControllerTest {
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
+@Autowired
+private MatchingManager matchingManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -78,7 +82,7 @@ public class BaseControllerTest {
         return jwtTokenProvider.createToken(user.getEmail(),user.getRoles());
     }
 
-    public List<User> getAuthUsers(int size){
+    public  List<User> getAuthUsers(int size){
         List<User> users = new ArrayList<>();
         System.out.println("usercount="+ userRepository.findAll().size());
         for (int i = 0; i < size; i++) {
@@ -88,6 +92,7 @@ public class BaseControllerTest {
                     .dreamProfiles(dreamProfiles())
                     .detailProfiles(detailProfiles())
                     .roles(ROLES)
+                    .lastMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
                     .build();
             users.add(build);
         }

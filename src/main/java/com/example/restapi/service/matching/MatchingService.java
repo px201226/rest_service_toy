@@ -5,16 +5,17 @@ import com.example.restapi.domain.matching.*;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
+import com.example.restapi.exception.exceptions.MatchedResultNotFoundException;
+import com.example.restapi.exception.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -30,31 +31,26 @@ public class MatchingService {
     public void matching() {
 
         List<MatchingWaitEntity> all = matchingWaitEntityRepository.findAll();
-        List<User> collect = all.stream().map((x) -> x.getUser()).collect(Collectors.toList());
-        List<Pair<User, User>> pairs = matchingManager.matchingRandom(collect);
+        List<User> users = all.stream().map(
+                (x) -> x.getUser()).collect(Collectors.toList());
 
-        List<MatchingResult> matchingResults = new ArrayList<>();
+        List<Pair<User, User>> matchingPairs = matchingManager.getMatchingRandomPairsFrom(users);
+
         LocalDate nextMatchingDate = matchingManager.getNextMatchingDate(LocalDate.now());
+        List<MatchingResult> matchingResults = MatchingResult.getResultsTo(matchingPairs, nextMatchingDate);
 
-        Iterator<Pair<User, User>> iterator = pairs.iterator();
-        while (iterator.hasNext()) {
-            Pair<User, User> next = iterator.next();
-            MatchingResult build = MatchingResult.builder()
-                    .user(next.getFirst())
-                    .anotherUser(next.getSecond())
-                    .matchingDate(nextMatchingDate)
-                    .build();
-
-            matchingResults.add(build);
-        }
-
-
-        List<MatchingResult> matchingResults1 = matchingResultRepository.saveAll(matchingResults);
-
-        List<MatchingResult> all1 = matchingResultRepository.findAll();
-        System.out.println("matching----------");
-        System.out.println(Arrays.toString(matchingResults.toArray()));
-        System.out.println(Arrays.toString(all1.toArray()));
+   //     matchedDateRepository.save(MatchedDateHistory.builder().matchedDate(nextMatchingDate).build());
+        matchingResultRepository.saveAll(matchingResults);
         matchingWaitEntityRepository.deleteAllInBatch();
+    }
+
+    @Transactional
+    public User findMatchedResult(String userEmail){
+        User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
+
+        MatchingResult matchingResult = matchingResultRepository.findByUserIdAndMatchingDate(user.getId(), user.getLastMatchingDate())
+                .orElseThrow(MatchedResultNotFoundException::new);
+
+        return matchingResult.getAnotherUser();
     }
 }

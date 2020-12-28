@@ -1,15 +1,17 @@
 package com.example.restapi.domain.user;
 
 import com.example.restapi.domain.LocalDateTimeEntity;
-import com.example.restapi.domain.comments.Comments;
+import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.matching.Identifiable;
 import com.example.restapi.domain.matching.MatchingScoreComparable;
 import com.example.restapi.domain.matching.MatchingWaitEntity;
-import com.example.restapi.domain.posts.Posts;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.user.profile.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
@@ -33,14 +35,16 @@ public class User extends LocalDateTimeEntity
     @Column(nullable = false, unique = true)
     private String email;
 
+    private String nickName;
+
     @Size(min = 2)
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<Posts> posts;
+    private List<Post> posts;
 
     @OneToMany(mappedBy = "user")
-    private List<Comments> comments;
+    private List<Comment> comments;
 
     @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
@@ -56,25 +60,9 @@ public class User extends LocalDateTimeEntity
     @Embedded
     private DreamProfiles dreamProfiles;                              // 이상형 프로필
 
+    private LocalDate lastMatchingDate;
+
     private String kakaoId;
-
-    public User updateMyDetailProfiles(DetailProfiles detailProfiles){
-        this.detailProfiles = detailProfiles;
-        return this;
-    }
-
-    public User updateDreamProfiles(DreamProfiles dreamProfiles) {
-        this.dreamProfiles = dreamProfiles;
-        return this;
-    }
-
-    public User updateUser(User reqeustUpdateUserDto) {
-        this.dreamProfiles = reqeustUpdateUserDto.getDreamProfiles();
-        this.detailProfiles = reqeustUpdateUserDto.getDetailProfiles();
-        this.kakaoId = kakaoId;
-        return this;
-    }
-
 
     // Identifiable interface 구현
     @Override
@@ -97,4 +85,27 @@ public class User extends LocalDateTimeEntity
     public int compareObjective(User other) {
         return dreamProfiles.compareObjective(other.detailProfiles);
     }
+
+    public User updateMyDetailProfiles(DetailProfiles detailProfiles){
+        this.detailProfiles = detailProfiles;
+        return this;
+    }
+
+    public User updateDreamProfiles(DreamProfiles dreamProfiles) {
+        this.dreamProfiles = dreamProfiles;
+        return this;
+    }
+
+    public User updateUser(User reqeustUpdateUserDto) {
+        this.dreamProfiles = reqeustUpdateUserDto.getDreamProfiles();
+        this.detailProfiles = reqeustUpdateUserDto.getDetailProfiles();
+        this.kakaoId = kakaoId;
+        return this;
+    }
+
+    public User updateLastMatchingDate(LocalDate localDate){
+        this.lastMatchingDate = localDate;
+        return this;
+    }
+
 }

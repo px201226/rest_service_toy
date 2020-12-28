@@ -1,5 +1,6 @@
 package com.example.restapi.web;
 
+import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
@@ -35,6 +36,8 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private MatchingWaitEntityRepository matchingWaitEntityRepository;
     private RestDocumentationResultHandler document;
 
     private User loginUser;
@@ -46,6 +49,8 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
 
     @After
     public void cleanUp() {
+
+        matchingWaitEntityRepository.deleteAll();
         this.userRepository.deleteAll();
     }
 
@@ -61,7 +66,7 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.name").value(loginUser.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.name").value(loginUser.getDetailProfiles().getName()));
     }
 
     @Test
@@ -84,7 +89,7 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.name").value(detailProfiles.getName()));
+                .andExpect(jsonPath("$.name").value(detailProfiles.getName()));
 
     }
 

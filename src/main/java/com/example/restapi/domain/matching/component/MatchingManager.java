@@ -24,7 +24,7 @@ public class MatchingManager {
 
     }
 
-    public <T extends Identifiable> List<Pair<T,T>> matchingRandom(List<T> identifiables) {
+    public <T extends Identifiable> List<Pair<T,T>> getMatchingRandomPairsFrom(List<T> identifiables) {
 
         int totalSize = identifiables.size(), count = 0;
 
@@ -32,6 +32,9 @@ public class MatchingManager {
                 matchingCombinator.getAllPairsFromLists(identifiables));
 
         Map<T,Boolean> selectStatus = new TreeMap<>();
+
+
+
         List<Pair<T,T>> result = new ArrayList<>();
 
         Random random = new Random();

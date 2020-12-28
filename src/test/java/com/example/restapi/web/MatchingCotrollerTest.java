@@ -64,14 +64,15 @@ public class MatchingCotrollerTest extends BaseControllerTest {
 
     @After
     public void cleanUp() {
-        this.userRepository.deleteAll();
         this.matchingWaitEntityRepository.deleteAll();
+        this.userRepository.deleteAll();
+
     }
 
     @Test
     public void expectSuccessApply() throws Exception {
         // when && then
-        mockMvc.perform(post("/v1/matching")
+        mockMvc.perform(post("/v1/matching/apply")
                 .header("X-AUTH-TOKEN", jwtTokenProvider.createToken(loginUser.getEmail(),loginUser.getRoles()))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)
@@ -88,7 +89,7 @@ public class MatchingCotrollerTest extends BaseControllerTest {
         // when && then
         for(int i=0; i<10; i++) {
             User user = authUsers.get(i);
-            mockMvc.perform(post("/v1/matching")
+            mockMvc.perform(post("/v1/matching/apply")
                     .header("X-AUTH-TOKEN", jwtTokenProvider.createToken(user.getEmail(), user.getRoles()))
                     .contentType(MediaType.APPLICATION_JSON_VALUE)
                     .accept(MediaTypes.HAL_JSON)
@@ -108,7 +109,7 @@ public class MatchingCotrollerTest extends BaseControllerTest {
         matchingWaitEntityRepository.save(build);
 
         // when && then
-        mockMvc.perform(post("/v1/matching")
+        mockMvc.perform(post("/v1/matching/apply")
                 .header("X-AUTH-TOKEN", jwtTokenProvider.createToken(loginUser.getEmail(),loginUser.getRoles()))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)

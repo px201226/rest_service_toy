@@ -6,7 +6,6 @@ import org.springframework.data.util.Pair;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,10 +29,10 @@ public class MatchingManagerTest {
 
     @Test
     public void corret_random_matching(){
-        int size = 1010;
+        int size = 5;
        for(int i=1; i<=size; i++){
             List<User> users = getUsers(size);
-            List<Pair<User,User>> pairs = matchingManager.matchingRandom(users);
+            List<Pair<User,User>> pairs = matchingManager.getMatchingRandomPairsFrom(users);
             //System.out.println(Arrays.toString(pairs.toArray()));
            System.out.println(i);
             assertEquals(users.size() / 2, pairs.size());

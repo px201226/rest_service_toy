@@ -1,16 +1,12 @@
 package com.example.restapi.service.posts;
 
 
-import com.example.restapi.domain.posts.PostsRepository;
-import com.example.restapi.domain.posts.Posts;
-import com.example.restapi.domain.user.User;
+import com.example.restapi.domain.posts.PostRepository;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.EmailSigninFailedException;
 import com.example.restapi.exception.exceptions.PostsNotFoundException;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
-import com.example.restapi.exception.high.NotExistDataException;
-import com.example.restapi.web.dto.PostsListResponseDto;
-import com.example.restapi.web.dto.PostsResponseDto;
 import com.example.restapi.web.dto.PostsSaveRequestDto;
 import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -18,27 +14,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class PostsService {
 
-    private final PostsRepository postsRepository;
+    private final PostRepository postRepository;
     private final UserRepository userRepository;
 
     @Transactional
-    public Posts save(PostsSaveRequestDto requestDto, String userEmail){
-        User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
-
-        return postsRepository.save(requestDto.toEntity(user));
+    public Post save(PostsSaveRequestDto requestDto, String userEmail){
+        return userRepository.findByEmail(userEmail)
+                .map( u -> postRepository.save(requestDto.toEntity(u)))
+                .orElseThrow(UserNotFoundException::new);
     }
 
     @Transactional
-    public Posts update(Long postId, PostsUpdateRequestDto requestDto, String userEmail) {
-        Posts post = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
+    public Post update(Long postId, PostsUpdateRequestDto requestDto, String userEmail) {
 
-        if(!isEqualUser(post,userEmail)){
+        Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
+
+        if(!post.isEqualUserEmail(userEmail)){
             throw new EmailSigninFailedException();
         }
 
@@ -48,31 +44,25 @@ public class PostsService {
     }
 
     @Transactional
-    public Posts findById(Long postId){
-        Posts entity = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-
-        return entity;
+    public Post findById(Long postId){
+        return postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
     }
 
     @Transactional(readOnly = true)
-    public List<Posts> findAllDesc(){
-        return postsRepository.findAllDesc();
+    public List<Post> findAllDesc(){
+        return postRepository.findAllDesc();
     }
 
     @Transactional
     public void delete(Long postId, String userEmail){
-        Posts posts = postsRepository.findById(postId).orElseThrow(PostsNotFoundException::new
+        Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new
         );
 
-        if(!isEqualUser(posts,userEmail)){
+        if(!post.isEqualUserEmail(userEmail)){
             throw new EmailSigninFailedException();
         }
 
-        postsRepository.delete(posts);
+        postRepository.delete(post);
     }
 
-    // Post 작성자와 접속user Id가 같은지
-    private boolean isEqualUser(Posts posts, String userEmail){
-        return userEmail.equals(posts.getUser().getEmail());
-    }
 }

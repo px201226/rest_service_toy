@@ -2,7 +2,7 @@ package com.example.restapi.domain.comments;
 
 
 import com.example.restapi.domain.LocalDateTimeEntity;
-import com.example.restapi.domain.posts.Posts;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -10,12 +10,13 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Entity
-public class Comments extends LocalDateTimeEntity {
+public class Comment extends LocalDateTimeEntity {
 
 
     @Id                                                         // jpa가 자동으로 테이블을 만들기 위해 선언해야됨
@@ -31,7 +32,7 @@ public class Comments extends LocalDateTimeEntity {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    private Posts posts;
+    private Post post;
 
     public void update(String content) {
         this.content = content;

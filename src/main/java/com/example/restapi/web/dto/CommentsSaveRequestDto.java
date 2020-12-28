@@ -1,7 +1,7 @@
 package com.example.restapi.web.dto;
 
-import com.example.restapi.domain.comments.Comments;
-import com.example.restapi.domain.posts.Posts;
+import com.example.restapi.domain.comments.Comment;
+import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.user.User;
 import lombok.*;
 
@@ -16,11 +16,11 @@ public class CommentsSaveRequestDto {
     @NotEmpty
     private String content;
 
-    public Comments toEntity(User user, Posts posts){
-        return Comments.builder()
+    public Comment toEntity(User user, Post post){
+        return Comment.builder()
                 .content(content)
                 .user(user)
-                .posts(posts)
+                .post(post)
                 .build();
     }
 }

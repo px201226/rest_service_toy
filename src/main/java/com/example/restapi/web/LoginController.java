@@ -70,13 +70,7 @@ public class LoginController {
         List<MatchingResult> results = matchingResultRepository.findAll();
         int afterWaitEntities = waits.size();
         int afterMatchingEntity = results.size();
-
-        System.out.println("111111111111");
-        System.out.println(results.size());
-        System.out.println(Arrays.toString(results.toArray()));
-        System.out.println("11111111111111");
-        assertEquals(afterWaitEntities, 0);
-        assertEquals(afterMatchingEntity, expectMatchingResultEntities);
+        
     }
 
     public void userSetting() {
@@ -166,8 +160,7 @@ public class LoginController {
         System.out.println(user.getPassword());
         User joinUser = userService.join(user);
 //        GuestResource resource = new GuestResource(joinUser);
-////        ResponseData<GuestResource> response = responseService.create(ResponseStatus.SUCCESS, resource);
-        System.out.println("mmmmmmmmm" + user.toString());
+////        ResponseData<GuestResource> response = responseService.create(ResponseStatus.SUCCESS, resource);;
         return ResponseEntity.ok(joinUser);
     }
 

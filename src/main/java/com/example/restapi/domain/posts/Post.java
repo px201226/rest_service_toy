@@ -2,11 +2,10 @@ package com.example.restapi.domain.posts;
 
 
 import com.example.restapi.domain.LocalDateTimeEntity;
-import com.example.restapi.domain.comments.Comments;
+import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -18,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Entity
-public class Posts extends LocalDateTimeEntity {
+public class Post extends LocalDateTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +33,12 @@ public class Posts extends LocalDateTimeEntity {
     private User user;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "posts", cascade = CascadeType.ALL)
-    private List<Comments> comments;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public boolean isEqualUserEmail( String userEmail){
+        return this.user.getEmail().equals(userEmail);
+    }
 
     public void update(String content) {
         this.content = content;

@@ -1,10 +1,7 @@
 package com.example.restapi.web.dto;
 
-import com.example.restapi.domain.posts.Posts;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.example.restapi.domain.posts.Post;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +15,7 @@ public class PostsListResponseDto {
     private String writerEmail;
 
 
-    public PostsListResponseDto(Posts entity){
+    public PostsListResponseDto(Post entity){
         this.id = entity.getId();
         this.content = entity.getContent();
         this.author = entity.getUser().getDetailProfiles().getName();

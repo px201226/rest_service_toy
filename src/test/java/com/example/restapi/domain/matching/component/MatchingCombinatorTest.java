@@ -21,19 +21,18 @@ public class MatchingCombinatorTest {
     public void corret_shuffle_pairOfList(){
 
         // given
-        List<Pair<User,User>> answers = new ArrayList<>();
         int size = 10;
         List<User> users = getIdentifies(size);
 
         // when && then
-        matchingCombinator.getAllCombinations(users,answers,new boolean[size],0,2 );
-        String origin = Arrays.toString(answers.toArray());
-        String shuffle = Arrays.toString(matchingCombinator.shufflePairs(answers).toArray());
+        List<Pair<User, User>> allPairsAndShuffle = matchingCombinator.getAllPairsAndShuffle(users);
+        String origin = Arrays.toString(allPairsAndShuffle.toArray());
+        String shuffle = Arrays.toString(matchingCombinator.shufflePairs(allPairsAndShuffle).toArray());
         System.out.println(origin);
         assertNotEquals(origin,shuffle);
 
-        origin = Arrays.toString(answers.toArray());
-        shuffle = Arrays.toString(matchingCombinator.shufflePairs(answers).toArray());
+        origin = Arrays.toString(allPairsAndShuffle.toArray());
+        shuffle = Arrays.toString(matchingCombinator.shufflePairs(allPairsAndShuffle).toArray());
         System.out.println(origin);
         assertNotEquals(origin,shuffle);
     }
@@ -41,15 +40,12 @@ public class MatchingCombinatorTest {
     @Test
     public void corret_listToMap(){
 
-        // given
-        List<Pair<User,User>> answers = new ArrayList<>();
-
         int size = 10;
         List<User> users = getIdentifies(size);
 
         // when && then
-        matchingCombinator.getAllCombinations(users,answers,new boolean[size],0,2 );
-        Map<User, List<User>> pairsMapFrom = matchingCombinator.getPairsMapFrom(answers);
+        List<Pair<User, User>> allPairsFromLists = matchingCombinator.getAllPairsFromLists(users);
+        Map<User, List<User>> pairsMapFrom = matchingCombinator.getPairsMapFrom(allPairsFromLists);
 
         for(Map.Entry<User, List<User>>  e : pairsMapFrom.entrySet()){
             System.out.print("key=" + e.getKey().getIdentify());
@@ -61,16 +57,14 @@ public class MatchingCombinatorTest {
     @Test
     public void corret_AllComb_Count(){
 
-        // given
-        List<Pair<User,User>> answers = new ArrayList<>();
         int size = 10;
         List<User> users = getIdentifies(size);
 
         // when
-        matchingCombinator.getAllCombinations(users,answers,new boolean[size],0,2 );
+        List<Pair<User, User>> allPairsFromLists = matchingCombinator.getAllPairsFromLists(users);
 
         // then
-        assertEquals(answers.size(), combination(size,2));
+        assertEquals(allPairsFromLists.size(), combination(size,2));
 
     }
 
