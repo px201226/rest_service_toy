@@ -61,7 +61,7 @@ public class UserDreamProfilesControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.tallType").value(loginUser.getDreamProfiles().getTallType().toString()));
+                .andExpect(jsonPath("$.data.tallType").value(loginUser.getDreamProfiles().getTallType().toString()));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserDreamProfilesControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.bodyType").value(dreamProfiles.getBodyType().toString()));
+                .andExpect(jsonPath("$.data.bodyType").value(dreamProfiles.getBodyType().toString()));
 
     }
 

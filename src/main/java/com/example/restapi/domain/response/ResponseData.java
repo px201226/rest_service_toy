@@ -11,7 +11,5 @@ import lombok.*;
 public class ResponseData<T> {
     int resultCode;
     String resultMsg;
-
-    @JsonUnwrapped
     T data;
 }

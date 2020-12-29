@@ -62,7 +62,7 @@ public class UserControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.detailProfiles.name").value(loginUser.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.data.detailProfiles.name").value(loginUser.getDetailProfiles().getName()));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class UserControllerTest extends BaseControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.detailProfiles.name").value(user.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.data.detailProfiles.name").value(user.getDetailProfiles().getName()));
 
     }
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -85,5 +86,6 @@ public class MatchingCombinatorTest {
         else
             return combination(n - 1, r - 1) + combination(n - 1, r);
     }
+
 
 }
