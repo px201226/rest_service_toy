@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework: DEBUG
+
+spring:
+  messages:
+    basename: messages
+  datasource:
+    url: jdbc:h2:mem:testdb
+  jpa:
+    show-sql: true
+  jwt:
+    secret: govlepl!@#
+
+  security:
+    user:
+      name: username
+      password: password
+
+  data:
+    rest:
+      base-path: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
