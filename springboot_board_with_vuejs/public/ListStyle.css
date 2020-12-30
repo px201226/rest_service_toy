@@ -1,0 +1,66 @@
+
+    p{
+        display: inline;
+    }
+
+    img{
+        max-width: 100%;
+
+    }
+
+    code.a {
+        font-family: Consolas,"courier new";
+        color: blue;
+        background-color: #8f0505;
+        padding: 2px;
+        font-size: 105%;
+      }
+      
+    pre {
+        background: #f4f4f4;
+        border: 1px solid #ddd;
+        border-left: 3px solid #64DD17;
+        color: #666;
+        page-break-inside: avoid;
+        font-family: monospace;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 1.6em;
+        max-width: 100%;
+        overflow: auto;
+        padding: 1em 1.5em;
+        display: block;
+        word-wrap: break-word;
+    }
+
+    li.none {
+      list-style: none;
+      /* Remove default bullets */
+    }
+
+    ul li pre {
+        margin-left: -1em;
+        padding: 1em;
+    }
+
+    pre {
+        padding: 1em;
+    }
+
+    li.listyle::before {
+      content: "\2022";
+      /* Add content: \2022 is the CSS Code/unicode for a bullet */
+      color: green;
+      /* Change the color */
+      font-weight: bold;
+      /* If you want it to be bold */
+      display: inline-block;
+      /* Needed to add space between the bullet and the text */
+      width: 1em;
+      /* Also needed for space (tweak if needed) */
+      margin-left: -1em;
+      /* Also needed for space (tweak if needed) */
+    }
+
+
+}
