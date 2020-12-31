@@ -104,7 +104,6 @@ private MatchingManager matchingManager;
 
     public DetailProfiles detailProfiles() {
         return DetailProfiles.builder()
-                .name(NAME)
                 .bodyType(BodyType.SKINNY)
                 .tallType(TallType.NORMAL)
                 .locationCategory(LocationCategory.BUSAN)

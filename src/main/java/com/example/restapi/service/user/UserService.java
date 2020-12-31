@@ -40,6 +40,8 @@ public class UserService implements UserDetailsService {
 
         return userRepository.save(User.builder()
                 .email(user.getEmail())
+                .nickName(user.getNickName())
+                .kakaoId(user.getKakaoId())
                 .detailProfiles(user.getDetailProfiles())
                 .dreamProfiles(user.getDreamProfiles())
                 .password(passwordEncoder.encode(user.getPassword()))

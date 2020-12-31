@@ -44,19 +44,24 @@
         </v-btn>
       </v-row>
     </v-col>
+    <modal />
   </div>
 </template>
 
 <script>
+import Modal from "../components/Modal.vue";
 import Timer from "../components/Timer.vue";
+
 export default {
   components: {
     Timer,
+    Modal,
   },
 
   methods: {
     onMatchingApply() {
-      this.$router.push("/matching/apply");
+      this.$store.commit("OPEN_SNACKBAR", { text: "dd" });
+      // this.$router.push("/matching/apply");
     },
 
     onMatchingResult() {

@@ -18,9 +18,6 @@ import javax.validation.constraints.NotEmpty;
 @Embeddable
 public class DetailProfiles {
 
-    @NotEmpty
-    private String name;                                    // 닉네임
-
     // 키, 몸무게, 사는곳
     @Enumerated(EnumType.STRING)
     private TallType tallType;

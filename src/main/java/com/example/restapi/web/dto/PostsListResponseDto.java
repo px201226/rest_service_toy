@@ -18,7 +18,7 @@ public class PostsListResponseDto {
     public PostsListResponseDto(Post entity){
         this.id = entity.getId();
         this.content = entity.getContent();
-        this.author = entity.getUser().getDetailProfiles().getName();
+        this.author = entity.getUser().getNickName();
         this.modifiedDate = entity.getModifiedDate();
         this.writerEmail = entity.getUser().getEmail();
     }

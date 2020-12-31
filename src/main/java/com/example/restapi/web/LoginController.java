@@ -113,7 +113,6 @@ public class LoginController {
 
     public DetailProfiles detailProfiles() {
         return DetailProfiles.builder()
-                .name("NAME")
                 .bodyType(BodyType.SKINNY)
                 .tallType(TallType.NORMAL)
                 .locationCategory(LocationCategory.BUSAN)
@@ -156,11 +155,9 @@ public class LoginController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
         User joinUser = userService.join(user);
-//        GuestResource resource = new GuestResource(joinUser);
-////        ResponseData<GuestResource> response = responseService.create(ResponseStatus.SUCCESS, resource);;
+        GuestResource resource = new GuestResource(joinUser);
+       ResponseData<GuestResource> response = responseService.create(ResponseStatus.SUCCESS, resource);;
         return ResponseEntity.ok(joinUser);
     }
 

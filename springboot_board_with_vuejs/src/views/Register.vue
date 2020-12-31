@@ -144,12 +144,15 @@
         </v-tab-item>
       </v-tabs>
     </v-form>
+    <modal />
   </div>
 </template>
 
 <script>
+import Modal from "../components/Modal.vue";
 export default {
   name: "Resister",
+  components: { Modal },
   data() {
     return {
       currentId: null,
@@ -222,7 +225,6 @@ export default {
       return this.$store.state.common.typeRules;
     },
   },
-  components: {},
   methods: {
     setDetailLocationCategory(a) {
       this.setDreamLocationCategory(a);
@@ -245,9 +247,13 @@ export default {
     },
     requestJoin() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("REQUEST_JOIN", this.member);
+        this.$store.dispatch("QUERY_JOIN", this.member);
       } else {
-        alert("dd");
+        this.$store.commit("OPEN_MODAL", {
+          title: "오류",
+          content: "입력하지 않은 항목이 있습니다",
+          option1: "닫기",
+        });
       }
     },
   },

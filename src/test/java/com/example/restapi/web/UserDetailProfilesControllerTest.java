@@ -65,15 +65,14 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.name").value(loginUser.getDetailProfiles().getName()));
+                .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()));
+             //   .andExpect(jsonPath("$.data.nickName").value(loginUser.getNickName()));
     }
 
     @Test
     public void successUpdateMyProfile() throws Exception {
         // given
         DetailProfiles detailProfiles = DetailProfiles.builder()
-                .name("change")
                 .locationCategory(LocationCategory.SEOUL)
                 .tallType(TallType.TALL)
                 .bodyType(BodyType.SKINNY)
@@ -88,9 +87,7 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()))
-                .andExpect(jsonPath("$.data.name").value(detailProfiles.getName()));
-
+                .andExpect(jsonPath("$.resultCode").value(ResponseStatus.SUCCESS.getResultCode()));
     }
 
 }

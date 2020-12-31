@@ -1,4 +1,4 @@
-import {getSessionUser, getTestUser,logout } from "../api/user_api";
+import {getSessionUser, getTestUser,logout, join } from "../api/user_api";
 import router from "../router";
 
 // state
@@ -66,8 +66,26 @@ const actions = {
       return Promise.reject(e);
     }
   },
-
+  async QUERY_JOIN(context, req) {
+    try {
+      const response = await join(req);
+      context.commit("SET_USER", response.data);
+      context.commit('OPEN_SNACKBAR', setSnackBarInfo('제목과 종료일자를 작성해주세요.', 'error', 'top'))
+      return response.data;
+    } catch (e) {
+      context.commit('OPEN_MODAL', {title: '회원가입에 실패', content: e.response.data.data.message, option1: '닫기',});
+      return Promise.reject(e);
+    }
+  },
 };
+
+function setSnackBarInfo(text, color, location) {
+  return {
+      text: text,
+      color: color,
+      location: location,
+  }
+}
 
 export default {
   state,

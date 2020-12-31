@@ -11,7 +11,7 @@
       <PostView /> <PostView class=" " /> -->
       <router-view />
     </v-content>
-
+    <SnackBar />
     <BottomNavigator />
   </v-app>
 </template>
@@ -20,6 +20,8 @@
 import Home from "./views/Home.vue";
 import AppBar from "./views/AppBar.vue";
 import About from "./views/About.vue";
+import Modal from "././components/Modal.vue";
+import SnackBar from "././components/SnackBar.vue";
 
 import BottomNavigator from "./views/BottomNavigator.vue";
 import PostView from "./views/PostView.vue";
@@ -27,6 +29,7 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Matching from "./views/matching.vue";
 import MatchingResult from "./views/MatchingResult.vue";
+
 export default {
   name: "App",
 
@@ -40,6 +43,8 @@ export default {
     Register,
     Matching,
     MatchingResult,
+    Modal,
+    SnackBar,
   },
 
   data() {

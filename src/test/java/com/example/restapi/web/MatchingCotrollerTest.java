@@ -50,7 +50,6 @@ public class MatchingCotrollerTest extends BaseControllerTest {
 
     public DetailProfiles detailProfiles() {
         return DetailProfiles.builder()
-                .name("이기수 닉네임")
                 .bodyType(BodyType.CHUBBY)
                 .tallType(TallType.NORMAL)
                 .locationCategory(LocationCategory.BUSAN)
