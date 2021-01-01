@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,19 +37,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      /*  http.authorizeRequests().antMatchers("/h2-console/*").permitAll()
-                .and().csrf().disable()
-                .headers().frameOptions().disable();
-        super.configure(http);*/
 
         http
-                .cors().disable()
+                .cors().and()
                 .httpBasic().disable()          // REST API 이므로 기본설정 안함. 기본설정은 비인증시 로그인폼 화면으로 리다이렉트된다
                 .csrf().disable()               // Rest API 이므로 crsf 보안이 필요없다.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)         //jwt token으로 인증하므로 세션을 생성안함.
                 .and()
                     .authorizeRequests()    // 다음 리퀘스트에 대한 사용권한 체크
-                    .antMatchers("/*/join", "/*/login", "/h2-console/**","/exception/**","/**").permitAll()       //가입 및 인증 주소는 누구나 가능
+                    .antMatchers("/*/join", "/*/login", "/h2-console/**","/exception/**").permitAll()       //가입 및 인증 주소는 누구나 가능
                     .anyRequest().hasRole("USER")
                 .and()
                     .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
@@ -62,6 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v2/api-docs", "/swagger-resources/**",
-                "/swagger-ui.html", "/webjars/**", "/swagger/**", "/h2-console/**", "/**");
+                "/swagger-ui.html", "/webjars/**", "/swagger/**", "/h2-console/**");
+
     }
 }

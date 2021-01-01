@@ -27,19 +27,21 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
 
     @Override
     public UserModel toModel(User entity) {
+        System.out.println("dddddddddddddddd");
         UserModel userModel = new UserModel();
        // userModel.setComments(entity.getComments());
         userModel.setDetailProfiles(entity.getDetailProfiles());
         userModel.setDreamProfiles(entity.getDreamProfiles());
         userModel.setEmail(entity.getEmail());
         userModel.setId(entity.getId());
+        userModel.setNickName(entity.getNickName());
         userModel.setKakaoId(entity.getKakaoId());
         userModel.setLastMatchingDate(entity.getLastMatchingDate());
         userModel.setPosts(toPostModel(entity.getPosts()));
         userModel.add(linkTo(UserController.class).slash("").withSelfRel())
                 .add(linkTo(methodOn(UserDetailProfilesController.class).getUserProfile(null)).withRel("detailProfiles"))
                 .add(linkTo(methodOn(UserDreamProfilesController.class).getDreamProfile(null)).withRel("dreamProfiles"));
-
+        System.out.println("dddddddddddddddd");
         return userModel;
 
     }

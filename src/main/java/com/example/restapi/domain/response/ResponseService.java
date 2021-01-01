@@ -10,7 +10,7 @@ public class ResponseService {
     public <T> ResponseData<T> create(ResponseStatus state, T data){
         return ResponseData.<T>builder()
                 .resultCode(state.getResultCode())
-                .resultMsg(state.resultMsg)
+                .message(state.resultMsg)
                 .data(data)
                 .build();
     }

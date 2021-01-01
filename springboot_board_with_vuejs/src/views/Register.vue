@@ -11,7 +11,8 @@
           <v-container fluid v-if="item === items[0]">
             <v-text-field
               :rules="emailRules"
-              class="pl-3 pr-3"
+              outlined
+              class="px-3 my-3"
               label="이메일"
               prepend-icon="mdi-email"
               required
@@ -22,7 +23,8 @@
 
             <v-text-field
               :rules="passwordRules"
-              class="pl-3 pr-3"
+              outlined
+              class="px-3 my-3"
               label="비밀번호"
               prepend-icon="mdi-lock"
               required
@@ -33,7 +35,8 @@
 
             <v-text-field
               :rules="validatePasswordRules"
-              class="pl-3 pr-3"
+              class="px-3 my-3"
+              outlined
               label="비밀번호 확인"
               prepend-icon="mdi-lock"
               required
@@ -44,7 +47,8 @@
 
             <v-text-field
               :rules="nameRules"
-              class="pl-3 pr-3"
+              class="px-3 my-3"
+              outlined
               label="닉네임"
               prepend-icon="mdi-account"
               required
@@ -55,8 +59,9 @@
 
             <v-text-field
               :rules="nameRules"
-              class="pl-3 pr-3"
+              class="px-3 my-3"
               label="카카오톡 ID"
+              outlined
               prepend-icon="mdi-account"
               required
               type="text"
@@ -69,7 +74,7 @@
             <v-combobox
               :rules="typeRules"
               required
-              class="pl-3 pr-3"
+              class="px-3 my-3"
               outlined
               persistent-hint
               hint="본인의 거주지역을 선택하세요."
@@ -80,7 +85,7 @@
             <v-combobox
               :rules="typeRules"
               required
-              class="pl-3 pr-3"
+              class="px-3 my-3"
               outlined
               persistent-hint
               hint="본인의 체형을 선택하세요."
@@ -91,7 +96,7 @@
             <v-combobox
               :rules="typeRules"
               required
-              class="pl-3 pr-3"
+              class="px-3 my-3"
               outlined
               persistent-hint
               hint="본인의 신장을 선택해주세요."
@@ -99,9 +104,6 @@
               :items="tallType"
               @change="setDetailTallType"
             ></v-combobox>
-            {{ member.detailProfiles.locationCategory }}
-            {{ member.detailProfiles.bodyType }}
-            {{ member.detailProfiles.tallType }}
           </v-container>
 
           <!-- ----------------------------------------------- -->
@@ -109,7 +111,7 @@
             <v-combobox
               :rules="typeRules"
               required
-              class="pl-3 pr-3"
+              class="px-3 my-3"
               outlined
               persistent-hint
               hint="희망하는 이성의 체형을 선택하세요."
@@ -120,7 +122,7 @@
             <v-combobox
               :rules="typeRules"
               required
-              class="pl-3 pr-3"
+              class="px-3 my-3"
               outlined
               persistent-hint
               hint="흐망하는 이성의 신장을 선택하세요."
@@ -128,14 +130,12 @@
               :items="tallType"
               @change="setDreamTallType"
             ></v-combobox>
-            {{ member.dreamProfiles.locationCategory }}
-            {{ member.dreamProfiles.bodyType }}
-            {{ member.dreamProfiles.tallType }}
             <v-btn
               depressed
               block
               class="my-auto"
               color="primary"
+              :loading="loading"
               @click="requestJoin"
             >
               회원가입
@@ -209,6 +209,9 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.common.loading;
+    },
     emailRules() {
       return this.$store.state.common.emailRules;
     },

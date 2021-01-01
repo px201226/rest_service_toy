@@ -127,12 +127,11 @@ public class LoginController {
                 .build();
     }
 
-    @GetMapping(value = "/login")
-    public ResponseEntity signin( @RequestParam String email,
-                                  @RequestParam String password) {
+    @PostMapping(value = "/login")
+    public ResponseEntity signin( @RequestBody User reqUser) {
 
-        User user = userRepository.findByEmail(email).orElseThrow(EmailSigninFailedException::new);
-        if (!passwordEncoder.matches(password, user.getPassword()))
+        User user = userRepository.findByEmail(reqUser.getEmail()).orElseThrow(EmailSigninFailedException::new);
+        if (!passwordEncoder.matches(reqUser.getPassword(), user.getPassword()))
             throw new EmailSigninFailedException("아이디/비밀번호가 틀립니다.");
 
         String jwtToken = jwtTokenProvider.createToken(user.getEmail(), user.getRoles());

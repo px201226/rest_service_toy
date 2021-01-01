@@ -12,6 +12,6 @@ public class EmailSigninFailedException extends NotExistDataException {
     }
 
     public EmailSigninFailedException() {
-        super();
+        super("회원이 아닙니다");
     }
 }

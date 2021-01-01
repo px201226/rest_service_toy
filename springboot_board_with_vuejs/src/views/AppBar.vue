@@ -5,12 +5,13 @@
     </div>
 
     <v-spacer></v-spacer>
+    {{ isLogin }}
     <div align="center" justify="center" v-if="isLogin">
       <v-menu left bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon v-bind="attrs" v-on="on">
             <v-list-item-avatar>
-              <v-img :src="getUser.picture"></v-img>
+              <!-- <v-img :src="getUser.picture"></v-img> -->
             </v-list-item-avatar>
           </v-btn>
         </template>
@@ -37,16 +38,8 @@ export default {
   name: "AppBar",
   components: {},
 
-  created() {
-    this.$store.dispatch("QUERY_GET_USER");
-  },
+  created() {},
   computed: {
-    getUser() {
-      return this.$store.getters.GET_USER;
-    },
-    getUserName() {
-      return this.$store.getters.GET_USER_NAME;
-    },
     isLogin() {
       return this.$store.getters.GET_IS_LOGIN;
     },

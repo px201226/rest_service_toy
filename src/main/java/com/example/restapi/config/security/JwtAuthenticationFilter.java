@@ -24,9 +24,12 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     // Request로 들어오는 jwt Token의 유효성을 감증하는 filter를  filterChain에 등록한다.
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        System.out.println("doFilter 작동중");
         String token = jwtTokenProvider.resolveToken((HttpServletRequest)servletRequest);
+        System.out.println(token);
         if(token != null && jwtTokenProvider.validateToken(token)){
             Authentication auth = jwtTokenProvider.getAuthentication(token);
+            System.out.println("성공");
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         filterChain.doFilter(servletRequest,servletResponse);

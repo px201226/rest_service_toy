@@ -1,7 +1,8 @@
 import router from "../router";
 
 const state = {
-
+    
+    loading: false,
     modal: {open: false, title: '', content: '', option1: '', option2: '',},
     snackbar: {open: false, text: '', location: 'top',},
 
@@ -27,18 +28,31 @@ const state = {
 
 };
 
-const getters = {};
+const getters = {
+    GET_LOADING_STATE(state) {
+        return state.loading;
+      },
+
+};
 
 const mutations = {
      CLOSE_MODAL(state) {
         state.modal.open = false;
     },
     OPEN_MODAL(state, modalTexts) {
-        state.loadingState = false;
+        state.loading = false;
         state.modal.title = modalTexts.title;
         state.modal.content = modalTexts.content;
         state.modal.option1 = modalTexts.option1;
         state.modal.option2 = modalTexts.option2 ? modalTexts.option2 : null;
+        state.modal.open = true;
+    },
+    NETWORK_ERROR(state) {
+        state.loading = false;
+        state.modal.title = "네트워크 연결 에러"
+        state.modal.content = "서버와 연결할 수 없습니다."
+        state.modal.option1 = "닫기";
+        state.modal.option2 = null
         state.modal.open = true;
     },
     OPEN_SNACKBAR(state, snackbarInfo) {
@@ -46,6 +60,12 @@ const mutations = {
         state.snackbar.text = snackbarInfo.text;
         state.snackbar.color = snackbarInfo.color;
         state.snackbar.location = snackbarInfo.location;
+    },
+    START_LOADING(state) {
+        state.loading = true;
+    },
+    END_LOADING(state) {
+        state.loading = false;
     },
 };
 

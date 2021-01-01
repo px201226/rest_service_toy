@@ -10,6 +10,8 @@ import lombok.*;
 @Builder
 public class ResponseData<T> {
     int resultCode;
-    String resultMsg;
+    String message;
+
+    @JsonUnwrapped
     T data;
 }
