@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="344">
+  <v-card>
     <div>
       <v-row>
         <v-col cols="auto">
@@ -13,19 +13,19 @@
         <v-col>
           <v-row>
             <div class="text--primary">
-              닉네임
+              {{ nickName }}
             </div>
           </v-row>
           <v-row>
             <div class="font-weight-light">
-              2014-12-12
+              {{ date }}
             </div>
           </v-row>
         </v-col>
       </v-row>
     </div>
-    <div class="font-weight-regular ml-4 my-2">
-      Normal weight text.<br />Normal weight text.
+    <div class="font-weight-regular ml-4 mt-3 mb-6">
+      {{ content }}sadddddddsadsa
     </div>
 
     <v-card-actions>
@@ -33,7 +33,7 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn text color="" class="ml-auto" @click="expand = !expand">
-        좋아요 0개 | 댓글 0개
+        좋아요 {{ likes }}개 | 댓글 {{ comments }}개
       </v-btn>
     </v-card-actions>
     <v-expand-transition>
@@ -46,10 +46,13 @@
 import Comment from "./Comment.vue";
 export default {
   name: "PostView",
-  data: () => ({
-    expand: false,
-    expand2: false,
-  }),
+  props: ["nickName", "date", "likes", "comments", "content"],
+  data() {
+    return {
+      expand: false,
+      expand2: false,
+    };
+  },
   components: { Comment },
   created() {
     this.$store.dispatch("QUERY_GET_USER");

@@ -1,44 +1,49 @@
 <template>
-  <v-container class="fill-height fill-width jusity-center" fluid>
-    <v-layout row justify-center align-center>
-      <v-flex xs12>
+  <v-container class="fill-height fill-width jusity-center" fluid="fluid">
+    <v-layout
+      row="row"
+      justify-center="justify-center"
+      align-center="align-center"
+    >
+      <v-flex xs12="xs12">
         <h1 class="text-center">로그인</h1>
         <v-form class="pa-3" ref="form">
           <v-text-field
             :rules="emailRules"
-            outlined
+            outlined="outlined"
             label="이메일"
             prepend-icon="mdi-email"
-            required
+            required="required"
             type="email"
             v-model="member.email"
           ></v-text-field>
 
           <v-text-field
             :rules="passwordRules"
-            outlined
+            outlined="outlined"
             prepend-icon="mdi-lock"
             label="패스워드"
             @keyup.enter="loginRequest"
-            required
+            required="required"
             type="password"
             v-model="member.password"
           ></v-text-field>
 
           <v-btn
             @click="loginRequest"
-            block
+            block="block"
             color="primary"
             class="my-3 pa-7"
-            outlined
+            outlined="outlined"
+            :loading="loading"
           >
-            <v-icon left>mdi-login</v-icon>
+            <v-icon left="left">mdi-login</v-icon>
             로그인
           </v-btn>
 
           <v-btn
-            depressed
-            block
+            depressed="depressed"
+            block="block"
             class="mt-3 text--right pa-7"
             color="primary"
             @click="onRegisterClick"
@@ -65,12 +70,22 @@ export default {
       },
     };
   },
+  mounted() {
+    this.$store.commit("APPBAR_DISPLAY", false);
+    this.$store.commit("NAVIBAR_DISPLAY", false);
+  },
+  destroyed() {
+    console.log("desyod");
+    this.$store.commit("APPBAR_DISPLAY", true);
+    this.$store.commit("NAVIBAR_DISPLAY", true);
+  },
+
   computed: {
     emailRules() {
       return this.$store.state.common.emailRules;
     },
-    loadingState() {
-      return this.$store.state.common.loadingState;
+    loading() {
+      return this.$store.state.common.loading;
     },
     passwordRules() {
       return this.$store.state.common.passwordRules;
@@ -93,7 +108,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped="scoped">
 @media (min-width: 700px) {
   .login {
     width: 360px !important;

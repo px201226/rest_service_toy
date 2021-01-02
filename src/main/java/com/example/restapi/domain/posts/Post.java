@@ -9,6 +9,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,7 +26,6 @@ public class Post extends LocalDateTimeEntity {
 
     @NotEmpty
     private String content;
-
     private Long likes;
 
     @JsonIgnore
@@ -34,7 +34,7 @@ public class Post extends LocalDateTimeEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public boolean isEqualUserEmail( String userEmail){
         return this.user.getEmail().equals(userEmail);

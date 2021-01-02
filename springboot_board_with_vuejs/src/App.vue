@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <AppBar />
+    <AppBar v-if="appbarShow" />
+
     <v-content class="">
       <!-- <MatchingResult /> -->
       <!-- <matching /> -->
@@ -49,6 +50,14 @@ export default {
 
   data() {
     return {};
+  },
+  computed: {
+    appbarShow() {
+      return this.$store.getters.IS_APPBAR_SHOW;
+    },
+    navibarShow() {
+      return this.$store.getters.IS_NAVIBAR_SHOW;
+    },
   },
 };
 </script>

@@ -1,12 +1,24 @@
 import router from "../router";
 
 const state = {
-    
-    loading: false,
-    modal: {open: false, title: '', content: '', option1: '', option2: '',},
-    snackbar: {open: false, text: '', location: 'top',},
 
-    // ============ Rules ============ //
+    appbarShow: true,
+    navibarShow: true,
+    loading: false,
+    modal: {
+        open: false,
+        title: '',
+        content: '',
+        option1: '',
+        option2: ''
+    },
+    snackbar: {
+        open: false,
+        text: '',
+        location: 'top'
+    },
+
+    // ============ Rules ============
     emailRules: [
         v => !!v || '이메일을 작성해주세요.',
         v => /.+@.+\..+/.test(v) || '이메일 형식으로 작성해주세요.',
@@ -19,24 +31,34 @@ const state = {
     passwordRules: [
         v => !!v || '비밀번호를 작성해주세요.',
         v => (v.length >= 2) || '2글자 이상 작성해주세요!',
-        v => v.search(/\s/) === -1 || '공백을 제거해주세요!',
-      
+        v => v.search(/\s/) === -1 || '공백을 제거해주세요!'
     ],
-    typeRules: [
-        v => !!v || '항목을 선택해주세요.',
-    ],
-
+    typeRules: [v => !!v || '항목을 선택해주세요.']
 };
 
 const getters = {
     GET_LOADING_STATE(state) {
         return state.loading;
-      },
+    },
 
+    IS_APPBAR_SHOW(state) {
+        return state.appbarShow;
+    },
+
+    IS_NAVIBAR_SHOW(state) {
+        return state.navibarShow;
+    }
 };
 
 const mutations = {
-     CLOSE_MODAL(state) {
+    APPBAR_DISPLAY(state, display) {
+        state.appbarShow = display;
+    },
+    NAVIBAR_DISPLAY(state, display) {
+        state.navibarShow = display;
+    },
+
+    CLOSE_MODAL(state) {
         state.modal.open = false;
     },
     OPEN_MODAL(state, modalTexts) {
@@ -44,7 +66,9 @@ const mutations = {
         state.modal.title = modalTexts.title;
         state.modal.content = modalTexts.content;
         state.modal.option1 = modalTexts.option1;
-        state.modal.option2 = modalTexts.option2 ? modalTexts.option2 : null;
+        state.modal.option2 = modalTexts.option2
+            ? modalTexts.option2
+            : null;
         state.modal.open = true;
     },
     NETWORK_ERROR(state) {
@@ -66,7 +90,7 @@ const mutations = {
     },
     END_LOADING(state) {
         state.loading = false;
-    },
+    }
 };
 
 const actions = {};

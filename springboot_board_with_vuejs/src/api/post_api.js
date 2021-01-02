@@ -1,7 +1,7 @@
 import http from './http';
 
-export async function updatePostsList(){
-	return http.get("/api/v1/posts");
+export async function getPostsList(page){
+	return http.get("/v1/posts?page=" + page + "&size=5&sort=id,desc");
 };
 
 export async function readPostByPostId(postId){

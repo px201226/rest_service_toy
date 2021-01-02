@@ -1,5 +1,12 @@
 <template>
-  <v-bottom-navigation app horizontal fixed :value="value" color="primary">
+  <v-bottom-navigation
+    app
+    horizontal
+    fixed
+    :input-value="navibarShow"
+    :value="value"
+    color="primary"
+  >
     <v-btn @click="onClickBoard">
       <span>게시판</span>
       <v-icon>mdi-view-list</v-icon>
@@ -21,7 +28,11 @@
 <script>
 export default {
   data: () => ({ value: 0 }),
-
+  computed: {
+    navibarShow() {
+      return this.$store.getters.IS_NAVIBAR_SHOW;
+    },
+  },
   methods: {
     onClickBoard() {
       this.$router.push("/");

@@ -208,6 +208,16 @@ export default {
       ],
     };
   },
+  mounted() {
+    console.log("mounted");
+    this.$store.commit("APPBAR_DISPLAY", false);
+    this.$store.commit("NAVIBAR_DISPLAY", false);
+  },
+  destroyed() {
+    this.$store.commit("APPBAR_DISPLAY", true);
+    this.$store.commit("NAVIBAR_DISPLAY", true);
+  },
+
   computed: {
     loading() {
       return this.$store.state.common.loading;

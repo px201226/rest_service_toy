@@ -5,13 +5,15 @@
     </div>
 
     <v-spacer></v-spacer>
-    {{ isLogin }}
+
     <div align="center" justify="center" v-if="isLogin">
-      <v-menu left bottom>
+      <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn icon v-bind="attrs" v-on="on">
+          <v-btn class="pa-3" icon v-bind="attrs" v-on="on">
             <v-list-item-avatar>
-              <!-- <v-img :src="getUser.picture"></v-img> -->
+              <img
+                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              ></img>
             </v-list-item-avatar>
           </v-btn>
         </template>
@@ -23,6 +25,7 @@
         </v-list>
       </v-menu>
     </div>
+    
     <div v-if="!isLogin">
       <v-btn target="_blank" text @click="onLoginClick">
         로그인

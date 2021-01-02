@@ -19,6 +19,7 @@ public class PostModel extends RepresentationModel<PostModel> {
     private Long id;
     private String content;
     private Long likes;
-    private UserModel user;
+    private String userEmail;c
+    private String userNickName;
     private List<CommentModel> comments;
 }

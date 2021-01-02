@@ -10,6 +10,8 @@ import com.example.restapi.exception.exceptions.UserNotFoundException;
 import com.example.restapi.web.dto.PostsSaveRequestDto;
 import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,9 +26,10 @@ public class PostsService {
 
     @Transactional
     public Post save(PostsSaveRequestDto requestDto, String userEmail){
-        return userRepository.findByEmail(userEmail)
-                .map( u -> postRepository.save(requestDto.toEntity(u)))
+        Post post = userRepository.findByEmail(userEmail)
+                .map(u -> postRepository.saveAndFlush(requestDto.toEntity(u)))
                 .orElseThrow(UserNotFoundException::new);
+        return post;
     }
 
     @Transactional
@@ -51,6 +54,11 @@ public class PostsService {
     @Transactional(readOnly = true)
     public List<Post> findAllDesc(){
         return postRepository.findAllDesc();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Post> findAll(Pageable pageable){
+        return postRepository.findAll(pageable);
     }
 
     @Transactional

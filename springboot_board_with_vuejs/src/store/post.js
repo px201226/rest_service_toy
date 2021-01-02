@@ -1,4 +1,4 @@
-import { updatePostsList, readPostByPostId, writePost, deletePost,updatePost } from "../api/post_api";
+import { getPostsList, readPostByPostId, writePost, deletePost,updatePost } from "../api/post_api";
 import router from "../router";
 
 // state
@@ -7,7 +7,7 @@ const state = {
 
   },
 
-  postList: [],
+  posts: [],
 };
 
 // getters
@@ -17,14 +17,14 @@ const getters = {
   },
 
   GET_POST_LIST(state) {
-    return state.postList;
+    return state.posts;
   },
 };
 
 // mutations
 const mutations = {
-  SET_POST_LIST(state, postList) {
-    state.postList = postList;
+  ADD_POST_LIST(state, posts) {
+    state.posts = state.posts.concat(posts);
   },
 
   SET_POST_DETAIL(state, post) {
@@ -59,11 +59,12 @@ const actions = {
     }
   },
 
-  async QUERY_POST_LIST(context) {
+  async QUERY_POST_LIST(context, page) {
     try {
-      const response = await updatePostsList();
-      context.commit("SET_POST_LIST", response.data);
-      return response.data;
+      const response = await getPostsList(page);
+      context.commit("ADD_POST_LIST", response.data._embedded.postModels);
+      console.log(response.data._embedded.postModels);
+      return response.data._embedded.postModels;
     } catch (e) {
       return Promise.reject(e);
     }

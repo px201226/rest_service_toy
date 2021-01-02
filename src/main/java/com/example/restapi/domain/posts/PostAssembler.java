@@ -6,7 +6,10 @@ import com.example.restapi.domain.comments.CommentModel;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserModel;
 import com.example.restapi.web.PostController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +33,9 @@ public class PostAssembler extends RepresentationModelAssemblerSupport<Post, Pos
                .id(entity.getId())
                .likes(entity.getLikes())
                .content(entity.getContent())
-               .comments(toCommentModel(entity.getComments()))
-               .user(toUserModel(entity.getUser()))
+               //.comments(toCommentModel(entity.getComments()))
+               .userEmail(entity.getUser().getEmail())
+               .userNickName(entity.getUser().getNickName())
                .build()
                .add(linkTo(PostController.class).slash(entity.getId()).withSelfRel());
     }
@@ -39,19 +43,12 @@ public class PostAssembler extends RepresentationModelAssemblerSupport<Post, Pos
     @Override
     public CollectionModel<PostModel> toCollectionModel(Iterable<? extends Post> entities)
     {
+
         CollectionModel<PostModel> models = super.toCollectionModel(entities);
         return models;
     }
 
-    private UserModel toUserModel(User user) {
-        UserModel add = UserModel.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .nickName(user.getNickName())
-                .build();
 
-        return add;
-    }
     private List<CommentModel> toCommentModel(List<Comment> comments) {
         if (comments.isEmpty())
             return Collections.emptyList();
