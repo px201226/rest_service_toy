@@ -30,8 +30,9 @@ public class Comment extends LocalDateTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Post post;
 
     public void update(String content) {

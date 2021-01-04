@@ -5,6 +5,7 @@ import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.comments.CommentModel;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserModel;
+import com.example.restapi.web.CommentsController;
 import com.example.restapi.web.PostController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -13,6 +14,7 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,11 +35,13 @@ public class PostAssembler extends RepresentationModelAssemblerSupport<Post, Pos
                .id(entity.getId())
                .likes(entity.getLikes())
                .content(entity.getContent())
-               //.comments(toCommentModel(entity.getComments()))
+               .comments((Long.valueOf(entity.getComments().size())))
+               .modifyDate(entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
                .userEmail(entity.getUser().getEmail())
                .userNickName(entity.getUser().getNickName())
                .build()
-               .add(linkTo(PostController.class).slash(entity.getId()).withSelfRel());
+               .add(linkTo(PostController.class).slash(entity.getId()).withSelfRel())
+               .add(linkTo(PostController.class).slash(entity.getId()).slash("comments").withRel("comments"));
     }
 
     @Override
@@ -49,19 +53,5 @@ public class PostAssembler extends RepresentationModelAssemblerSupport<Post, Pos
     }
 
 
-    private List<CommentModel> toCommentModel(List<Comment> comments) {
-        if (comments.isEmpty())
-            return Collections.emptyList();
-
-        return comments.stream()
-                .map(comment ->  CommentModel.builder()
-                        .id(comment.getId())
-                        .postId(comment.getPost().getId())
-                        .content(comment.getContent())
-                        .userEmail(comment.getUser().getEmail())
-                        .userNickName(comment.getUser().getNickName())
-                        .build())
-                .collect(Collectors.toList());
-    }
 
 }

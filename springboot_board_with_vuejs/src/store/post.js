@@ -6,7 +6,10 @@ const state = {
   post: {
 
   },
-
+  
+  page:{
+   
+  },
   posts: [],
 };
 
@@ -19,12 +22,22 @@ const getters = {
   GET_POST_LIST(state) {
     return state.posts;
   },
+
+  GET_PAGE(state){
+    return state.page;
+  }
 };
 
 // mutations
 const mutations = {
   ADD_POST_LIST(state, posts) {
     state.posts = state.posts.concat(posts);
+  },
+
+  SET_PAGE(state, page){
+    console.log(page);
+    state.page = page;
+    console.log(state.page);
   },
 
   SET_POST_DETAIL(state, post) {
@@ -34,6 +47,20 @@ const mutations = {
 
 // actions
 const actions = {
+
+  async QUERY_POST_LIST(context, page) {
+    try {
+      context.commit('START_LOADING')
+      const response = await getPostsList(page);
+      context.commit("ADD_POST_LIST", response.data._embedded.postModels);
+      context.commit("SET_PAGE", response.data.page);
+      console.log(response.data.page);
+      return response.data._embedded.postModels;
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  },
+
   async QUERY_POST_DETAIL(context, id) {
     try {
       const response = await readPostByPostId(id);
@@ -59,16 +86,7 @@ const actions = {
     }
   },
 
-  async QUERY_POST_LIST(context, page) {
-    try {
-      const response = await getPostsList(page);
-      context.commit("ADD_POST_LIST", response.data._embedded.postModels);
-      console.log(response.data._embedded.postModels);
-      return response.data._embedded.postModels;
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  },
+  
 
   async QUERY_WRITE_POST(context, requestPostSaveDto) {
     try {

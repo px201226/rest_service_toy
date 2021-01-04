@@ -43,9 +43,7 @@ const actions = {
       const response = await join(req);
       router.push("/login")
       context.commit('OPEN_SNACKBAR', setSnackBarInfo('회원가입이 완료되었습니다.', 'success', 'top'))
-    
     } catch (e) {
-      console.log(e);
       context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
     } 
   },
@@ -61,7 +59,6 @@ const actions = {
       context.commit('SET_JWTTOKEN',response.data.jwtToken );
   
       const response1 = await getUser();
-      console.log(response1);
       return response.jwtToken;
     } catch (e) {
       console.log(e);

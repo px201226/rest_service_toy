@@ -14,12 +14,9 @@ const instance = axios.create({
 instance.interceptors.request.use(
     config => {
 		let jwtToken = store.getters.GET_JWT_TOKEN; 
-		console.log("interceptor")
-		console.log(jwtToken);
 		localStorage.getItem('jwtToken');
         if (jwtToken !== null) {
 			config.headers.common['X-AUTH-TOKEN'] = jwtToken;
-			console.log("헤더설정")
         }
          console.log('Interceptors Request is', config, new Date());
         return config
@@ -34,11 +31,12 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
    response => {
 	    console.log('Interceptors Response is ', response, new Date());
-	 
+	   store.state.common.loading = false;
 		return response;
    },
    function (error) {
 	    console.log('Interceptors Response Error is ', error.response, new Date());
+	   store.state.common.loading = false;
 
 	   if (!error.response) {
 		

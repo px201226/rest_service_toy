@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Collections;
 
 @Getter
 @Builder
@@ -23,6 +24,7 @@ public class PostsSaveRequestDto {
         return Post.builder()
                 .content(content)
                 .likes(0L)
+                .comments(Collections.emptyList())
                 .user(user)
                 .build();
     }

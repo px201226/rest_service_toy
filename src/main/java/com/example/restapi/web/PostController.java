@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class PostController {
   private final ResponseService responseService;
     private final PostsService postsService;
     private final PostAssembler postAssembler;
+    private final EntityManager entityManager;
 
     @GetMapping(value = "/test")
     public ResponseEntity getList(){
