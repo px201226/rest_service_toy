@@ -18,7 +18,6 @@ public class PostsResponseDto {
         this.id = entity.getId();
         this.content = entity.getContent();
         this.author = entity.getUser().getNickName();
-        this.likes = entity.getLikes();
         this.modifiedDate = entity.getModifiedDate();
     }
 }

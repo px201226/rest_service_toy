@@ -23,8 +23,8 @@ public class PostsSaveRequestDto {
     public Post toEntity(User user){
         return Post.builder()
                 .content(content)
-                .likes(0L)
                 .comments(Collections.emptyList())
+                .like(Collections.emptySet())
                 .user(user)
                 .build();
     }

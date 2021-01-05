@@ -52,10 +52,10 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getPostsList(page);
-      context.commit("ADD_POST_LIST", response.data._embedded.postModels);
+      context.commit("ADD_POST_LIST", response.data.content);
       context.commit("SET_PAGE", response.data.page);
       console.log(response.data.page);
-      return response.data._embedded.postModels;
+      return  response.data.content;
     } catch (e) {
       return Promise.reject(e);
     }

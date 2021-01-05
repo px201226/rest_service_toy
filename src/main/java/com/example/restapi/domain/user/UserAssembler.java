@@ -52,7 +52,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
                 .map(post -> PostModel.builder()
                         .id(post.getId())
                         .content(post.getContent())
-                        .likes(post.getLikes())
+                        .likes(Long.valueOf(post.getLike().size()))
                         .build()
                         .add(linkTo(
                                 methodOn(PostController.class).findById(post.getId())).withSelfRel()))

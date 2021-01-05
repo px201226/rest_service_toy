@@ -19,11 +19,13 @@
         :content="post.content"
         :date="post.modifyDate"
         :likes="post.likes"
+        :isLike="post.isLike"
         :comments="post.comments"
         class="my-3"
       >
       </post-view>
     </div>
+    <CommnetView />
     <infinite-loading @infinite="infiniteHandler" spinner="waveDots">
       <div
         slot="no-more"
@@ -39,10 +41,10 @@
 <script>
 import InfiniteLoading from "vue-infinite-loading";
 import PostView from "./PostView.vue";
-import axios from "axios";
+import CommnetView from "./CommentView.vue";
 export default {
   name: "Home",
-  components: { PostView, InfiniteLoading },
+  components: { PostView, InfiniteLoading, CommnetView },
 
   data() {
     return {
@@ -68,7 +70,12 @@ export default {
     },
 
     routePostArticle() {
-      this.$router.push("/save");
+      this.$store.commit("OPEN_MODAL", {
+        title: "에러",
+        content: "dd",
+        option1: "닫기",
+      });
+      // this.$router.push("/save");
     },
     infiniteHandler($state) {
       this.$store.dispatch("QUERY_POST_LIST", this.pageNum++).then(() => {

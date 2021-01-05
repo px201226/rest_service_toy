@@ -33,28 +33,34 @@ public class PostLikeService {
     public PostLike like(Long postId, String userEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
         Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-        return postLikeRepository.save(
-                PostLike.builder()
-                .post(post)
-                .user(user)
-                .build());
+        Optional<PostLike> byUserIdAndPostId = postLikeRepository.findByUserIdAndPostId(user.getId(), post.getId());
+
+        if(byUserIdAndPostId.isPresent()){
+            return byUserIdAndPostId.get();
+        }else{
+            return postLikeRepository.save(
+                    PostLike.builder()
+                            .post(post)
+                            .user(user)
+                            .build());
+        }
+
     }
 
     @Transactional
     public void unLike(Long postId, String userEmail) {
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
         Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-        postLikeRepository.delete(PostLike.builder()
-                .post(post)
-                .user(user)
-                .build());
+        postLikeRepository.deleteByUserIdAndPostId(user.getId(), postId);
     }
 
     @Transactional
-    public Optional<PostLike> findByUserEmailAndPostId(String userEmail, Long postId){
+    public Boolean findByUserEmailAndPostId(String userEmail, Long postId) {
 
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
         Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
-        return postLikeRepository.findByUserIdAndPostId(postId,user.getId());
+        return postLikeRepository.findByUserIdAndPostId(postId, user.getId())
+                .map(i -> true)
+                .orElse(false);
     }
 }

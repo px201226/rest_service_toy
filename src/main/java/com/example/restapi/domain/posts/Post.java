@@ -10,10 +10,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 
 @Builder
@@ -29,7 +28,6 @@ public class Post extends LocalDateTimeEntity {
 
     @NotEmpty
     private String content;
-    private Long likes;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)      // post : user = Main(주) : sub(자식)
@@ -40,13 +38,34 @@ public class Post extends LocalDateTimeEntity {
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private Set<PostLike> like = new HashSet<>();
+    private Set<PostLike> like;
 
-    public boolean isEqualUserEmail( String userEmail){
+    public boolean isEqualUserEmail(String userEmail){
         return this.user.getEmail().equals(userEmail);
+    }
+
+    public boolean isContainLikeUsers(User user){
+        if(user == null) return false;
+
+        for(PostLike postLike : like){
+            if(postLike.getUser().getEmail().equals(user.getEmail())) return true;
+        }
+        return false;
     }
 
     public void update(String content) {
         this.content = content;
+    }
+
+    public PostAdapter toAdapter(Post entity){
+        return PostAdapter.builder()
+                .id(entity.getId())
+                .likes(Long.valueOf(entity.getLike().size()))
+                .content(entity.getContent())
+                .comments((Long.valueOf(entity.getComments().size())))
+                .modifyDate(entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
+                .userEmail(entity.getUser().getEmail())
+                .userNickName(entity.getUser().getNickName())
+                .build();
     }
 }

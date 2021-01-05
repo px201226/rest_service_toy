@@ -32,9 +32,7 @@ public class PostLikeController {
 
     @GetMapping(value = "/{postId}")
     public ResponseEntity status(@PathVariable Long postId, @AuthUser User user){
-        return postLikeService.findByUserEmailAndPostId(user.getEmail(), postId)
-                .map(u-> responseService.create(ResponseStatus.SUCCESS, u))
-                .map(ResponseEntity::ok)
-                .orElseThrow();
+        Boolean byUserEmailAndPostId = postLikeService.findByUserEmailAndPostId(user.getEmail(), postId);
+        return ResponseEntity.ok(byUserEmailAndPostId);
     }
 }

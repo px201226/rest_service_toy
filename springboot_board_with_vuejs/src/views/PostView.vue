@@ -26,7 +26,7 @@
     </div>
 
     <v-card-actions>
-      <v-btn icon color="pink">
+      <v-btn icon :color="isLikeColor">
         <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn text color="" class="ml-auto" @click="expand = !expand">
@@ -43,7 +43,7 @@
 import Comment from "./Comment.vue";
 export default {
   name: "PostView",
-  props: ["nickName", "date", "likes", "comments", "content"],
+  props: ["nickName", "date", "likes", "comments", "content", "isLike"],
   data() {
     return {
       expand: false,
@@ -57,6 +57,11 @@ export default {
   computed: {
     getUser() {
       return this.$store.getters.GET_USER;
+    },
+
+    isLikeColor() {
+      if (this.isLike === true) return "pink";
+      else return "grey";
     },
   },
 };

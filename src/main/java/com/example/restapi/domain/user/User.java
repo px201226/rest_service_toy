@@ -6,6 +6,7 @@ import com.example.restapi.domain.matching.Identifiable;
 import com.example.restapi.domain.matching.MatchingScoreComparable;
 import com.example.restapi.domain.matching.MatchingWaitEntity;
 import com.example.restapi.domain.posts.Post;
+import com.example.restapi.domain.posts.like.PostLike;
 import com.example.restapi.domain.user.profile.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -14,6 +15,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -45,6 +47,9 @@ public class User extends LocalDateTimeEntity
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<PostLike> like;
 
     @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)

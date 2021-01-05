@@ -29,11 +29,12 @@ public class PostAssembler extends RepresentationModelAssemblerSupport<Post, Pos
         super(PostController.class, PostModel.class);
     }
 
+
     @Override
     public PostModel toModel(Post entity) {
        return PostModel.builder()
                .id(entity.getId())
-               .likes(entity.getLikes())
+               .likes(Long.valueOf(entity.getLike().size()))
                .content(entity.getContent())
                .comments((Long.valueOf(entity.getComments().size())))
                .modifyDate(entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
@@ -47,11 +48,7 @@ public class PostAssembler extends RepresentationModelAssemblerSupport<Post, Pos
     @Override
     public CollectionModel<PostModel> toCollectionModel(Iterable<? extends Post> entities)
     {
-
         CollectionModel<PostModel> models = super.toCollectionModel(entities);
         return models;
     }
-
-
-
 }
