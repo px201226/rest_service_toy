@@ -37,11 +37,26 @@ public class PostController {
     private final EntityManager entityManager;
 
     @GetMapping
-    public ResponseEntity getPageableList(Pageable pageable, PagedResourcesAssembler<PostAdapter> assembler,@AuthUser User user) {
-        Page<Post> all = postsService.findAll(pageable);
-        Page<PostAdapter> map = all.map(u -> u.toAdapter(u).setIsLike(u.isContainLikeUsers(user)));
+    public ResponseEntity getPageableList(Pageable pageable,
+                                          PagedResourcesAssembler<PostAdapter> postAdapterAssembler,
+                                          PagedResourcesAssembler<Post> postAssembler,
+                                          @AuthUser User user) {
 
-        PagedModel<PostModel> postModels = assembler.toModel(map, postAdapterAssembler);
+        Page<Post> all = postsService.findAll(pageable);
+        PagedModel<PostModel> postModels;
+
+        if (user != null) {
+            Page<PostAdapter> map = all.map(u ->
+                    u.toAdapter(u)
+                            .setIsLike(u.isContainLikeUsers(user))
+                            .setIsWriter(u.isEqualUserEmail(user.getEmail()))
+            );
+
+            postModels = postAdapterAssembler.toModel(map, this.postAdapterAssembler);
+        } else {
+            postModels = postAssembler.toModel(all, this.postAssembler);
+        }
+
         ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postModels);
         return ResponseEntity.ok(responseData);
     }

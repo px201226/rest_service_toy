@@ -19,9 +19,15 @@ public class PostAdapter extends RepresentationModel<PostAdapter> {
     private String modifyDate;
     private Long comments;
     private Boolean isLike;
+    private Boolean isWirter;
 
     public PostAdapter setIsLike(boolean bool){
         isLike = bool;
+        return this;
+    }
+
+    public PostAdapter setIsWriter(boolean bool){
+        isWirter = bool;
         return this;
     }
 }

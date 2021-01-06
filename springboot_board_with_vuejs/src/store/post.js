@@ -1,31 +1,35 @@
-import { getPostsList, readPostByPostId, writePost, deletePost,updatePost } from "../api/post_api";
+import { getPostsList, writePost, deletePost,updatePost, getPost } from "../api/post_api";
+import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
 import router from "../router";
 
 // state
 const state = {
-  post: {
-
-  },
-  
+  // 페이지 정보  
   page:{
    
   },
+
+  // 포스트 리스트
   posts: [],
+
+  post:{},
 };
 
 // getters
 const getters = {
-  GET_POST_DETAIL(state) {
-    return state.post;
+
+  GET_PAGE(state){
+    return state.page;
   },
 
   GET_POST_LIST(state) {
     return state.posts;
   },
 
-  GET_PAGE(state){
-    return state.page;
-  }
+  GET_POST(state){
+    return state.post;
+  },
+
 };
 
 // mutations
@@ -35,14 +39,18 @@ const mutations = {
   },
 
   SET_PAGE(state, page){
-    console.log(page);
     state.page = page;
-    console.log(state.page);
   },
-
-  SET_POST_DETAIL(state, post) {
+  
+  SET_POST(state, post){
     state.post = post;
   },
+
+  CLEAR_POST(state){
+    state.page = {};
+    state.posts = [];
+  }
+
 };
 
 // actions
@@ -54,59 +62,60 @@ const actions = {
       const response = await getPostsList(page);
       context.commit("ADD_POST_LIST", response.data.content);
       context.commit("SET_PAGE", response.data.page);
-      console.log(response.data.page);
       return  response.data.content;
     } catch (e) {
       return Promise.reject(e);
     }
   },
 
-  async QUERY_POST_DETAIL(context, id) {
+  async QUERY_GET_POST(context, postId) {
     try {
-      const response = await readPostByPostId(id);
-      context.commit("SET_POST_DETAIL", response.data);
+      context.commit('START_LOADING')
+      const response = await getPost(postId);
+      context.commit("SET_POST", response.data);
       console.log(response.data);
-
-      return response.data;
+      return  response.data;
     } catch (e) {
-
       return Promise.reject(e);
     }
   },
 
   async QUERY_DELETE_POST(context,id) {
     try {
+      context.commit('START_LOADING')
       const response = await deletePost(id);
-      alert('게시물을 삭제하였습니다');
-      router.push("/");
+      context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 삭제되었습니다.', 'success', 'top'))
       return response.data;
     } catch (e) {
-      alert("권한이 없습니다");
+      context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
       return Promise.reject(e);
     }
   },
 
   
 
-  async QUERY_WRITE_POST(context, requestPostSaveDto) {
+  async QUERY_WRITE_POST(context, req) {
     try {
-      const response = await writePost(requestPostSaveDto);
-      router.push("/");
+      context.commit('START_LOADING')
+      const response = await writePost(req);
+      context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 작성되었습니다.', 'success', 'top'))
       return response.data;
     } catch (e) {
-      alert("권한이 없습니다");
+      context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
       return Promise.reject(e);
     } finally {
     }
   },
 
-  async QUERY_UPDATE_POST(context, requestPostUpdateDto) {
+  async QUERY_UPDATE_POST(context, req) {
     try {
-      const response = await updatePost(requestPostUpdateDto.id, requestPostUpdateDto);
-      alert('게시물을 수정하였습니다.');
+      context.commit('START_LOADING')
+      const response = await updatePost(req.id, req);
+      context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 수정되었습니다.', 'success', 'top'))
       router.push("/");
       return response.data;
     } catch (e) {
+      context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
       return Promise.reject(e);
       } finally {
     }

@@ -1,5 +1,10 @@
 <template>
-  <v-dialog v-model="modal.open" max-width="290">
+  <v-dialog
+    v-model="modal.open"
+    max-width="290"
+    persistent
+    :retain-focus="false"
+  >
     <v-card>
       <v-card-title> {{ modal.title }} </v-card-title>
       <hr />
@@ -40,11 +45,12 @@ export default {
       if (this.modal.option1 === "닫기") {
         this.$store.commit("CLOSE_MODAL");
       } else {
-        this.$emit("pass");
+        this.$emit("pass", this.modal.data);
       }
     },
     submit() {
-      this.$emit("pass");
+      this.$emit("pass", this.modal.data);
+      this.$store.commit("CLOSE_MODAL");
     },
   },
   destroyed() {

@@ -1,15 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import ArticleDetailView from '../views/ArticleDetailView.vue'
-import ArticleUpdateView from '../views/ArticleUpdateView.vue'
-import ArticleWriter from '../views/ArticleWriter.vue'
 
-import PostView from "../views/PostView.vue";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
-import Matching from "../views/matching.vue";
-import MatchingResult from "../views/MatchingResult.vue";
 
 Vue.use(VueRouter)
 
@@ -17,47 +8,48 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component:() => import('../views/Home.vue')
   },
   {
     path: '/posts/:id',
-    name: 'ArticleDetailView',
-    component: ArticleDetailView
+    name: 'PostView',
+    component: () => import('../views/PostView.vue')
   },
-  {
-    path: '/update',
-    name: 'ArticleUpdateView',
-    component: ArticleUpdateView
-  },
-  {
-	  path: '/save',
-	  name: 'ArticleWriterView',
-	  component: ArticleWriter
-  },
+
+  // {
+  //   path: '/update',
+  //   name: 'ArticleUpdateView',
+  //   component: ArticleUpdateView
+  // },
+  // {
+	//   path: '/save',
+	//   name: 'ArticleWriterView',
+	//   component: ArticleWriter
+  // },
   {
     path: '/matching',
     name: "Matching",
-    component: Matching
+    component: () => import('../views/matching.vue')
   },
   {
     path: '/matching/apply',
     name: "Register",
-    component: Register
+    component:  () => import('../views/Register.vue')
   },
   {
     path: '/matching/result',
     name: "MatchingResult",
-    component: MatchingResult
+    component:  () => import('../views/MatchingResult.vue')
   },
   {
     path: '/register',
     name: "Register",
-    component: Register
+    component: () => import('../views/Register.vue')
   },
   {
     path: '/login',
     name: "Login",
-    component: Login
+    component: () => import('../views/Login.vue')
   },
  
 

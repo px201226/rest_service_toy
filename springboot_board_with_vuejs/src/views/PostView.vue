@@ -1,67 +1,60 @@
 <template>
-  <v-card flat outlined>
-    <v-layout row>
-      <div class="pa-5 d-inline-flex">
-        <v-avatar size="36px">
-          <img
-            src="https://lh5.googleusercontent.com/-2QXdr8wesbM/AAAAAAAAAAI/AAAAAAAAAAA/AMZuucnb024lRD57ypepPkcphVu_7loiBQ/s96-c/photo.jpg"
-            alt="John"
-          />
-        </v-avatar>
-      </div>
-      <div class="pa-5 pl-2 py-4">
-        <v-row>
-          <div class="text--primary font-weight-bold">
-            {{ nickName }}
-          </div>
-        </v-row>
-        <v-row>
-          <div class="font-weight-light">{{ date }}</div>
-        </v-row>
-      </div>
-    </v-layout>
-
-    <div class="font-weight-regular ml-4 mt-3 mb-6">
-      {{ content }}
-    </div>
-
-    <v-card-actions>
-      <v-btn icon :color="isLikeColor">
-        <v-icon>mdi-heart</v-icon>
+  <v-card>
+    <v-toolbar dark color="primary">
+      <v-btn icon dark @click="onBackButtonClick">
+        <v-icon>mdi-close</v-icon>
       </v-btn>
-      <v-btn text color="" class="ml-auto" @click="expand = !expand">
-        좋아요 {{ likes }}개 | 댓글 {{ comments }}개
-      </v-btn>
-    </v-card-actions>
-    <v-expand-transition>
-      <comment v-show="expand">d </comment>
-    </v-expand-transition>
+      <v-toolbar-title>뒤로가기</v-toolbar-title>
+      {{ post }}
+      <v-spacer></v-spacer>
+    </v-toolbar>
+    <v-row class="pa-5 pb-0 ">
+      <v-textarea
+        label="댓글을 입력하세요"
+        auto-grow
+        outlined
+        rows="1"
+        row-height="5"
+      ></v-textarea>
+      <v-btn class="mx-1 " height="55" depressed color="primary">작성</v-btn>
+    </v-row>
+    <v-divider />
+    <comment /> <comment /> <comment />
+    <comment />
   </v-card>
 </template>
 
 <script>
+import BottomNavigator from "./BottomNavigator.vue";
 import Comment from "./Comment.vue";
-export default {
-  name: "PostView",
-  props: ["nickName", "date", "likes", "comments", "content", "isLike"],
-  data() {
-    return {
-      expand: false,
-      expand2: false,
-    };
-  },
-  components: { Comment },
-  created() {
-    //this.$store.dispatch("QUERY_GET_USER");
-  },
-  computed: {
-    getUser() {
-      return this.$store.getters.GET_USER;
-    },
 
-    isLikeColor() {
-      if (this.isLike === true) return "pink";
-      else return "grey";
+export default {
+  components: { BottomNavigator, Comment },
+  name: "PostView",
+
+  mounted() {
+    console.log("mounted");
+    this.$store.commit("APPBAR_DISPLAY", false);
+    this.$store.commit("NAVIBAR_DISPLAY", false);
+  },
+  created() {
+    this.$store.dispatch("QUERY_GET_POST", this.$route.params.id);
+  },
+
+  destroyed() {
+    this.$store.commit("APPBAR_DISPLAY", true);
+    this.$store.commit("NAVIBAR_DISPLAY", true);
+  },
+
+  computed: {
+    post() {
+      return this.$store.getters.GET_POST;
+    },
+  },
+
+  methods: {
+    onBackButtonClick() {
+      this.$router.back();
     },
   },
 };

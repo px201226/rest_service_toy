@@ -1,5 +1,6 @@
 import store from '.';
 import {logout, login, join, getUser } from "../api/user_api";
+import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
 import router from "../router";
 
 // state
@@ -17,6 +18,10 @@ const getters = {
   },
   GET_JWT_TOKEN(state){
     return state.jwtToken;
+  },
+
+  GET_USER(state){
+    return state.user
   }
 };
 
@@ -59,6 +64,8 @@ const actions = {
       context.commit('SET_JWTTOKEN',response.data.jwtToken );
   
       const response1 = await getUser();
+      context.commit('SET_USER',response1.data)
+
       return response.jwtToken;
     } catch (e) {
       console.log(e);
@@ -67,16 +74,6 @@ const actions = {
   },
 };
 
-function setSnackBarInfo(text, color, location) {
-  return {
-      text: text,
-      color: color,
-      location: location,
-  }
-}
-const setTokenInLocalStorage = (jwtToken) => {
-  localStorage.setItem("jwtToken", jwtToken);
-};
 
 export default {
   state,

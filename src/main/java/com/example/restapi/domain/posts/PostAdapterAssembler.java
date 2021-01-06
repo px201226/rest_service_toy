@@ -29,6 +29,7 @@ public class PostAdapterAssembler extends RepresentationModelAssemblerSupport<Po
                .userEmail(entity.getUserEmail())
                .userNickName(entity.getUserNickName())
                .isLike(entity.getIsLike())
+               .isWriter(entity.getIsWirter())
                .build()
                .add(linkTo(PostController.class).slash(entity.getId()).withSelfRel())
                .add(linkTo(PostController.class).slash(entity.getId()).slash("comments").withRel("comments"));

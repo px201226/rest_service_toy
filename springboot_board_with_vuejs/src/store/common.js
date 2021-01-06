@@ -5,12 +5,16 @@ const state = {
     appbarShow: true,
     navibarShow: true,
     loading: false,
+    commentModal: false,
+    postModal: false,
+
     modal: {
         open: false,
         title: '',
         content: '',
         option1: '',
-        option2: ''
+        option2: '',
+        data:{},
     },
     snackbar: {
         open: false,
@@ -69,6 +73,7 @@ const mutations = {
         state.modal.option2 = modalTexts.option2
             ? modalTexts.option2
             : null;
+        state.modal.data = modalTexts.data;
         state.modal.open = true;
     },
     NETWORK_ERROR(state) {
@@ -90,9 +95,33 @@ const mutations = {
     },
     END_LOADING(state) {
         state.loading = false;
-    }
+    },
+
+    OPEN_COMMENTS(state){
+        state.commentModal = true;
+    },
+    
+    CLOSE_COMMENTS(state){
+        state.commentModal = false;
+    },
+
+    OPEN_POST_WRITER(state){
+        state.postModal = true;
+    },
+    
+    CLOSE_POST_WRITER(state){
+        state.postModal = false;
+    },
+
+    
 };
 
 const actions = {};
 
-export default {mutations, state, actions, getters};
+
+const setTokenInLocalStorage = (jwtToken) => {
+    localStorage.setItem("jwtToken", jwtToken);
+  };
+
+  
+export default {mutations, state, actions, getters, setTokenInLocalStorage};

@@ -7,9 +7,7 @@
       <!-- <matching /> -->
       <!-- <register /> -->
       <!-- <login /> -->
-      <!-- <PostView />
-      <PostView />
-      <PostView /> <PostView class=" " /> -->
+
       <router-view />
     </v-content>
     <SnackBar />
@@ -25,7 +23,7 @@ import Modal from "././components/Modal.vue";
 import SnackBar from "././components/SnackBar.vue";
 
 import BottomNavigator from "./views/BottomNavigator.vue";
-import PostView from "./views/PostView.vue";
+
 import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Matching from "./views/matching.vue";
@@ -39,7 +37,6 @@ export default {
     AppBar,
     About,
     BottomNavigator,
-    PostView,
     Login,
     Register,
     Matching,

@@ -21,7 +21,7 @@ export default {
   name: "SnackBar",
   data() {
     return {
-      timeout: 5000,
+      timeout: 2000,
     };
   },
   computed: {

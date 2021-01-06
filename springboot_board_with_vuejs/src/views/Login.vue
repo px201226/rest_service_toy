@@ -75,7 +75,6 @@ export default {
     this.$store.commit("NAVIBAR_DISPLAY", false);
   },
   destroyed() {
-    console.log("desyod");
     this.$store.commit("APPBAR_DISPLAY", true);
     this.$store.commit("NAVIBAR_DISPLAY", true);
   },

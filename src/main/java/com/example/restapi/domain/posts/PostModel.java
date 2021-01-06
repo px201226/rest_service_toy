@@ -28,6 +28,6 @@ public class PostModel extends RepresentationModel<PostModel> {
     private String modifyDate;
     private Long comments;
     private Boolean isLike;
-
+    private Boolean isWriter;
 
 }
