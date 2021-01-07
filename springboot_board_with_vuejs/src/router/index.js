@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
     path: '/',
     name: 'Home',
@@ -52,13 +53,23 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
  
-
+  {
+    path: '/error',
+    name: 'error`',
+    component: () => import('../views/Error'),
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    // 원하는 위치로 돌아가기
+    
+    console.log("scroll")
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

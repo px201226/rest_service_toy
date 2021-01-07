@@ -10,6 +10,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +34,10 @@ public class CommentAssembler extends RepresentationModelAssemblerSupport<Commen
                 .content(entity.getContent())
                 .userEmail(entity.getUser().getEmail())
                 .userNickName(entity.getUser().getNickName())
-                .build();
+                .modifyDate(entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
+                .build()
+                .add(linkTo(
+                        methodOn(CommentsController.class).findById(entity.getPost().getId(), entity.getId())).withSelfRel());
     }
 
     @Override

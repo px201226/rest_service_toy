@@ -1,82 +1,51 @@
-import { getPostsList, writePost, deletePost,updatePost, getPost } from "../api/post_api";
+import { getCommentList, writeComment, deleteComment,updateComment } from "../api/commnet_api";
 import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
 import router from "../router";
 
 // state
 const state = {
-  // 페이지 정보  
-  page:{
-   
-  },
 
-  // 포스트 리스트
-  posts: [],
-
-  post:{},
+  
+  comments: [],                    // 포스트 리스트
 };
 
 // getters
 const getters = {
 
-  GET_PAGE(state){
-    return state.page;
+  GET_COMMENT_LIST(state) {
+    return state.comments;
   },
-
-  GET_POST_LIST(state) {
-    return state.posts;
-  },
-
-
 
 };
 
 // mutations
 const mutations = {
-  ADD_POST_LIST(state, posts) {
-    state.posts = state.posts.concat(posts);
-  },
 
-  SET_PAGE(state, page){
-    state.page = page;
+  SET_COMMENS(state, comments){
+    state.comments = comments;
   },
   
-  CLEAR_POST(state){
-    state.page = {};
-    state.posts = [];
-  }
-
 };
 
 // actions
 const actions = {
 
-  async QUERY_POST_LIST(context, page) {
+  async QUERY_COMMENT_LIST(context, page) {
     try {
       context.commit('START_LOADING')
-      const response = await getPostsList(page);
-      context.commit("ADD_POST_LIST", response.data.content);
-      context.commit("SET_PAGE", response.data.page);
+      const response = await getCommentList(page);
+      context.commit("SET_COMMENS", response.data.content);
       return  response.data.content;
     } catch (e) {
       return Promise.reject(e);
     }
   },
 
-  async QUERY_GET_POST(context, postId) {
+  async QUERY_DELETE_COMMENT(context,req) {
     try {
       context.commit('START_LOADING')
-      const response = await getPost(postId);
-      return  response.data;
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  },
-
-  async QUERY_DELETE_POST(context,id) {
-    try {
-      context.commit('START_LOADING')
-      const response = await deletePost(id);
-      context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 삭제되었습니다.', 'success', 'top'))
+      const response = await deletePost(req.postId, req.commentId);
+      context.commit('OPEN_SNACKBAR', setSnackBarInfo('댓글 삭제되었습니다.', 'success', 'top'))
       return response.data;
     } catch (e) {
       context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
@@ -86,7 +55,7 @@ const actions = {
 
   
 
-  async QUERY_WRITE_POST(context, req) {
+  async QUERY_WRITE_COMMENT(context, req) {
     try {
       context.commit('START_LOADING')
       const response = await writePost(req);

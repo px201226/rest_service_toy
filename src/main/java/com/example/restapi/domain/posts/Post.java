@@ -57,7 +57,7 @@ public class Post extends LocalDateTimeEntity {
         this.content = content;
     }
 
-    public PostAdapter toAdapter(Post entity){
+    public PostAdapter toAdapter(Post entity, User user){
         return PostAdapter.builder()
                 .id(entity.getId())
                 .likes(Long.valueOf(entity.getLike().size()))
@@ -66,6 +66,8 @@ public class Post extends LocalDateTimeEntity {
                 .modifyDate(entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
                 .userEmail(entity.getUser().getEmail())
                 .userNickName(entity.getUser().getNickName())
+                .isLike(isContainLikeUsers((user)))
+                .isWirter(isEqualUserEmail(user.getEmail()))
                 .build();
     }
 }

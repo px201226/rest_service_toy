@@ -49,7 +49,7 @@ const actions = {
       router.push("/login")
       context.commit('OPEN_SNACKBAR', setSnackBarInfo('회원가입이 완료되었습니다.', 'success', 'top'))
     } catch (e) {
-      context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
+      context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
     } 
   },
 

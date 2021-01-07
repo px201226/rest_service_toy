@@ -18,10 +18,10 @@
         </v-row>
       </v-col>
       <div class="mr-2" v-if="isWriter">
-        <v-btn class="ml-auto" icon :color="isLikeColor">
+        <v-btn class="ml-auto" icon>
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
-        <v-btn class="ml-auto" icon @click="onDelete">
+        <v-btn class="ml-auto" icon @click="onDeleteButtonClick">
           <v-icon>mdi-delete</v-icon>
         </v-btn>
       </div>
@@ -32,7 +32,7 @@
     </div>
 
     <v-card-actions>
-      <v-btn icon :color="isLikeColor">
+      <v-btn icon :color="isLikeColor" @click="onLikeButtonClick">
         <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn text color="" class="ml-auto" @click="openPostView">
@@ -62,6 +62,7 @@ export default {
   ],
   data() {
     return {
+      like: this.isLike,
       expand: false,
       expand2: false,
     };
@@ -70,13 +71,13 @@ export default {
 
   computed: {
     isLikeColor() {
-      if (this.isLike === true) return "pink";
+      if (this.like === true) return "pink";
       else return "grey";
     },
   },
 
   methods: {
-    onDelete() {
+    onDeleteButtonClick() {
       this.$store.commit("OPEN_MODAL", {
         title: "확인",
         content: "게시물을 정말로 삭제하시겠습니까?",
@@ -85,6 +86,23 @@ export default {
         data: this.id,
       });
     },
+
+    onLikeButtonClick() {
+      if (this.like === false) {
+        this.$store
+          .dispatch("QUERY_LIKE", this.id)
+          .then((req) => {
+            this.like = true;
+          })
+          .catch(() => "");
+      } else {
+        this.$store
+          .dispatch("QUERY_UNLIKE", this.id)
+          .then(() => (this.like = false))
+          .catch(() => "");
+      }
+    },
+
     openPostView() {
       this.$router.push("/posts/" + this.id);
     },

@@ -35,15 +35,11 @@ public class PostLikeService {
         Post post = postRepository.findById(postId).orElseThrow(PostsNotFoundException::new);
         Optional<PostLike> byUserIdAndPostId = postLikeRepository.findByUserIdAndPostId(user.getId(), post.getId());
 
-        if(byUserIdAndPostId.isPresent()){
-            return byUserIdAndPostId.get();
-        }else{
-            return postLikeRepository.save(
-                    PostLike.builder()
-                            .post(post)
-                            .user(user)
-                            .build());
-        }
+        return byUserIdAndPostId.orElse(postLikeRepository.save(
+                PostLike.builder()
+                        .post(post)
+                        .user(user)
+                        .build()));
 
     }
 

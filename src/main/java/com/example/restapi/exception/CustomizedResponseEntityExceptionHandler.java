@@ -59,7 +59,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(NotExistDataException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     protected ResponseEntity notExistDataException(WebRequest request, NotExistDataException e) {
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
@@ -68,7 +68,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
                 exceptionResponse);
 
-        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(responseData, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(NotExistParameterException.class)
@@ -85,7 +85,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler(ServiceAcessDeniedException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     protected ResponseEntity serviceAcessDeniedException(WebRequest request, ServiceAcessDeniedException e) {
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
@@ -94,7 +94,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 com.example.restapi.domain.response.ResponseStatus.SERVICE_ACCESS_DENIED_ERROR,
                 exceptionResponse);
 
-        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(responseData, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(RedundantDataException.class)

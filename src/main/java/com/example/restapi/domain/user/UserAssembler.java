@@ -55,7 +55,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
                         .likes(Long.valueOf(post.getLike().size()))
                         .build()
                         .add(linkTo(
-                                methodOn(PostController.class).findById(post.getId())).withSelfRel()))
+                                methodOn(PostController.class).findById(post.getId(),null)).withSelfRel()))
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +69,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
                 .postId(comment.getPost().getId())
                 .userNickName(comment.getUser().getNickName())
                         .userEmail(comment.getUser().getEmail())
-                .build().add(linkTo(methodOn(CommentsController.class).getList(comment.getPost().getId(), comment.getId())).withSelfRel()))
+                .build().add(linkTo(methodOn(CommentsController.class).findById(comment.getPost().getId(), comment.getId())).withSelfRel()))
                 .collect(Collectors.toList());
     }
 }

@@ -7,7 +7,8 @@ const state = {
     loading: false,
     commentModal: false,
     postModal: false,
-
+    errorMessage: "",
+    
     modal: {
         open: false,
         title: '',
@@ -95,6 +96,11 @@ const mutations = {
     },
     END_LOADING(state) {
         state.loading = false;
+    },
+
+    PUSH_ERROR_PAGE(state) {
+        state.errorMessage = '잘못된 요청입니다.';
+        router.push('/error');
     },
 
     OPEN_COMMENTS(state){

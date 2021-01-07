@@ -28,14 +28,21 @@
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapterAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapterAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/posts/PostLikeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/posts/PostLikeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/CommentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/CommentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel$PostModelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel$PostModelBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentAssembler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/CommentsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/CommentsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -330,22 +337,22 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1609214988176" />
-    <state width="1237" height="192" key="GridCell.Tab.0.bottom" timestamp="1609914298141">
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom" timestamp="1610004163655">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="192" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1609914298141" />
-    <state width="1237" height="192" key="GridCell.Tab.0.center" timestamp="1609914298141">
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610004163655" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center" timestamp="1610004163654">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="192" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1609914298141" />
-    <state width="1237" height="192" key="GridCell.Tab.0.left" timestamp="1609914298141">
+    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610004163654" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left" timestamp="1610004163654">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="192" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1609914298141" />
-    <state width="1237" height="192" key="GridCell.Tab.0.right" timestamp="1609914298141">
+    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610004163654" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right" timestamp="1610004163654">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="192" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1609914298141" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610004163654" />
     <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1609828836552">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -374,18 +381,18 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="436" y="123" key="chooseDestDirectoryDialog/0.0.1280.689@0.0.1280.689" timestamp="1608622836357" />
-    <state x="313" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1609811611202">
+    <state x="313" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1610004841413">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="313" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.689@0.0.1280.689" timestamp="1609811611202" />
+    <state x="313" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.689@0.0.1280.689" timestamp="1610004841413" />
     <state x="412" y="140" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1609811749339">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="412" y="140" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1280.689@0.0.1280.689" timestamp="1609811749339" />
-    <state x="0" y="31" width="1280" height="602" key="find.popup" timestamp="1609913625227">
+    <state x="0" y="31" width="1280" height="602" key="find.popup" timestamp="1610004853936">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="0" y="31" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1609913625227" />
+    <state x="0" y="31" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1610004853936" />
     <state x="37" y="0" key="new project wizard" timestamp="1607926175349">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -394,14 +401,14 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="346" y="101" key="refactoring.ChangeSignatureDialog/0.0.1280.689@0.0.1280.689" timestamp="1609569260027" />
-    <state x="297" y="153" key="run.anything.popup" timestamp="1609681679380">
+    <state x="297" y="153" key="run.anything.popup" timestamp="1609995625608">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1609681679380" />
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1609913061838">
+    <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1609995625608" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1610002876499">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1609913061838" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1610002876499" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,30 +43,31 @@ public class PostController {
                                           PagedResourcesAssembler<Post> postAssembler,
                                           @AuthUser User user) {
 
-        Page<Post> all = postsService.findAll(pageable);
-        PagedModel<PostModel> postModels;
+        Page<Post> posts = postsService.findAll(pageable);
 
-        if (user != null) {
-            Page<PostAdapter> map = all.map(u ->
-                    u.toAdapter(u)
-                            .setIsLike(u.isContainLikeUsers(user))
-                            .setIsWriter(u.isEqualUserEmail(user.getEmail()))
-            );
-
-            postModels = postAdapterAssembler.toModel(map, this.postAdapterAssembler);
-        } else {
-            postModels = postAssembler.toModel(all, this.postAssembler);
-        }
+        PagedModel<PostModel> postModels = Optional.ofNullable(user)
+                .map(u -> posts.map(p -> p.toAdapter(p, u)))
+                .map(postAdapters -> postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler))
+                .orElse(postAssembler.toModel(posts, this.postAssembler));
 
         ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postModels);
+
         return ResponseEntity.ok(responseData);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity findById(@PathVariable Long id) {
+    public ResponseEntity findById(@PathVariable Long id,
+                                   @AuthUser User user) {
 
-        Post byId = postsService.findById(id);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postAssembler.toModel(byId));
+        Post post = postsService.findById(id);
+
+        PostModel model = Optional.ofNullable(user)
+                .map(u -> post.toAdapter(post, u))
+                .map(postAdapterAssembler::toModel)
+                .orElse(postAssembler.toModel(post));
+
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS,model);
+
         return ResponseEntity.ok(responseData);
     }
 

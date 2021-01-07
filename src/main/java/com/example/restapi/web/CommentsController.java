@@ -40,7 +40,7 @@ public class CommentsController {
     }
 
     @GetMapping("/v1/posts/{postId}/comments/{commentId}")
-    public ResponseEntity getList(@PathVariable Long postId,
+    public ResponseEntity findById(@PathVariable Long postId,
                                   @PathVariable Long commentId) {
         Comment byId = commentsService.findById(postId, commentId);
         ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(byId));

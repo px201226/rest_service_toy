@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/exception")
 public class ExceptionController {
 
-    @GetMapping(value = "/entrypoint")
-    public ResponseEntity entrypointException() {
+//    @GetMapping(value = "/entrypoint")
+//    public ResponseEntity entrypointException1() {
+//        throw new CAuthenticationEntryPointException("권한이 없습니다");
+//    }
+
+    @RequestMapping(value = "/entrypoint")
+    public ResponseEntity entrypointException2() {
         throw new CAuthenticationEntryPointException("권한이 없습니다");
     }
+
 }
