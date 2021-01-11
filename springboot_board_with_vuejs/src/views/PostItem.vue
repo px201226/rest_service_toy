@@ -36,7 +36,7 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn text color="" class="ml-auto" @click="openPostView">
-        좋아요 {{ likes }}개 | 댓글 {{ comments }}개
+        좋아요 {{ mlikes }}개 | 댓글 {{ comments }}개
       </v-btn>
     </v-card-actions>
     <v-expand-transition>
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       like: this.isLike,
+      mlikes: this.likes,
       expand: false,
       expand2: false,
     };
@@ -93,12 +94,16 @@ export default {
           .dispatch("QUERY_LIKE", this.id)
           .then((req) => {
             this.like = true;
+            this.mlikes++;
           })
           .catch(() => "");
       } else {
         this.$store
           .dispatch("QUERY_UNLIKE", this.id)
-          .then(() => (this.like = false))
+          .then(() => {
+            this.like = false;
+            this.mlikes--;
+          })
           .catch(() => "");
       }
     },

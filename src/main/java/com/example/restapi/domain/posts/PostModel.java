@@ -1,17 +1,9 @@
 package com.example.restapi.domain.posts;
 
 import com.example.restapi.domain.comments.Comment;
-import com.example.restapi.domain.comments.CommentModel;
-import com.example.restapi.domain.posts.like.PostLike;
-import com.example.restapi.domain.user.User;
-import com.example.restapi.domain.user.UserModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder

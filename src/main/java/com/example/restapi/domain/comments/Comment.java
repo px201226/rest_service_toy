@@ -1,6 +1,4 @@
 package com.example.restapi.domain.comments;
-
-
 import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.user.User;
@@ -9,7 +7,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Builder
 @NoArgsConstructor
@@ -37,5 +36,23 @@ public class Comment extends LocalDateTimeEntity {
 
     public void update(String content) {
         this.content = content;
+    }
+
+    public boolean isEqualUserEmail(Optional<User> loginUser){
+
+        return loginUser.map(u -> user.getEmail().equals(u.getEmail()))
+                .orElse(false);
+    }
+
+    public CommentAdapter toAdapter(Optional<User> loginUser){
+        return  CommentAdapter.builder()
+                .id(getId())
+                .postId(getPost().getId())
+                .content(getContent())
+                .userEmail(getUser().getEmail())
+                .userNickName(getUser().getNickName())
+                .modifyDate(getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
+                .isWriter(isEqualUserEmail(loginUser))
+                .build();
     }
 }

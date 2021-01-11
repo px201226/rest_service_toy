@@ -94,7 +94,7 @@ export default {
     routePostArticle() {
       this.$store.commit("OPEN_MODAL", {
         title: "에러",
-        content: "dd",
+        content: "test",
         option1: "닫기",
       });
       // this.$router.push("/save");

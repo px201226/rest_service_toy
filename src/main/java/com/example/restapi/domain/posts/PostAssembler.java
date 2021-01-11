@@ -2,25 +2,14 @@ package com.example.restapi.domain.posts;
 
 
 import com.example.restapi.domain.comments.Comment;
-import com.example.restapi.domain.comments.CommentModel;
-import com.example.restapi.domain.user.User;
-import com.example.restapi.domain.user.UserModel;
-import com.example.restapi.web.CommentsController;
 import com.example.restapi.web.PostController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class PostAssembler extends RepresentationModelAssemblerSupport<Post, PostModel> {

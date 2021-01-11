@@ -60,7 +60,7 @@ export default {
 
   methods: {
     onMatchingApply() {
-      this.$store.commit("OPEN_SNACKBAR", { text: "dd" });
+      this.$store.commit("OPEN_SNACKBAR", { text: "test" });
       // this.$router.push("/matching/apply");
     },
 

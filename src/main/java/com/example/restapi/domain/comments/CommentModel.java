@@ -23,4 +23,5 @@ public class CommentModel  extends RepresentationModel<CommentModel> {
     private String userEmail;
     private String userNickName;
     private String modifyDate;
+    private Boolean isWriter;
 }

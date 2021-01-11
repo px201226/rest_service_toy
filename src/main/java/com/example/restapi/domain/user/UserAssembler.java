@@ -69,7 +69,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
                 .postId(comment.getPost().getId())
                 .userNickName(comment.getUser().getNickName())
                         .userEmail(comment.getUser().getEmail())
-                .build().add(linkTo(methodOn(CommentsController.class).findById(comment.getPost().getId(), comment.getId())).withSelfRel()))
+                .build().add(linkTo(methodOn(CommentsController.class).findById(comment.getPost().getId(), comment.getId(),null)).withSelfRel()))
                 .collect(Collectors.toList());
     }
 }

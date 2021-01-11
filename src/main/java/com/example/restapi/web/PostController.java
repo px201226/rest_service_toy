@@ -45,10 +45,13 @@ public class PostController {
 
         Page<Post> posts = postsService.findAll(pageable);
 
-        PagedModel<PostModel> postModels = Optional.ofNullable(user)
-                .map(u -> posts.map(p -> p.toAdapter(p, u)))
-                .map(postAdapters -> postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler))
-                .orElse(postAssembler.toModel(posts, this.postAssembler));
+//        PagedModel<PostModel> postModels = Optional.ofNullable(user)
+//                .map(u -> posts.map(p -> p.toAdapter(null)))
+//                .map(postAdapters -> postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler))
+//                .orElse(postAssembler.toModel(posts, this.postAssembler));
+//
+        Page<PostAdapter> postAdapters = posts.map(p -> p.toAdapter(Optional.ofNullable(user)));
+        PagedModel<PostModel> postModels = postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler);
 
         ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postModels);
 
@@ -61,12 +64,13 @@ public class PostController {
 
         Post post = postsService.findById(id);
 
-        PostModel model = Optional.ofNullable(user)
-                .map(u -> post.toAdapter(post, u))
-                .map(postAdapterAssembler::toModel)
-                .orElse(postAssembler.toModel(post));
+//        PostModel model = Optional.ofNullable(user)
+//                .map(u -> post.toAdapter(post, u))
+//                .map(postAdapterAssembler::toModel)
+//                .orElse(postAssembler.toModel(post));
 
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS,model);
+        PostModel model = postAdapterAssembler.toModel(post.toAdapter(Optional.ofNullable(user)));
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
 
         return ResponseEntity.ok(responseData);
     }
@@ -82,6 +86,7 @@ public class PostController {
             return ResponseEntity.badRequest().body(response);
         }
 
+        // 영속성 유지 안됨 (save 객체) -> getComment가 안됨.
         Post save = postsService.save(postsSaveRequestDto, user.getEmail());
         PostModel model = postAssembler.toModel(save);
 

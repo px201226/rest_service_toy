@@ -51,6 +51,9 @@ instance.interceptors.response.use(
 		   return Promise.reject(error);
 	   }
 
+	   if( status === 400){
+			store.commit('OPEN_MODAL', {title: '에러', content: "입력이 올바르지 않습니다", option1: '닫기',});
+	   }
 	   if (status === 401) {
 		   let errorData = error.response.data;
 		   if (errorData.error !== 'invalid_token') {

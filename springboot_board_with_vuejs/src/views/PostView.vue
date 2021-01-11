@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card id="view">
     <v-toolbar dark color="primary">
       <v-btn icon dark @click="onBackButtonClick">
         <v-icon>mdi-close</v-icon>
@@ -45,7 +45,7 @@
           <v-icon>mdi-heart</v-icon>
         </v-btn>
         <v-btn text color="" class="ml-auto">
-          좋아요 {{ post.likes }}개 | 댓글 {{ post.comments }}개
+          좋아요 {{ post.likes }}개 | 댓글 {{ getCommentList.length }}개
         </v-btn>
       </v-card-actions>
     </div>
@@ -53,20 +53,29 @@
     <v-divider />
     <v-row class="pa-5 pb-0 ">
       <v-textarea
+        v-model="commentReq"
         label="댓글을 입력하세요"
         auto-grow
         outlined
         rows="1"
         row-height="5"
       ></v-textarea>
-      <v-btn class="mx-1 " height="55" depressed color="primary">작성</v-btn>
+      <v-btn
+        class="mx-1 "
+        height="55"
+        depressed
+        color="primary"
+        @click="onCommentWriteClick"
+        >작성</v-btn
+      >
     </v-row>
     <v-divider />
 
     <comment
       v-for="(comment, index) in getCommentList"
       :key="index"
-      :id="comment.id"
+      :postId="postId"
+      :commentId="comment.id"
       :nickName="comment.userNickName"
       :content="comment.content"
       :date="comment.modifyDate"
@@ -75,7 +84,7 @@
       class="my-1"
     />
 
-    <modal @pass="deleteEmit" />
+    <modal @postDelete="deletePost" @commentDelete="deleteComment" />
   </v-card>
 </template>
 
@@ -89,6 +98,7 @@ export default {
   name: "PostView",
   data() {
     return {
+      commentReq: "",
       postId: this.$route.params.id,
       post: "",
     };
@@ -109,7 +119,7 @@ export default {
       });
 
     //COMMENT READ
-    this.$store.dispatch("QUERY_COMMENT_LIST", this.postId);
+    this.$store.dispatch("QUERY_COMMENT_LIST", this.$route.params.id);
   },
 
   destroyed() {
@@ -129,12 +139,16 @@ export default {
   },
 
   methods: {
-    deleteEmit(id) {
+    deletePost(id) {
       this.$store.dispatch("QUERY_DELETE_POST", id).then(() => {
-        console.log("삭제");
+        this.$router.back();
       });
     },
-
+    deleteComment(req) {
+      this.$store.dispatch("QUERY_DELETE_COMMENT", req).then(() => {
+        this.$store.dispatch("QUERY_COMMENT_LIST", this.$route.params.id);
+      });
+    },
     onBackButtonClick() {
       this.$router.back();
     },
@@ -145,6 +159,7 @@ export default {
         content: "게시물을 정말로 삭제하시겠습니까?",
         option1: "닫기",
         option2: "삭제",
+        event: "postDelete",
         data: this.post.id,
       });
     },
@@ -155,14 +170,36 @@ export default {
           .dispatch("QUERY_LIKE", this.post.id)
           .then((req) => {
             this.post.isLike = true;
+            this.post.likes++;
           })
           .catch(() => "");
       } else {
         this.$store
           .dispatch("QUERY_UNLIKE", this.post.id)
-          .then(() => (this.post.isLike = false))
+          .then(() => {
+            this.post.isLike = false;
+            this.post.likes--;
+          })
           .catch(() => "");
       }
+    },
+
+    onCommentWriteClick() {
+      this.$store
+        .dispatch("QUERY_WRITE_COMMENT", {
+          postId: this.post.id,
+          content: this.commentReq,
+        })
+        .then((req) => {
+          this.commentReq = "";
+          this.$store
+            .dispatch("QUERY_COMMENT_LIST", this.$route.params.id)
+            .then(() => {
+              var objDiv = document.getElementById("view");
+              window.scrollTo({ top: objDiv.scrollHeight, behavior: "smooth" });
+            });
+        })
+        .catch(() => "");
     },
   },
 };

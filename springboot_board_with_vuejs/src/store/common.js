@@ -15,6 +15,7 @@ const state = {
         content: '',
         option1: '',
         option2: '',
+        event: '',
         data:{},
     },
     snackbar: {
@@ -75,6 +76,7 @@ const mutations = {
             ? modalTexts.option2
             : null;
         state.modal.data = modalTexts.data;
+        state.modal.event = modalTexts.event ? modalTexts.event : "pass";
         state.modal.open = true;
     },
     NETWORK_ERROR(state) {
@@ -83,6 +85,7 @@ const mutations = {
         state.modal.content = "서버와 연결할 수 없습니다."
         state.modal.option1 = "닫기";
         state.modal.option2 = null
+        state.modal.event = "pass"
         state.modal.open = true;
     },
     OPEN_SNACKBAR(state, snackbarInfo) {

@@ -1,8 +1,9 @@
 package com.example.restapi.exception.exceptions;
 
 import com.example.restapi.exception.high.NotExistDataException;
+import com.example.restapi.exception.high.NotExistParameterException;
 
-public class EmailSigninFailedException extends NotExistDataException {
+public class EmailSigninFailedException extends NotExistParameterException {
     public EmailSigninFailedException(String msg, Throwable t) {
         super(msg, t);
     }

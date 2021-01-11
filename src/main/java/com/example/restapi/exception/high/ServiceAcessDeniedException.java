@@ -1,6 +1,7 @@
 package com.example.restapi.exception.high;
 
 
+// 403
 public class ServiceAcessDeniedException extends RuntimeException {
     public ServiceAcessDeniedException(String msg, Throwable t) {
         super(msg, t);

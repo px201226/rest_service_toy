@@ -3,6 +3,7 @@ package com.example.restapi.web;
 
 import com.example.restapi.config.AuthUser;
 import com.example.restapi.domain.comments.Comment;
+import com.example.restapi.domain.comments.CommentAdapter;
 import com.example.restapi.domain.comments.CommentAssembler;
 import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.response.ResponseData;
@@ -18,8 +19,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,18 +36,25 @@ public class CommentsController {
     private final CommentAssembler commentAssembler;
 
     @GetMapping("/v1/posts/{postId}/comments")
-    public ResponseEntity getList(@PathVariable Long postId) {
+    public ResponseEntity getList(@PathVariable Long postId, @AuthUser User user) {
+
         Post post = postsService.findById(postId);
-        List<Comment> allDesc = post.getComments();
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toCollectionModel(allDesc));
+
+        List<CommentAdapter> commentAdapters = post.getComments().stream()
+                .map(c -> c.toAdapter(Optional.ofNullable(user)))
+                .collect(Collectors.toList());
+
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toCollectionModel(commentAdapters));
+
         return ResponseEntity.ok(responseData);
     }
 
     @GetMapping("/v1/posts/{postId}/comments/{commentId}")
     public ResponseEntity findById(@PathVariable Long postId,
-                                  @PathVariable Long commentId) {
-        Comment byId = commentsService.findById(postId, commentId);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(byId));
+                                   @PathVariable Long commentId,
+                                   @AuthUser User user) {
+        CommentAdapter commentAdapter = commentsService.findById(postId, commentId).toAdapter(Optional.ofNullable(user));
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(commentAdapter));
         return ResponseEntity.ok(responseData);
     }
 
@@ -58,8 +69,8 @@ public class CommentsController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        Comment save = commentsService.save(requestDto, postId, user.getEmail());
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(save));
+        CommentAdapter commentAdapter = commentsService.save(requestDto, postId, user.getEmail()).toAdapter(Optional.of(user));
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(commentAdapter));
 
         return ResponseEntity.ok(responseData);
     }
@@ -76,8 +87,8 @@ public class CommentsController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        Comment update = commentsService.update(requestDto, postId, commentId, user.getEmail());
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(update));
+        CommentAdapter commentAdapter = commentsService.update(requestDto, postId, commentId, user.getEmail()).toAdapter(Optional.of(user));
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toModel(commentAdapter));
         return ResponseEntity.ok(responseData);
     }
 
@@ -86,7 +97,7 @@ public class CommentsController {
                                  @PathVariable Long commentId,
                                  @AuthUser User user) {
 
-        commentsService.delete(postId,commentId, user.getEmail());
+        commentsService.delete(postId, commentId, user.getEmail());
         return ResponseEntity.noContent().build();
 
     }

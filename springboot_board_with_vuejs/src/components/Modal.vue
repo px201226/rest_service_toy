@@ -45,11 +45,11 @@ export default {
       if (this.modal.option1 === "닫기") {
         this.$store.commit("CLOSE_MODAL");
       } else {
-        this.$emit("pass", this.modal.data);
+        this.$emit(this.modal.event, this.modal.data);
       }
     },
     submit() {
-      this.$emit("pass", this.modal.data);
+      this.$emit(this.modal.event, this.modal.data);
       this.$store.commit("CLOSE_MODAL");
     },
   },

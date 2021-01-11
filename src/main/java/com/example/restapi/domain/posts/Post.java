@@ -10,7 +10,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -41,33 +40,42 @@ public class Post extends LocalDateTimeEntity {
     private Set<PostLike> like;
 
     public boolean isEqualUserEmail(String userEmail){
-        return this.user.getEmail().equals(userEmail);
+
+        return userEmail.equals(getUser().getEmail());
     }
 
-    public boolean isContainLikeUsers(User user){
-        if(user == null) return false;
+    public boolean isEqualUserEmail(Optional<User> loginUser){
 
-        for(PostLike postLike : like){
-            if(postLike.getUser().getEmail().equals(user.getEmail())) return true;
-        }
-        return false;
+        return loginUser.map(u -> user.getEmail().equals(u.getEmail()))
+                .orElse(false);
+    }
+
+    public boolean isContainLikeUsers(Optional<User> loginUser){
+
+        return loginUser.map(u -> {
+            for (PostLike postLike : like) {
+                if (postLike.getUser().getEmail().equals(u.getEmail())) return true;
+            }
+            return false;
+        }).orElse(false);
+
     }
 
     public void update(String content) {
         this.content = content;
     }
 
-    public PostAdapter toAdapter(Post entity, User user){
+    public PostAdapter toAdapter(Optional<User> loginUser){
         return PostAdapter.builder()
-                .id(entity.getId())
-                .likes(Long.valueOf(entity.getLike().size()))
-                .content(entity.getContent())
-                .comments((Long.valueOf(entity.getComments().size())))
-                .modifyDate(entity.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
-                .userEmail(entity.getUser().getEmail())
-                .userNickName(entity.getUser().getNickName())
-                .isLike(isContainLikeUsers((user)))
-                .isWirter(isEqualUserEmail(user.getEmail()))
+                .id(getId())
+                .likes(Long.valueOf(getLike().size()))
+                .content(getContent())
+                .comments((Long.valueOf(getComments().size())))
+                .modifyDate(getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
+                .userEmail(getUser().getEmail())
+                .userNickName(getUser().getNickName())
+                .isLike(isContainLikeUsers(loginUser))
+                .isWriter(isEqualUserEmail(loginUser))
                 .build();
     }
 }

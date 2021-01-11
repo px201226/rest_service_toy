@@ -44,7 +44,7 @@ const actions = {
   async QUERY_DELETE_COMMENT(context,req) {
     try {
       context.commit('START_LOADING')
-      const response = await deletePost(req.postId, req.commentId);
+      const response = await deleteComment(req.postId, req.commentId);
       context.commit('OPEN_SNACKBAR', setSnackBarInfo('댓글 삭제되었습니다.', 'success', 'top'))
       return response.data;
     } catch (e) {
@@ -57,26 +57,27 @@ const actions = {
 
   async QUERY_WRITE_COMMENT(context, req) {
     try {
+      console.log(req);
       context.commit('START_LOADING')
-      const response = await writePost(req);
-      context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 작성되었습니다.', 'success', 'top'))
+      const response = await writeComment(req.postId,req);
+      context.commit('OPEN_SNACKBAR', setSnackBarInfo('댓글이 작성되었습니다.', 'success', 'top'))
       return response.data;
     } catch (e) {
-      context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
+      //context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
       return Promise.reject(e);
     } finally {
     }
   },
 
-  async QUERY_UPDATE_POST(context, req) {
+  async QUERY_UPDATE_COMMENT(context, req) {
     try {
       context.commit('START_LOADING')
-      const response = await updatePost(req.id, req);
+      const response = await updateComment(req.postId, req.commentId, {content:req.content});
       context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 수정되었습니다.', 'success', 'top'))
       router.push("/");
       return response.data;
     } catch (e) {
-      context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
+      //context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});
       return Promise.reject(e);
       } finally {
     }

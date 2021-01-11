@@ -6,8 +6,6 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import java.time.format.DateTimeFormatter;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
@@ -29,7 +27,7 @@ public class PostAdapterAssembler extends RepresentationModelAssemblerSupport<Po
                .userEmail(entity.getUserEmail())
                .userNickName(entity.getUserNickName())
                .isLike(entity.getIsLike())
-               .isWriter(entity.getIsWirter())
+               .isWriter(entity.getIsWriter())
                .build()
                .add(linkTo(PostController.class).slash(entity.getId()).withSelfRel())
                .add(linkTo(PostController.class).slash(entity.getId()).slash("comments").withRel("comments"));
