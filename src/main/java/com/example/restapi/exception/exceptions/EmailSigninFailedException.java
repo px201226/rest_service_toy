@@ -1,6 +1,5 @@
 package com.example.restapi.exception.exceptions;
 
-import com.example.restapi.exception.high.NotExistDataException;
 import com.example.restapi.exception.high.NotExistParameterException;
 
 public class EmailSigninFailedException extends NotExistParameterException {

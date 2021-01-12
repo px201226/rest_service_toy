@@ -58,7 +58,7 @@
             @click="onUpdateButtonClick"
           >
             <v-icon> mdi-check </v-icon>
-            수정{{ comment.content }}
+            수정
           </v-btn>
         </v-row>
       </v-card>
@@ -73,29 +73,38 @@ export default {
 
   data() {
     return {
-      comment: {
-        id: this.commentId,
-        postId: this.postId,
-        nickName: this.nickName,
-        date: this.date,
-        content: this.content,
-      },
       isEdit: false,
       editContent: this.content,
     };
   },
 
+  computed: {
+    comment() {
+      return {
+        id: this.commentId,
+        postId: this.postId,
+        nickName: this.nickName,
+        date: this.date,
+        content: this.content,
+      };
+    },
+  },
   methods: {
     onEditButton() {
       this.isEdit = !this.isEdit;
+      this.editContent = this.content;
     },
     onUpdateButtonClick() {
       this.isEdit = !this.isEdit;
-      this.$store.dispatch("QUERY_UPDATE_COMMENT", {
-        postId: this.postId,
-        commentId: this.commentId,
-        content: this.editContent,
-      });
+      this.$store
+        .dispatch("QUERY_UPDATE_COMMENT", {
+          postId: this.postId,
+          commentId: this.commentId,
+          content: this.editContent,
+        })
+        .then(() => {
+          this.$emit("refresh");
+        });
     },
 
     onDeleteButtonClick() {

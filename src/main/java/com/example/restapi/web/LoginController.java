@@ -2,8 +2,8 @@ package com.example.restapi.web;
 
 import com.example.restapi.domain.matching.MatchingResult;
 import com.example.restapi.domain.matching.MatchingResultRepository;
-import com.example.restapi.domain.matching.MatchingWaitEntity;
-import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
+import com.example.restapi.domain.matching.Participant;
+import com.example.restapi.domain.matching.ParticipantRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
@@ -22,7 +22,6 @@ import com.example.restapi.exception.exceptions.EmailSigninFailedException;
 import com.example.restapi.service.matching.MatchingService;
 import com.example.restapi.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Errors;
@@ -32,7 +31,6 @@ import javax.validation.Valid;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,7 +50,7 @@ public class LoginController {
     private final PasswordEncoder passwordEncoder;
 
     private final MatchingManager matchingManager;
-    private final MatchingWaitEntityRepository matchingWaitEntityRepository;
+    private final ParticipantRepository participantRepository;
     private final MatchingService matchingService;
     private final MatchingResultRepository matchingResultRepository;
 
@@ -66,7 +64,7 @@ public class LoginController {
 
         matchingService.matching();
         List<User> all = userRepository.findAll();
-        List<MatchingWaitEntity> waits = matchingWaitEntityRepository.findAll();
+        List<Participant> waits = participantRepository.findAll();
         List<MatchingResult> results = matchingResultRepository.findAll();
         int afterWaitEntities = waits.size();
         int afterMatchingEntity = results.size();
@@ -79,9 +77,9 @@ public class LoginController {
         List<User> users = getAuthUsers(10);
 
         System.out.println("0000000000000");
-        List<MatchingWaitEntity> matchingWaitEntities = new ArrayList<>();
+        List<Participant> matchingWaitEntities = new ArrayList<>();
         for(int i=0; i<10; i++){
-            MatchingWaitEntity build = MatchingWaitEntity.builder()
+            Participant build = Participant.builder()
                     .user(users.get(i))
                     .nextMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
                     .build();
@@ -89,7 +87,7 @@ public class LoginController {
             matchingWaitEntities.add(build);
         }
         System.out.println("1111111111");
-        matchingWaitEntityRepository.saveAll(matchingWaitEntities);
+        participantRepository.saveAll(matchingWaitEntities);
         System.out.println("2222222222");
     }
     public List<User> getAuthUsers(int size){

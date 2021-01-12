@@ -42,7 +42,7 @@ public class MatchingResult {
         return String.format("(%d,%d)", user.getId(), anotherUser.getId());
     }
 
-    public static List<MatchingResult> getResultsTo(List<Pair<User, User>> matchingPairs, LocalDate localDate) {
+    public static List<MatchingResult> getResultsFrom(List<Pair<User, User>> matchingPairs, LocalDate localDate) {
 
         List<MatchingResult> matchingResults = new ArrayList<>();
 

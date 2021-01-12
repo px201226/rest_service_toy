@@ -1,7 +1,6 @@
 package com.example.restapi.exception.exceptions;
 
 
-import com.example.restapi.exception.high.NotExistDataException;
 import com.example.restapi.exception.high.RedundantDataException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

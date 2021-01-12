@@ -74,7 +74,6 @@ const actions = {
       context.commit('START_LOADING')
       const response = await updateComment(req.postId, req.commentId, {content:req.content});
       context.commit('OPEN_SNACKBAR', setSnackBarInfo('게시물이 수정되었습니다.', 'success', 'top'))
-      router.push("/");
       return response.data;
     } catch (e) {
       //context.commit('OPEN_MODAL', {title: '에러', content: e.response.message, option1: '닫기',});

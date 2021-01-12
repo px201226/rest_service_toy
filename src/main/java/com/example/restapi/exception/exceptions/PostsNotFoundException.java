@@ -2,7 +2,7 @@ package com.example.restapi.exception.exceptions;
 
 
 import com.example.restapi.exception.high.NotExistDataException;
-import lombok.NoArgsConstructor;
+import com.example.restapi.exception.high.NotExistURIException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

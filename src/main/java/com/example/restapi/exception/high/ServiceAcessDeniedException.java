@@ -12,6 +12,6 @@ public class ServiceAcessDeniedException extends RuntimeException {
     }
 
     public ServiceAcessDeniedException() {
-        super();
+        super("서비스 접근이 거부되었습니다.");
     }
 }

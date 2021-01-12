@@ -2,6 +2,7 @@ package com.example.restapi.exception.exceptions;
 
 
 import com.example.restapi.exception.high.NotExistDataException;
+import com.example.restapi.exception.high.NotExistURIException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -9,8 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 // 2xx -> OK
 // 4xx -> client error
 // 5xx -> server error
-@ResponseStatus(HttpStatus.NOT_FOUND)
-
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class MatchedResultNotFoundException extends NotExistDataException {
     public MatchedResultNotFoundException(String message) {
         super(message);

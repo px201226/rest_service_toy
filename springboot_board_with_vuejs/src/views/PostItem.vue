@@ -39,15 +39,10 @@
         좋아요 {{ mlikes }}개 | 댓글 {{ comments }}개
       </v-btn>
     </v-card-actions>
-    <v-expand-transition>
-      <comment v-show="expand">d </comment>
-    </v-expand-transition>
   </v-card>
 </template>
 
 <script>
-import Comment from "./Comment.vue";
-
 export default {
   name: "PostItem",
   props: [
@@ -68,7 +63,7 @@ export default {
       expand2: false,
     };
   },
-  components: { Comment },
+  components: {},
 
   computed: {
     isLikeColor() {

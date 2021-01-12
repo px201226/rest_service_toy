@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface MatchingResultRepository extends JpaRepository<MatchingResult,Long> {
 
     Optional<MatchingResult> findByUserIdAndMatchingDate(Long userId,LocalDate matchingDate);
+    Optional<MatchingResult> findByAnotherUserIdAndMatchingDate(Long anotherUserId,LocalDate matchingDate);
 }

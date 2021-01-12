@@ -27,44 +27,57 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/NotExistURIException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapterAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapterAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingResultRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingResultRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingWaitEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/Participant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingWaitEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/ParticipantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/MatchingWaitEntityResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching/ParticipantResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/AlreadyApplyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/AlreadyApplyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/CommentNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/CommentNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/EmailSigninFailedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/EmailSigninFailedException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/MatchedResultNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/MatchedResultNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/MatchingApplyNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/MatchingApplyNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/PostsNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/PostsNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/UserNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/InvalidRequestParamaterException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/InvalidRequestParamaterException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/NotExistDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/NotExistDataException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/NotExistParameterException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/NotExistParameterException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/RedundantDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/RedundantDataException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/ServiceAcessDeniedException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/ServiceAcessDeniedException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/CommentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/CommentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/Comment$CommentBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/Comment$CommentBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/Comment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentAssembler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentModel$CommentModelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentModel$CommentModelBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/Post$PostBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/Post$PostBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/Post.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostAssembler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel$PostModelBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel$PostModelBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/posts/PostModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingApplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingApplyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/MatchingCotroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/MatchingCotroller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/service/matching/MatchingService2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/service/matching/MatchingService2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/service/matching/MatchingServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/service/matching/MatchingServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/MatchingCotrollerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/MatchingCotrollerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserDetailProfilesControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserDetailProfilesControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/matching/MatchingResultRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/matching/MatchingResultRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/matching/MatchingWaitEntity$MatchingWaitEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/matching/MatchingWaitEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/matching/MatchingWaitEntityRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/matching/MatchingWaitEntityResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/AlreadyApplyException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/AlreadyApplyException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/CommentNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/CommentNotFoundException.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/EmailSigninFailedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/EmailSigninFailedException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/MatchedResultNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/MatchedResultNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/MatchingApplyNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/MatchingApplyNotFoundException.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/UserNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/UserNotFoundException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/InvalidRequestParamaterException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/InvalidRequestParamaterException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/RedundantDataException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/RedundantDataException.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/ServiceAcessDeniedException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/ServiceAcessDeniedException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/CommentsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/CommentsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingApplyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingApplyService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/MatchingCotroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/MatchingCotroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/restapi/service/matching/MatchingService2Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/restapi/service/matching/MatchingService2Test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/restapi/service/matching/MatchingServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/restapi/service/matching/MatchingServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/MatchingCotrollerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/MatchingCotrollerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/UserDetailProfilesControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/UserDetailProfilesControllerTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,11 +130,11 @@
       <recent name="com.example.restapi" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.restapi.exception.high" />
       <recent name="com.example.restapi.domain.comments" />
       <recent name="com.example.restapi.domain.posts" />
       <recent name="com.example.restapi.service.posts" />
       <recent name="com.example.restapi.domain.posts.like" />
-      <recent name="com.example.restapi.config" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\test\java\com\example\restapi\web" />
@@ -346,10 +359,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="423" y="212" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1280.689@0.0.1280.689" timestamp="1608279704833" />
-    <state x="155" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610331750754">
+    <state x="155" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610434167965">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="155" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.689@0.0.1280.689" timestamp="1610331750754" />
+    <state x="155" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.689@0.0.1280.689" timestamp="1610434167965" />
     <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1609825761614">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -358,22 +371,22 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1609214988176" />
-    <state width="1237" height="198" key="GridCell.Tab.0.bottom" timestamp="1610346422844">
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom" timestamp="1610440369355">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610346422844" />
-    <state width="1237" height="198" key="GridCell.Tab.0.center" timestamp="1610346422844">
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610440369355" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center" timestamp="1610440369355">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610346422844" />
-    <state width="1237" height="198" key="GridCell.Tab.0.left" timestamp="1610346422844">
+    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610440369355" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left" timestamp="1610440369355">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610346422844" />
-    <state width="1237" height="198" key="GridCell.Tab.0.right" timestamp="1610346422844">
+    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610440369355" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right" timestamp="1610440369355">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610346422844" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610440369355" />
     <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1609828836552">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -410,10 +423,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="412" y="140" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1280.689@0.0.1280.689" timestamp="1609811749339" />
-    <state x="0" y="31" width="1280" height="602" key="find.popup" timestamp="1610346386316">
+    <state x="0" y="31" width="1280" height="602" key="find.popup" timestamp="1610439957813">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="0" y="31" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1610346386316" />
+    <state x="0" y="31" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1610439957813" />
     <state x="37" y="0" key="new project wizard" timestamp="1607926175349">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -426,10 +439,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1610345293224" />
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1610351102232">
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1610434673394">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1610351102232" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1610434673394" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

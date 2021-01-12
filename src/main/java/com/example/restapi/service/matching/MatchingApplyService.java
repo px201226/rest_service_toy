@@ -1,8 +1,8 @@
 package com.example.restapi.service.matching;
 
 
-import com.example.restapi.domain.matching.MatchingWaitEntity;
-import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
+import com.example.restapi.domain.matching.Participant;
+import com.example.restapi.domain.matching.ParticipantRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
@@ -22,32 +22,32 @@ import java.util.Optional;
 public class MatchingApplyService {
 
     private final MatchingManager matchingManager;
-    private final MatchingWaitEntityRepository matchingWaitEntityRepository;
+    private final ParticipantRepository participantRepository;
     private final UserRepository userRepository;
 
     @Transactional
-    public MatchingWaitEntity apply(String userEmail){
+    public Participant apply(String userEmail){
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
-        Optional<MatchingWaitEntity> byUser = matchingWaitEntityRepository.findByUser(user);
+        Optional<Participant> byUser = participantRepository.findByUser(user);
 
         if(byUser.isPresent()){
             throw new AlreadyApplyException();
         }
 
-        MatchingWaitEntity build = MatchingWaitEntity.builder()
+        Participant build = Participant.builder()
                 .user(user)
                 .nextMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
                 .build();
 
         user.updateLastMatchingDate(LocalDate.now());
 
-        return matchingWaitEntityRepository.save(build);
+        return participantRepository.save(build);
     }
 
     @Transactional
-    public MatchingWaitEntity isApply(String userEmail){
+    public Participant isApply(String userEmail){
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
-        Optional<MatchingWaitEntity> byUser = matchingWaitEntityRepository.findByUser(user);
+        Optional<Participant> byUser = participantRepository.findByUser(user);
         if(!byUser.isPresent()){
             throw new MatchingApplyNotFoundException();
         }

@@ -1,8 +1,7 @@
 package com.example.restapi.exception.exceptions;
 
 
-import com.example.restapi.exception.high.NotExistDataException;
-import lombok.NoArgsConstructor;
+import com.example.restapi.exception.high.NotExistURIException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 // 4xx -> client error
 // 5xx -> server error
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class CommentNotFoundException extends NotExistDataException {
+public class CommentNotFoundException extends NotExistURIException {
     public CommentNotFoundException(String message) {
         super(message);
     }

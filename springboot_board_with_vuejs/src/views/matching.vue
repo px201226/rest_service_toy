@@ -2,20 +2,21 @@
   <div
     class="align-center d-flex flex-column fill-weidh fill-height pink lighten-1"
   >
-    <v-col class="align-center justify-center ">
-      <v-row class=" justify-center mt-5">
-        <p class="text-center white--text text-h7">
+    <v-col class="align-center justify-center pa-0 ">
+      <v-row class=" justify-center align-center pt-7 purple lighten-2">
+        <v-icon class="mr-5 mb-3" dark x-large> mdi-alarm </v-icon>
+        <p class="white--text text-h4">
           다음 소개팅까지
         </p>
       </v-row>
 
-      <v-row class="mt-0 justify-center">
-        <timer deadline="2021-01-11 00:00:00" />
+      <v-row class="justify-center purple lighten-2">
+        <timer :deadline="matchingDay" />
       </v-row>
 
-      <v-row class=" justify-center">
-        <p class="text-center white--text text-h7">
-          소개팅 매칭에 참여하실려면 다음을 클릭해주세요!
+      <v-row class="mt-10 px-10 justify-center ">
+        <p class="text-center white--text text-h6">
+          소개팅에 참여하시겠어요?
         </p>
       </v-row>
       <v-row class=" justify-center">
@@ -26,11 +27,12 @@
           @click="onMatchingApply"
         >
           소개팅 신청하기
+          <v-icon right> mdi-arrow-right </v-icon>
         </v-btn>
       </v-row>
-      <v-row class="justify-center mt-7">
+      <v-row class="justify-center mt-7 px-10">
         <p class="text-center white--text text-h6">
-          소개팅에 참여하셨다면 결과를 확인해보세요!
+          소개팅 결과를 확인해보세요!
         </p>
       </v-row>
       <v-row class=" justify-center">
@@ -41,6 +43,7 @@
           @click="onMatchingResult"
         >
           결과확인
+          <v-icon right> mdi-arrow-right </v-icon>
         </v-btn>
       </v-row>
     </v-col>
@@ -56,6 +59,20 @@ export default {
   components: {
     Timer,
     Modal,
+  },
+
+  created() {
+    this.$store.dispatch("QUERY_NEXT_MATCHING_DAY");
+  },
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    matchingDay() {
+      return this.$store.getters.GET_MATCHING_DAY;
+    },
   },
 
   methods: {

@@ -4,7 +4,7 @@ import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.matching.Identifiable;
 import com.example.restapi.domain.matching.MatchingScoreComparable;
-import com.example.restapi.domain.matching.MatchingWaitEntity;
+import com.example.restapi.domain.matching.Participant;
 import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.posts.like.PostLike;
 import com.example.restapi.domain.user.profile.*;
@@ -57,7 +57,7 @@ public class User extends LocalDateTimeEntity
     private List<String> roles = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY )
-    private MatchingWaitEntity matchingWaitEntity;
+    private Participant participant;
 
     @Embedded
     private DetailProfiles detailProfiles;

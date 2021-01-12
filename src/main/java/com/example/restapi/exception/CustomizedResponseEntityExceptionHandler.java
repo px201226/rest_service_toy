@@ -2,9 +2,6 @@ package com.example.restapi.exception;
 
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
-import com.example.restapi.exception.exceptions.CAuthenticationEntryPointException;
-import com.example.restapi.exception.exceptions.EmailSigninFailedException;
-import com.example.restapi.exception.exceptions.UserNotFoundException;
 import com.example.restapi.exception.high.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
@@ -58,17 +54,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(NotExistDataException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    protected ResponseEntity notExistDataException(WebRequest request, NotExistDataException e) {
+    @ExceptionHandler(NotExistURIException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity notExistDataException(WebRequest request, NotExistURIException e) {
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_URI,
                 exceptionResponse);
 
-        return new ResponseEntity(responseData, HttpStatus.NOT_FOUND);
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(NotExistParameterException.class)
@@ -79,6 +75,32 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_PARAMETER_ERROR,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @ExceptionHandler(RedundantDataException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity redundantDataException(WebRequest request, RedundantDataException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.REDUNTANT_DATA_ERROR,
+                exceptionResponse);
+
+        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    @ExceptionHandler(NotExistDataException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ResponseEntity notExistDataException (WebRequest request, NotExistDataException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -97,18 +119,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(responseData, HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler(RedundantDataException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected ResponseEntity redundantDataException(WebRequest request, RedundantDataException e) {
-        ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
 
-        ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.REDUNTANT_DATA_ERROR,
-                exceptionResponse);
-
-        return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
 /*
     @ExceptionHandler(UserNotFoundException.class)      // UserNotFoundException 클래스가 발생하면 실행된다.
     public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){

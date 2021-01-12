@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="">
     <div v-if="currentTime">
       <div class="align-center d-flex flex-column">
-        <p class="white--text digit ">
+        <p class="white--text digit segment">
           {{ hours | formatTime }}:{{ minutes | formatTime }}:{{
             seconds | formatTime
           }}
@@ -69,8 +69,17 @@ export default {
 
 <style scoped>
 .digit {
-  font-size: 70px;
-  font-weight: 100;
+  font-size: 76px;
+  font-weight: 120;
   text-align: center;
+}
+
+@font-face {
+  src: url("../assets/7segment.ttf");
+  font-family: "7segment";
+}
+
+.segment {
+  font-family: "7segment";
 }
 </style>

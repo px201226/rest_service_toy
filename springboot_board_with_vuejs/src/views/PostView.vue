@@ -81,6 +81,7 @@
       :date="comment.modifyDate"
       :isLike="comment.isLike"
       :isWriter="comment.isWriter"
+      @refresh="refreshComment"
       class="my-1"
     />
 
@@ -139,6 +140,9 @@ export default {
   },
 
   methods: {
+    refreshComment() {
+      this.$store.dispatch("QUERY_COMMENT_LIST", this.$route.params.id);
+    },
     deletePost(id) {
       this.$store.dispatch("QUERY_DELETE_POST", id).then(() => {
         this.$router.back();

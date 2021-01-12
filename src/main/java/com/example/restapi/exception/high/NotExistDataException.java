@@ -1,6 +1,6 @@
 package com.example.restapi.exception.high;
 
-// 404
+// 500
 public class NotExistDataException extends RuntimeException {
     public NotExistDataException(String msg, Throwable t) {
         super(msg, t);

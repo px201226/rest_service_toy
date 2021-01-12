@@ -35,6 +35,7 @@ export default {
     };
   },
   components: {},
+
   methods: {
     onHomeClick() {
       this.$router.push("/");

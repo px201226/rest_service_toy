@@ -4,6 +4,7 @@ import post from "./post"
 import user from "./user"
 import like from "./like"
 import comment from "./comment"
+import matching from "./matching"
 import common from "./common"
 
 Vue.use(Vuex)
@@ -16,6 +17,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-	  post, user, common, like, comment
+	  post, user, common, like, comment,matching
   }
 })

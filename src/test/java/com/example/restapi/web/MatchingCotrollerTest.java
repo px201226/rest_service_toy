@@ -1,8 +1,8 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.security.JwtTokenProvider;
-import com.example.restapi.domain.matching.MatchingWaitEntity;
-import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
+import com.example.restapi.domain.matching.Participant;
+import com.example.restapi.domain.matching.ParticipantRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
@@ -38,7 +38,7 @@ public class MatchingCotrollerTest extends BaseControllerTest {
     private UserRepository userRepository;
 
     @Autowired
-    private MatchingWaitEntityRepository matchingWaitEntityRepository;
+    private ParticipantRepository participantRepository;
 
     @Autowired
     private MatchingManager matchingManager;
@@ -63,7 +63,7 @@ public class MatchingCotrollerTest extends BaseControllerTest {
 
     @After
     public void cleanUp() {
-        this.matchingWaitEntityRepository.deleteAll();
+        this.participantRepository.deleteAll();
         this.userRepository.deleteAll();
 
     }
@@ -100,12 +100,12 @@ public class MatchingCotrollerTest extends BaseControllerTest {
     @Test
     public void expectReduntApply() throws Exception {
         // given
-        MatchingWaitEntity build = MatchingWaitEntity.builder()
+        Participant build = Participant.builder()
                 .user(loginUser)
                 .nextMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
                 .build();
 
-        matchingWaitEntityRepository.save(build);
+        participantRepository.save(build);
 
         // when && then
         mockMvc.perform(post("/v1/matching/apply")

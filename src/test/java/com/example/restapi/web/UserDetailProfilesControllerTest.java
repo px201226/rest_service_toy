@@ -1,6 +1,6 @@
 package com.example.restapi.web;
 
-import com.example.restapi.domain.matching.MatchingWaitEntityRepository;
+import com.example.restapi.domain.matching.ParticipantRepository;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
@@ -37,7 +37,7 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
     private UserRepository userRepository;
 
     @Autowired
-    private MatchingWaitEntityRepository matchingWaitEntityRepository;
+    private ParticipantRepository participantRepository;
     private RestDocumentationResultHandler document;
 
     private User loginUser;
@@ -50,7 +50,7 @@ public class UserDetailProfilesControllerTest extends BaseControllerTest {
     @After
     public void cleanUp() {
 
-        matchingWaitEntityRepository.deleteAll();
+        participantRepository.deleteAll();
         this.userRepository.deleteAll();
     }
 
