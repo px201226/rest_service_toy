@@ -1,5 +1,6 @@
 import { getPostsList, writePost, deletePost,updatePost, getPost } from "../api/post_api";
-import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
+import {setTokenInLocalStorage} from "./token"
+import {setSnackBarInfo} from "../api/common_api"
 import router from "../router";
 
 // state

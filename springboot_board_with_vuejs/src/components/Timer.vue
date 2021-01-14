@@ -10,7 +10,9 @@
       </div>
     </div>
     <div class="text-center" v-if="!currentTime">
-      Time's Up!
+      <p class="white--text digit segment">
+        00:00:00
+      </p>
     </div>
   </div>
 </template>

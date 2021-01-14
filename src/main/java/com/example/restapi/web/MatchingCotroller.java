@@ -1,10 +1,11 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.AuthUser;
-import com.example.restapi.domain.matching.MatchingResult;
-import com.example.restapi.domain.matching.Participant;
-import com.example.restapi.domain.matching.ParticipantResource;
+import com.example.restapi.domain.matching.participant.Participant;
 import com.example.restapi.domain.matching.component.MatchingManager;
+import com.example.restapi.domain.matching.participant.ParticipantAssembler;
+import com.example.restapi.domain.matching.participant.ParticipantModel;
+import com.example.restapi.domain.matching.result.MatchingResult;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.domain.response.ResponseStatus;
@@ -12,6 +13,7 @@ import com.example.restapi.domain.user.User;
 import com.example.restapi.exception.high.ServiceAcessDeniedException;
 import com.example.restapi.service.matching.MatchingApplyService;
 import com.example.restapi.service.matching.MatchingService;
+import com.example.restapi.web.dto.MatchingResultResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -31,14 +34,15 @@ public class MatchingCotroller {
     private final MatchingManager matchingManager;
     private final MatchingApplyService matchingApplyService;
     private final MatchingService matchingService;
+    private final ParticipantAssembler participantAssembler;
     private final ResponseService responseService;
 
     @GetMapping(value = "/apply")
     public ResponseEntity isApply(@AuthUser User user){
-        Participant apply = matchingApplyService.isApply(user.getEmail());
-        ParticipantResource resource = new ParticipantResource(apply);
 
-        ResponseData<ParticipantResource> responseData = responseService.create(ResponseStatus.SUCCESS, resource);
+        Participant apply = matchingApplyService.getLastApplyHistory(user.getEmail());
+        ParticipantModel participantModel = participantAssembler.toModel(apply);
+        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, participantModel);
         return ResponseEntity.ok(responseData);
     }
 
@@ -61,11 +65,14 @@ public class MatchingCotroller {
     @GetMapping(value = "/result")
     public ResponseEntity getMatchingResult(@AuthUser User user){
 
-        MatchingResult matchingResult = Optional.ofNullable(user)
-                .map(u -> matchingService.findMatchedResult(u.getEmail()))
-                .orElseThrow(ServiceAcessDeniedException::new);
+        Optional<MatchingResult> matchedResult = matchingService.findMatchedResult(user.getEmail());
+        MatchingResultResponseDto matchingResultResponseDto =
+                new MatchingResultResponseDto(matchedResult, user.getEmail());
+        
+        ResponseData<MatchingResultResponseDto> response =
+                responseService.create(ResponseStatus.SUCCESS, matchingResultResponseDto);
 
-        return ResponseEntity.ok(matchingResult);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(value = "/test")

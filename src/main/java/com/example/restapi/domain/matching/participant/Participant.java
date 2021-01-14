@@ -1,4 +1,4 @@
-package com.example.restapi.domain.matching;
+package com.example.restapi.domain.matching.participant;
 
 import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.user.User;

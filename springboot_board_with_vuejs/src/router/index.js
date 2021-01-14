@@ -1,8 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import context from '../store';
 
 Vue.use(VueRouter)
+
+const validateLogin =  (to, from, next) => {
+  console.log("forbiden");
+  if (!context.getters.GET_IS_LOGIN) {
+    context.commit("OPEN_SNACKBAR", {
+      text: "로그인이 필요합니다!",
+      color: "error",
+      location: "top",
+    });
+    console.log("forbiden");
+    next("forbidden")
+  }else{
+    console.log("god");
+  next("forbidden")
+  }
+}
 
 const routes = [
   
@@ -40,7 +56,8 @@ const routes = [
   {
     path: '/matching/result',
     name: "MatchingResult",
-    component:  () => import('../views/MatchingResult.vue')
+    component:  () => import('../views/MatchingResult.vue'),
+    beforeEnter: (to, from, next) => validateLogin(to, from, next),
   },
   {
     path: '/register',

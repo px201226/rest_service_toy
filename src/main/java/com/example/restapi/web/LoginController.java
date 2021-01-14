@@ -1,9 +1,9 @@
 package com.example.restapi.web;
 
-import com.example.restapi.domain.matching.MatchingResult;
-import com.example.restapi.domain.matching.MatchingResultRepository;
-import com.example.restapi.domain.matching.Participant;
-import com.example.restapi.domain.matching.ParticipantRepository;
+import com.example.restapi.domain.matching.result.MatchingResult;
+import com.example.restapi.domain.matching.result.MatchingResultRepository;
+import com.example.restapi.domain.matching.participant.Participant;
+import com.example.restapi.domain.matching.participant.ParticipantRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;

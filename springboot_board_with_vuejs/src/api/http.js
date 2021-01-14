@@ -1,7 +1,7 @@
 import axios from 'axios';
 import store from '../store';
-import {setTokenInLocalStorage,setSnackBarInfo} from "../store/token"
-
+import {setTokenInLocalStorage} from "../store/token"
+import {setSnackBarInfo} from "../api/common_api"
 const instance = axios.create({
 	//baseURL : "http://ec2-13-125-170-210.ap-northeast-2.compute.amazonaws.com",
 	baseURL : "http://localhost:8080",
@@ -70,6 +70,10 @@ instance.interceptors.response.use(
 
 	   if(status === 403){
 			store.commit('OPEN_SNACKBAR', setSnackBarInfo("권한이 없습니다", 'error', 'top'))
+	   }
+
+	   if(status === 500){
+		   store.commit('OPEN_MODAL', {title: '실패', content: error.response.data.message, option1: '닫기',});
 	   }
 	   return Promise.reject(error);
    }

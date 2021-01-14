@@ -53,7 +53,8 @@ const getters = {
 
     IS_NAVIBAR_SHOW(state) {
         return state.navibarShow;
-    }
+    },
+      
 };
 
 const mutations = {
@@ -120,17 +121,19 @@ const mutations = {
     
     CLOSE_POST_WRITER(state){
         state.postModal = false;
-    },
-
+    },  
     
 };
 
-const actions = {};
+const actions = {
+     
+};
 
 
-const setTokenInLocalStorage = (jwtToken) => {
-    localStorage.setItem("jwtToken", jwtToken);
-  };
+// const setTokenInLocalStorage = (jwtToken) => {
+//     localStorage.setItem("jwtToken", jwtToken);
+//   };
 
   
-export default {mutations, state, actions, getters, setTokenInLocalStorage};
+
+export default {mutations, state, actions, getters};

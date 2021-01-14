@@ -4,7 +4,7 @@ import com.example.restapi.domain.LocalDateTimeEntity;
 import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.matching.Identifiable;
 import com.example.restapi.domain.matching.MatchingScoreComparable;
-import com.example.restapi.domain.matching.Participant;
+import com.example.restapi.domain.matching.participant.Participant;
 import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.posts.like.PostLike;
 import com.example.restapi.domain.user.profile.*;

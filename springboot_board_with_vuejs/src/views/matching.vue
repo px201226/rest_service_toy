@@ -54,6 +54,7 @@
 <script>
 import Modal from "../components/Modal.vue";
 import Timer from "../components/Timer.vue";
+import { validateLogin } from "../api/common_api";
 
 export default {
   components: {
@@ -73,15 +74,27 @@ export default {
     matchingDay() {
       return this.$store.getters.GET_MATCHING_DAY;
     },
+
+    isApplied() {
+      return this.$store.getters.GET_IS_APPLIED;
+    },
   },
 
   methods: {
     onMatchingApply() {
+      if (!validateLogin()) {
+        return;
+      }
+      this.$store.dispatch("QUERY_APPLT_MATCHING");
       this.$store.commit("OPEN_SNACKBAR", { text: "test" });
       // this.$router.push("/matching/apply");
     },
 
     onMatchingResult() {
+      if (!validateLogin()) {
+        return;
+      }
+
       this.$router.push("/matching/result");
     },
   },

@@ -1,6 +1,7 @@
 import store from '.';
 import {like,unlike } from "../api/like_api";
-import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
+import {setTokenInLocalStorage} from "./token"
+import {setSnackBarInfo} from "../api/common_api"
 
 // state
 const state = {

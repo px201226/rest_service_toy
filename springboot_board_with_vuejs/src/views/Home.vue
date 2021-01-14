@@ -61,6 +61,7 @@ import InfiniteLoading from "vue-infinite-loading";
 import PostItem from "./PostItem.vue";
 import PostWrite from "./PostWrite.vue";
 import Modal from "../components/Modal.vue";
+import { validateLogin } from "../api/common_api";
 
 export default {
   name: "Home",
@@ -112,6 +113,9 @@ export default {
     },
 
     openPostWriter() {
+      if (!validateLogin()) {
+        return;
+      }
       this.$store.commit("OPEN_POST_WRITER");
     },
 

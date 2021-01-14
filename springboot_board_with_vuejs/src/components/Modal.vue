@@ -44,6 +44,7 @@ export default {
     modalOption() {
       if (this.modal.option1 === "닫기") {
         this.$store.commit("CLOSE_MODAL");
+        this.$emit(this.modal.event, this.modal.data);
       } else {
         this.$emit(this.modal.event, this.modal.data);
       }

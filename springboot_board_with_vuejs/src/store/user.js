@@ -1,6 +1,7 @@
 import store from '.';
 import {logout, login, join, getUser } from "../api/user_api";
-import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
+import {setTokenInLocalStorage} from "./token"
+import {setSnackBarInfo} from "../api/common_api"
 import router from "../router";
 
 // state
@@ -23,6 +24,8 @@ const getters = {
   GET_USER(state){
     return state.user
   }
+
+  
 };
 
 // mutations
@@ -58,13 +61,19 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await login(req);
-      router.push("/")
+      router.back()
 
+      //JWT 토큰 설정
       setTokenInLocalStorage(response.data.jwtToken);
       context.commit('SET_JWTTOKEN',response.data.jwtToken );
   
+      // USER PROFILE 설정
       const response1 = await getUser();
       context.commit('SET_USER',response1.data)
+      
+      // Matching 참가 여부 확인
+      if(response1.data.lastMatchingDate)
+      context.commit("SET_IS_APPLIED", true);
 
       return response.jwtToken;
     } catch (e) {

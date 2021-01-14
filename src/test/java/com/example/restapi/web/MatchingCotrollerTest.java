@@ -1,8 +1,8 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.security.JwtTokenProvider;
-import com.example.restapi.domain.matching.Participant;
-import com.example.restapi.domain.matching.ParticipantRepository;
+import com.example.restapi.domain.matching.participant.Participant;
+import com.example.restapi.domain.matching.participant.ParticipantRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;

@@ -1,4 +1,5 @@
-package com.example.restapi.domain.matching;
+package com.example.restapi.domain.matching.participant;
+
 
 import com.example.restapi.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,3 +12,4 @@ public interface ParticipantRepository extends JpaRepository<Participant,Long> {
 
     Optional<Participant> findByUser(User user);
 }
+

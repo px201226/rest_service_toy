@@ -1,8 +1,11 @@
 package com.example.restapi.service.matching;
 
 
-import com.example.restapi.domain.matching.*;
 import com.example.restapi.domain.matching.component.MatchingManager;
+import com.example.restapi.domain.matching.result.MatchingResult;
+import com.example.restapi.domain.matching.result.MatchingResultRepository;
+import com.example.restapi.domain.matching.participant.Participant;
+import com.example.restapi.domain.matching.participant.ParticipantRepository;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.MatchedResultNotFoundException;
@@ -14,8 +17,10 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -39,24 +44,27 @@ public class MatchingService {
         List<Pair<User, User>> matchingPairs = matchingManager.getMatchingRandomPairsFrom(users);
 
         LocalDate nextMatchingDate = matchingManager.getNextMatchingDate(LocalDate.now());
-        //List<MatchingResult> matchingResults = MatchingResult.getResultsTo(matchingPairs, nextMatchingDate);
+        List<MatchingResult> matchingResults = MatchingResult.getResultsFrom(matchingPairs, nextMatchingDate);
 
-        List<MatchingResult> matchingResults = MatchingResult.getResultsFrom(matchingPairs, LocalDate.now());
-
-   //     matchedDateRepository.save(MatchedDateHistory.builder().matchedDate(nextMatchingDate).build());
         matchingResultRepository.saveAll(matchingResults);
         participantRepository.deleteAllInBatch();
     }
 
     @Transactional
-    public MatchingResult findMatchedResult(String userEmail){
+    public Optional<MatchingResult> findMatchedResult(String userEmail){
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
 
-        MatchingResult matchingResult = matchingResultRepository.findByUserIdAndMatchingDate(user.getId(), user.getLastMatchingDate())
-                .orElse(
-                        matchingResultRepository.findByAnotherUserIdAndMatchingDate(user.getId(), user.getLastMatchingDate())
-                .orElseThrow(MatchedResultNotFoundException::new));
+        if(user.getLastMatchingDate() == null)
+            throw new MatchedResultNotFoundException("참가한 적이 없습니다");
 
-        return matchingResult;
+//        if(LocalDate.now().isBefore(user.getLastMatchingDate()))
+//            throw new MatchedResultNotFoundException("조회기간이 아닙니다");
+
+        MatchingResult matchingResult = matchingResultRepository.findByUserIdAndMatchingDate(user.getId(), user.getLastMatchingDate())
+                .orElseGet(() ->
+                        matchingResultRepository.findByAnotherUserIdAndMatchingDate(user.getId(), user.getLastMatchingDate())
+                                .orElse(null));
+
+        return Optional.ofNullable(matchingResult);
     }
 }

@@ -3,12 +3,5 @@ const setTokenInLocalStorage = (jwtToken) => {
   };
 
   
-  function setSnackBarInfo(text, color, location) {
-    return {
-        text: text,
-        color: color,
-        location: location,
-    }
-  }
   
-export {setTokenInLocalStorage,setSnackBarInfo};
+export {setTokenInLocalStorage};

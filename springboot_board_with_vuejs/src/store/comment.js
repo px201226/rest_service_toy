@@ -1,5 +1,6 @@
 import { getCommentList, writeComment, deleteComment,updateComment } from "../api/commnet_api";
-import {setTokenInLocalStorage,setSnackBarInfo} from "./token"
+import {setTokenInLocalStorage} from "./token"
+import {setSnackBarInfo} from "../api/common_api"
 import router from "../router";
 
 // state

@@ -1,6 +1,6 @@
 package com.example.restapi.web;
 
-import com.example.restapi.domain.matching.ParticipantRepository;
+import com.example.restapi.domain.matching.participant.ParticipantRepository;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;

@@ -3,7 +3,8 @@ server:
 
 logging:
   level:
-    org.springframework: DEBUG
+    org.hibernate.SQL: debug # 로거를 통한 찍는다
+    #org.hibernate.type: trace # 쿼리 파라미터 출력
 
 spring:
   messages:
@@ -12,6 +13,11 @@ spring:
     url: jdbc:h2:mem:testdb
   jpa:
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: false
+
   jwt:
     secret: govlepl!@#
 

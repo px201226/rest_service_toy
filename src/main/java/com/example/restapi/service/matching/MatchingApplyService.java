@@ -1,8 +1,8 @@
 package com.example.restapi.service.matching;
 
 
-import com.example.restapi.domain.matching.Participant;
-import com.example.restapi.domain.matching.ParticipantRepository;
+import com.example.restapi.domain.matching.participant.Participant;
+import com.example.restapi.domain.matching.participant.ParticipantRepository;
 import com.example.restapi.domain.matching.component.MatchingManager;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
@@ -39,13 +39,13 @@ public class MatchingApplyService {
                 .nextMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
                 .build();
 
-        user.updateLastMatchingDate(LocalDate.now());
+        user.updateLastMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()));
 
         return participantRepository.save(build);
     }
 
     @Transactional
-    public Participant isApply(String userEmail){
+    public Participant getLastApplyHistory(String userEmail){
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
         Optional<Participant> byUser = participantRepository.findByUser(user);
         if(!byUser.isPresent()){
