@@ -105,19 +105,30 @@
     <orderEntry type="library" name="Maven: io.micrometer:micrometer-core:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.hdrhistogram:HdrHistogram:2.1.12" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.latencyutils:LatencyUtils:2.0.3" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:2.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.1.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.3" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.activation:javax.activation-api:1.2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security.oauth:spring-security-oauth2:2.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.4.2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.4.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-jwt:1.0.9.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.56" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.56" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-test:4.2.20.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-rest:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-rest-webmvc:3.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-rest-core:3.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.atteo:evo-inflector:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.3" level="project" />
     <orderEntry type="library" name="Maven: io.jsonwebtoken:jjwt:0.9.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.3" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.restdocs:spring-restdocs-mockmvc:2.0.5.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.restdocs:spring-restdocs-core:2.0.5.RELEASE" level="project" />

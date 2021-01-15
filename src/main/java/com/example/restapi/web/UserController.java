@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -32,7 +34,10 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity getUserProfile(@AuthUser User user) {
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        System.out.println("user null??");
+        System.out.println(principal);
         return userRepository.findByEmail(user.getEmail())
                 .map(userAssembler::toModel)
                 .map( (u) -> responseService.create( ResponseStatus.SUCCESS, u))

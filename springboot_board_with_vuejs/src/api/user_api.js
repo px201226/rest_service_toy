@@ -5,9 +5,24 @@ export async function join(req){
 	return http.post("/v1/join", req);
 };
 
-export async function login(req){
-	return http.post("/v1/login", req);
-};
+
+export async function getOAuthToken(user) {
+    let form = new FormData();
+    user.email = user.email.toLowerCase();
+    form.append('username', user.email);
+    form.append('password', user.password);
+    form.append("grant_type", "password");
+    const requestData = {
+        url: `/oauth/token`,
+        method: "POST",
+        auth: {
+            username: process.env.VUE_APP_CLIENTID,
+            password: process.env.VUE_APP_CLIENTSECRET,
+        },
+        data: form
+    };
+    return http(requestData);
+}
 
 export async function getUser(){
 	return http.get("/v1/user");

@@ -71,6 +71,7 @@ export default {
     };
   },
   mounted() {
+    console.log(process.env);
     this.$store.commit("APPBAR_DISPLAY", false);
     this.$store.commit("NAVIBAR_DISPLAY", false);
   },

@@ -1,5 +1,5 @@
 import store from '.';
-import {logout, login, join, getUser } from "../api/user_api";
+import {logout, getOAuthToken, join, getUser } from "../api/user_api";
 import {setTokenInLocalStorage} from "./token"
 import {setSnackBarInfo} from "../api/common_api"
 import router from "../router";
@@ -60,12 +60,12 @@ const actions = {
   async QUERY_LOGIN(context, req) {
     try {
       context.commit('START_LOADING')
-      const response = await login(req);
+      const response = await getOAuthToken(req);
       router.back()
 
       //JWT 토큰 설정
-      setTokenInLocalStorage(response.data.jwtToken);
-      context.commit('SET_JWTTOKEN',response.data.jwtToken );
+      setTokenInLocalStorage(response.data);
+      context.commit('SET_JWTTOKEN',response.data );
   
       // USER PROFILE 설정
       const response1 = await getUser();

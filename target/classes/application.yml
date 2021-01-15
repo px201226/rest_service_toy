@@ -3,6 +3,7 @@ server:
 
 logging:
   level:
+    org.springframework.security: debug
     org.hibernate.SQL: debug # 로거를 통한 찍는다
     #org.hibernate.type: trace # 쿼리 파라미터 출력
 
@@ -36,3 +37,6 @@ management:
       exposure:
         include: "*"
 
+my-app:
+  client-id: myApp
+  client-secret: pass
