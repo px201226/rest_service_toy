@@ -119,6 +119,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity(responseData, HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    protected ResponseEntity unauthorizedException(WebRequest request, UnauthorizedException e) {
+        ExceptionResponse exceptionResponse =
+                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+
+        ResponseData<ExceptionResponse> responseData = responseService.create(
+                com.example.restapi.domain.response.ResponseStatus.UNAUTHORIZED,
+                exceptionResponse);
+        return new ResponseEntity(responseData, HttpStatus.FORBIDDEN);
+    }
 
 /*
     @ExceptionHandler(UserNotFoundException.class)      // UserNotFoundException 클래스가 발생하면 실행된다.

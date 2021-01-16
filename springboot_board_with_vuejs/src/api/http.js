@@ -16,8 +16,11 @@ instance.interceptors.request.use(
     config => {
 		let jwtToken = store.getters.GET_JWT_TOKEN; 
 		localStorage.getItem('jwtToken');
-        if (jwtToken !== null) {
-			config.headers.Authorization = jwtToken.access_token;
+		console.log("dddddddddddd")
+			console.log(jwtToken);
+        if ((jwtToken !== null) && (jwtToken !== "")) {
+			
+			config.headers.Authorization = "bearer " + jwtToken.access_token;
 			//config.headers.common['X-AUTH-TOKEN'] = jwtToken;
         }
          console.log('Interceptors Request is', config, new Date());

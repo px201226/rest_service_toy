@@ -27,21 +27,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/AppProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_4_1.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/CustomAuthenticationFailEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/UnauthorizedException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/SwaggerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,11 +92,11 @@
       <recent name="com.example.restapi" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.restapi.exception.high" />
+      <recent name="com.example.restapi.config.security" />
       <recent name="com.example.restapi.web.dto" />
       <recent name="com.example.restapi.domain.matching.result" />
       <recent name="com.example.restapi.domain.matching.participant" />
-      <recent name="com.example.restapi.domain.matching" />
-      <recent name="com.example.restapi.exception.high" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main\java\com\example\restapi\config" />
@@ -297,6 +295,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="267" y="24" key="#Inspections/0.0.1280.689@0.0.1280.689" timestamp="1610344587464" />
+    <state x="371" y="100" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1610767343724">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="371" y="100" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1280.689@0.0.1280.689" timestamp="1610767343724" />
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609567372860">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -305,10 +307,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="93" y="93" width="1095" height="504" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1280.689@0.0.1280.689" timestamp="1608965166170" />
-    <state x="691" y="16" key="#com.intellij.ide.util.MemberChooser" timestamp="1610698385796">
+    <state x="691" y="16" key="#com.intellij.ide.util.MemberChooser" timestamp="1610779927272">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="691" y="16" key="#com.intellij.ide.util.MemberChooser/0.0.1280.689@0.0.1280.689" timestamp="1610698385796" />
+    <state x="691" y="16" key="#com.intellij.ide.util.MemberChooser/0.0.1280.689@0.0.1280.689" timestamp="1610779927272" />
     <state x="246" y="268" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1610610476859">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -337,38 +339,38 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1610607028525" />
-    <state width="1237" height="222" key="GridCell.Tab.0.bottom" timestamp="1610700070994">
+    <state width="1237" height="196" key="GridCell.Tab.0.bottom" timestamp="1610782112749">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610700070994" />
-    <state width="1237" height="222" key="GridCell.Tab.0.center" timestamp="1610700070993">
+    <state width="1237" height="196" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
+    <state width="1237" height="196" key="GridCell.Tab.0.center" timestamp="1610782112749">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610700070993" />
-    <state width="1237" height="222" key="GridCell.Tab.0.left" timestamp="1610700070993">
+    <state width="1237" height="196" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
+    <state width="1237" height="196" key="GridCell.Tab.0.left" timestamp="1610782112749">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610700070993" />
-    <state width="1237" height="222" key="GridCell.Tab.0.right" timestamp="1610700070993">
+    <state width="1237" height="196" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
+    <state width="1237" height="196" key="GridCell.Tab.0.right" timestamp="1610782112749">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610700070993" />
-    <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1609828836552">
+    <state width="1237" height="196" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
+    <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1610781416933">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.bottom/0.0.1280.689@0.0.1280.689" timestamp="1609828836552" />
-    <state width="1237" height="225" key="GridCell.Tab.1.center" timestamp="1609828836551">
+    <state width="1237" height="225" key="GridCell.Tab.1.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610781416933" />
+    <state width="1237" height="225" key="GridCell.Tab.1.center" timestamp="1610781416933">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.center/0.0.1280.689@0.0.1280.689" timestamp="1609828836551" />
-    <state width="1237" height="225" key="GridCell.Tab.1.left" timestamp="1609828836551">
+    <state width="1237" height="225" key="GridCell.Tab.1.center/0.0.1280.689@0.0.1280.689" timestamp="1610781416933" />
+    <state width="1237" height="225" key="GridCell.Tab.1.left" timestamp="1610781416933">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.left/0.0.1280.689@0.0.1280.689" timestamp="1609828836551" />
-    <state width="1237" height="225" key="GridCell.Tab.1.right" timestamp="1609828836552">
+    <state width="1237" height="225" key="GridCell.Tab.1.left/0.0.1280.689@0.0.1280.689" timestamp="1610781416933" />
+    <state width="1237" height="225" key="GridCell.Tab.1.right" timestamp="1610781416933">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.right/0.0.1280.689@0.0.1280.689" timestamp="1609828836552" />
+    <state width="1237" height="225" key="GridCell.Tab.1.right/0.0.1280.689@0.0.1280.689" timestamp="1610781416933" />
     <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1608897729918">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -389,10 +391,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="412" y="140" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1280.689@0.0.1280.689" timestamp="1609811749339" />
-    <state x="0" y="33" width="1280" height="602" key="find.popup" timestamp="1610698948085">
+    <state x="0" y="33" width="1280" height="602" key="find.popup" timestamp="1610781736652">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="0" y="33" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1610698948085" />
+    <state x="0" y="33" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1610781736652" />
     <state x="37" y="0" key="new project wizard" timestamp="1607926175349">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -405,10 +407,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1610345293224" />
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1610690268117">
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1610776644910">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1610690268117" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1610776644910" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

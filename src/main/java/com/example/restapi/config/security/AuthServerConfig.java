@@ -3,6 +3,7 @@ package com.example.restapi.config.security;
 import com.example.restapi.config.AppProperties;
 import com.example.restapi.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private final TokenStore tokenStore;
     private final UserService userService;
     private final AppProperties appProperties;
+    @Value("spring.jwt.secret")
+    private String secretKey;
+
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -47,7 +51,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("password", "refresh_token")
                 .scopes("read", "write")
                 .secret(this.passwordEncoder.encode(appProperties.getClientSecret()))
-                .accessTokenValiditySeconds(10 * 60)
+                .accessTokenValiditySeconds(10)
                 .refreshTokenValiditySeconds(6 * 10 * 60);
     }
 
@@ -64,8 +68,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         // 로컬 도메인
         corsConfiguration.addAllowedOrigin("*");
-        // Netlify 도메인
-       // corsConfiguration.addAllowedOrigin("*");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         //corsConfiguration.setAllowCredentials(true);
@@ -77,6 +79,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter(){
-        return new JwtAccessTokenConverter();
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey(secretKey);
+        return converter;
     }
 }
