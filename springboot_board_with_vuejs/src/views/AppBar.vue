@@ -52,7 +52,7 @@ export default {
       this.$store.dispatch("QUERY_TEST_USER");
     },
     logout() {
-      this.$store.dispatch("QUERY_LOGOUT");
+      this.$store.commit("LOGOUT");
     },
 
     onLoginClick() {

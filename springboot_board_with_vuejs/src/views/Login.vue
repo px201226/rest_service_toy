@@ -68,6 +68,7 @@ export default {
         email: "",
         password: "",
       },
+      nextPath: this.$route.query.next ? this.$route.query.next : "/",
     };
   },
   mounted() {
@@ -97,7 +98,9 @@ export default {
   methods: {
     loginRequest() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("QUERY_LOGIN", this.member);
+        this.$store
+          .dispatch("QUERY_LOGIN", this.member)
+          .then(() => this.$router.push(this.nextPath));
       }
     },
 

@@ -35,13 +35,13 @@ export default {
   },
   methods: {
     onClickBoard() {
-      this.$router.push("/");
+      if (this.$route.path !== "/") this.$router.push("/");
     },
     onClickMatching() {
-      this.$router.push("/matching");
+      if (this.$route.path !== "/matching") this.$router.push("/matching");
     },
     onClickMyPage() {
-      this.$router.push("/mypage");
+      if (this.$route.path !== "/mypage") this.$router.push("/mypage");
     },
   },
 };

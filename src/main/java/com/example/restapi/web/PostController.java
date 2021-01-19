@@ -64,11 +64,6 @@ public class PostController {
 
         Post post = postsService.findById(id);
 
-//        PostModel model = Optional.ofNullable(user)
-//                .map(u -> post.toAdapter(post, u))
-//                .map(postAdapterAssembler::toModel)
-//                .orElse(postAssembler.toModel(post));
-
         PostModel model = postAdapterAssembler.toModel(post.toAdapter(Optional.ofNullable(user)));
         ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
 

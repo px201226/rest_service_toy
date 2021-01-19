@@ -5,7 +5,7 @@ import context from '../store';
 Vue.use(VueRouter)
 
 const validateLogin =  (to, from, next) => {
-  console.log("forbiden");
+  console.log(to);
   if (!context.getters.GET_IS_LOGIN) {
     context.commit("OPEN_SNACKBAR", {
       text: "로그인이 필요합니다!",
@@ -13,10 +13,10 @@ const validateLogin =  (to, from, next) => {
       location: "top",
     });
     console.log("forbiden");
-    next("forbidden")
+    next({ path: '/login', query:{next:to.path} })
   }else{
     console.log("god");
-  next("forbidden")
+    next()
   }
 }
 
@@ -70,6 +70,12 @@ const routes = [
     component: () => import('../views/Login.vue')
   },
  
+  {
+    path: '/mypage',
+    name: "Matching",
+    component: () => import('../views/MyPage.vue'),
+    beforeEnter: (to, from, next) => validateLogin(to, from, next),
+  },
   {
     path: '/error',
     name: 'error`',

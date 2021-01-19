@@ -127,7 +127,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.UNAUTHORIZED,
                 exceptionResponse);
-        return new ResponseEntity(responseData, HttpStatus.FORBIDDEN);
+        return new ResponseEntity(responseData, HttpStatus.UNAUTHORIZED);
     }
 
 /*

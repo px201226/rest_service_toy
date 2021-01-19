@@ -28,3 +28,12 @@ export async function getUser(){
 	return http.get("/v1/user");
 };
 
+export async function getPostList(){
+	return http.get("/v1/user/posts");
+};
+
+export async function getCommentList(){
+	return http.get("/v1/user/comments");
+};
+
+

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '../store';
-import {setTokenInLocalStorage} from "../store/token"
+import {setTokenInLocalStorage,setAcessTokenInLocalStorage,setRefreshTokenInLocalStorage} from "../store/token"
 import {setSnackBarInfo} from "../api/common_api"
 const instance = axios.create({
 	//baseURL : "http://ec2-13-125-170-210.ap-northeast-2.compute.amazonaws.com",
@@ -14,13 +14,11 @@ const instance = axios.create({
  */
 instance.interceptors.request.use(
     config => {
-		let jwtToken = store.getters.GET_JWT_TOKEN; 
-		localStorage.getItem('jwtToken');
-		console.log("dddddddddddd")
-			console.log(jwtToken);
+		let jwtToken = localStorage.getItem('access_token');
+	
         if ((jwtToken !== null) && (jwtToken !== "")) {
 			
-			config.headers.Authorization = "bearer " + jwtToken.access_token;
+			config.headers.Authorization = "bearer " + jwtToken;
 			//config.headers.common['X-AUTH-TOKEN'] = jwtToken;
         }
          console.log('Interceptors Request is', config, new Date());
@@ -58,18 +56,21 @@ instance.interceptors.response.use(
 	   if( status === 400){
 			store.commit('OPEN_MODAL', {title: '에러', content: "입력이 올바르지 않습니다", option1: '닫기',});
 	   }
-	   if (status === 401) {
-		   let errorData = error.response.data;
-		   if (errorData.error !== 'invalid_token') {
-			   return Promise.reject(error);
-		   }
+	   if (error.config && error.response && status === 401) {
+		   let errorData = error.response.data.message;
+		 
 
-		   if (isExpiredToken(errorData)) {
-			   return attemptRefreshToken();
+		   if (errorData === "토큰 유효기간이 지났습니다") {
+			   return attemptRefreshToken().then(()=>{
+				error.config.headers.Authorization = "bearer " + localStorage.getItem('access_token');
+				return instance.request(error.config);
+			});
 		   } else {
-			   store.commit('LOGOUT_WITH_TOKEN_INVALIDE');
-			   store.commit('SET_SNACKBAR', setSnackBarInfo('토큰 정보가 잘못되었습니다. 다시 로그인 해주세요', 'error', 'top'));
-		   }
+		
+			   store.commit('OPEN_SNACKBAR', setSnackBarInfo('토큰 정보가 잘못되었습니다. 다시 로그인 해주세요', 'error', 'top'));
+			   localStorage.removeItem("access_token");
+			   localStorage.removeItem("refresh_token");
+			}
 	   }
 
 	   if(status === 403){
@@ -83,5 +84,34 @@ instance.interceptors.response.use(
    }
 );
 
+
+function requestRefreshToken() {
+    let form = new FormData();
+    form.append("grant_type", "refresh_token");
+    form.append('refresh_token', localStorage.getItem('refresh_token'));
+    const requestData = {
+        url: `${process.env.VUE_APP_BASEURL}/oauth/token`,
+        method: "POST",
+        auth: {
+            username: process.env.VUE_APP_CLIENTID,
+            password: process.env.VUE_APP_CLIENTSECRET,
+        },
+        data: form
+    };
+    return instance(requestData);
+}
+
+function attemptRefreshToken() {
+    store.commit('OPEN_SNACKBAR', setSnackBarInfo('토큰이 만료되어 재발급 합니다.', 'error', 'top'));
+    return requestRefreshToken().then(res => {
+        setAcessTokenInLocalStorage(res.data.access_token);
+        store.commit('OPEN_SNACKBAR', setSnackBarInfo('토큰이 재발급 되었습니다.', 'info', 'top')
+        )
+    })
+        .catch(() => {
+            store.commit('OPEN_SNACKBAR', setSnackBarInfo('Refresh Token이 만료되었습니다. 다시 한번 로그인해주세요.', 'error', 'top'))
+            store.commit('LOGOUT');
+        });
+}
 
 export default instance;

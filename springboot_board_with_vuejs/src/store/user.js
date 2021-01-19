@@ -1,12 +1,12 @@
 import store from '.';
-import {logout, getOAuthToken, join, getUser } from "../api/user_api";
-import {setTokenInLocalStorage} from "./token"
+import {logout, getOAuthToken, join, getUser, getPostList, getCommentList } from "../api/user_api";
+import {setTokenInLocalStorage,deleteToken} from "./token"
 import {setSnackBarInfo} from "../api/common_api"
 import router from "../router";
 
 // state
 const state = {
-  jwtToken:"",
+  token: localStorage.getItem('access_token'),
   user : "",
   login:false
 };
@@ -15,10 +15,10 @@ const state = {
 const getters = {
  
   GET_IS_LOGIN(state) {
-    return !!state.jwtToken;
+    return !!state.token;
   },
-  GET_JWT_TOKEN(state){
-    return state.jwtToken;
+  GET_TOKEN(state){
+    return state.token;
   },
 
   GET_USER(state){
@@ -36,8 +36,15 @@ const mutations = {
   SET_LOGOUT(state){
     state.user=""
   },
-  SET_JWTTOKEN(state,token){
-    state.jwtToken = token;
+  SET_TOKEN(state,token){
+    state.token = token;
+  },
+  LOGOUT(state) {
+    deleteToken();
+    state.user = "";
+    state.token = "";
+    this.commit('OPEN_SNACKBAR', setSnackBarInfo('로그아웃 완료', 'success', 'top'));
+    router.push("/");
   },
 };
 
@@ -61,11 +68,10 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getOAuthToken(req);
-      router.back()
 
       //JWT 토큰 설정
       setTokenInLocalStorage(response.data);
-      context.commit('SET_JWTTOKEN',response.data );
+      context.commit('SET_TOKEN',response.data );
   
       // USER PROFILE 설정
       const response1 = await getUser();
@@ -80,6 +86,27 @@ const actions = {
       console.log(e);
       context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
     }
+  },
+  // 회원가입
+  async QUERY_GET_USER_POST_LIST(context) {
+    try {
+      context.commit('START_LOADING')
+      const response = await getPostList();
+      return response.data.content;
+    } catch (e) {
+      context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
+    } 
+  },
+
+  // 회원가입
+  async QUERY_GET_USER_COMMENT_LIST(context, req) {
+    try {
+      context.commit('START_LOADING')
+      const response = await getCommentList();
+      return response;
+    } catch (e) {
+      context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
+    } 
   },
 };
 

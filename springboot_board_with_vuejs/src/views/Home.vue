@@ -58,7 +58,7 @@
 
 <script>
 import InfiniteLoading from "vue-infinite-loading";
-import PostItem from "./PostItem.vue";
+import PostItem from "../components/PostItem.vue";
 import PostWrite from "./PostWrite.vue";
 import Modal from "../components/Modal.vue";
 import { validateLogin } from "../api/common_api";

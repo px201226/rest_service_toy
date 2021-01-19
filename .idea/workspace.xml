@@ -27,19 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/CustomAuthenticationFailEntryPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/UnauthorizedException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +68,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/example/restapi/config" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../codingtest" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
   </component>
@@ -335,26 +331,26 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="371" y="92" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.689@0.0.1280.689" timestamp="1610508903512" />
-    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1610607028525">
+    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1610974136749">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1610607028525" />
-    <state width="1237" height="196" key="GridCell.Tab.0.bottom" timestamp="1610782112749">
+    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1610974136749" />
+    <state width="1237" height="132" key="GridCell.Tab.0.bottom" timestamp="1611045952415">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="196" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
-    <state width="1237" height="196" key="GridCell.Tab.0.center" timestamp="1610782112749">
+    <state width="1237" height="132" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1611045952415" />
+    <state width="1237" height="132" key="GridCell.Tab.0.center" timestamp="1611045952415">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="196" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
-    <state width="1237" height="196" key="GridCell.Tab.0.left" timestamp="1610782112749">
+    <state width="1237" height="132" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1611045952415" />
+    <state width="1237" height="132" key="GridCell.Tab.0.left" timestamp="1611045952415">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="196" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
-    <state width="1237" height="196" key="GridCell.Tab.0.right" timestamp="1610782112749">
+    <state width="1237" height="132" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1611045952415" />
+    <state width="1237" height="132" key="GridCell.Tab.0.right" timestamp="1611045952415">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="196" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1610782112749" />
+    <state width="1237" height="132" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1611045952415" />
     <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1610781416933">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
