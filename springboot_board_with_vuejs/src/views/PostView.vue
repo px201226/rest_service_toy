@@ -2,7 +2,7 @@
   <v-card id="view">
     <v-toolbar dark color="primary">
       <v-btn icon dark @click="onBackButtonClick">
-        <v-icon>mdi-close</v-icon>
+        <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title>뒤로가기</v-toolbar-title>
       <v-spacer></v-spacer>

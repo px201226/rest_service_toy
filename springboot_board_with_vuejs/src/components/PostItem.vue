@@ -79,6 +79,7 @@ export default {
         content: "게시물을 정말로 삭제하시겠습니까?",
         option1: "닫기",
         option2: "삭제",
+        event: "deletePost",
         data: this.id,
       });
     },

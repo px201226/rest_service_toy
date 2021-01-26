@@ -23,9 +23,6 @@ public class CustomAuthenticationFailEntryPoint implements AuthenticationEntryPo
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException ex) throws IOException,
             ServletException {
-        //Access token expired
-
-        //Invalid access
 
         String errorMessage = ex.getMessage();
 

@@ -39,6 +39,7 @@ public class User extends LocalDateTimeEntity
 
     private String nickName;
 
+
     @Size(min = 2)
     private String password;
 
@@ -111,6 +112,10 @@ public class User extends LocalDateTimeEntity
     public User updateLastMatchingDate(LocalDate localDate){
         this.lastMatchingDate = localDate;
         return this;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
 }

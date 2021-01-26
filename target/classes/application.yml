@@ -31,6 +31,9 @@ spring:
     rest:
       base-path: /api
 
+  main:
+    allow-bean-definition-overriding: true
+
 management:
   endpoints:
     web:

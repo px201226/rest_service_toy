@@ -26,24 +26,46 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <v-flex xs12>
-      <v-data-table
-        @click:row="clickItem"
-        :headers="headers"
-        :items="posts"
-        :items-per-page="5"
-        class="elevation-1"
-      >
-      </v-data-table>
-      <v-data-table
-        @click:row="clickItem"
-        :headers="headers"
-        :items="getPostList"
-        :items-per-page="5"
-        class="elevation-1"
-      >
-      </v-data-table>
-    </v-flex>
+
+    <div class="my-5">
+      <p class="ma-3 text-h6 font-weight-black">내가 작성한 글</p>
+      <v-divider class="pink" />
+      <v-card class="py-3 mb-10">
+        <v-data-table
+          :headers="postHeaders"
+          :items="posts"
+          :items-per-page="5"
+          mobile-breakpoint="0"
+        >
+          <template v-slot:item="{ item }">
+            <tr @click="clickPostItem(item)">
+              <td class="truncate">{{ item.content }}</td>
+              <td>{{ item.comments }}</td>
+              <td>{{ item.likes }}</td>
+              <td>{{ item.modifyDate }}</td>
+            </tr>
+          </template>
+        </v-data-table>
+      </v-card>
+
+      <p class="ma-3 text-h6 font-weight-black">내가 작성한 댓글</p>
+      <v-divider class="pink" />
+      <v-card class="py-3 mb-10">
+        <v-data-table
+          :headers="commentheaders"
+          :items="comments"
+          :items-per-page="5"
+          mobile-breakpoint="0"
+        >
+          <template v-slot:item="{ item }">
+            <tr @click="clickCommentItem(item)">
+              <td class="truncate">{{ item.content }}</td>
+              <td>{{ item.modifyDate }}</td>
+            </tr>
+          </template>
+        </v-data-table>
+      </v-card>
+    </div>
   </div>
 </template>
 
@@ -56,30 +78,52 @@ export default {
       nickName: this.$store.getters.GET_USER.nickName,
 
       kakaoId: this.$store.getters.GET_USER.kakaoId,
-      headers: [
+
+      postHeaders: [
         {
           text: "내용",
           value: "content",
           sortable: false,
+          width: "50%",
         },
         {
-          text: "작성자",
-          value: "userNickName",
+          text: "댓글",
+          value: "comments",
           sortable: false,
+          width: "10%",
+        },
+        {
+          text: "좋아요",
+          value: "likes",
+          sortable: false,
+          width: "12%",
+        },
+        {
+          text: "수정일",
+          value: "modifyDate",
+          sortable: false,
+          width: "30%",
+        },
+      ],
+
+      commentheaders: [
+        {
+          text: "내용",
+          value: "content",
+          sortable: false,
+          width: "70%",
         },
 
         {
           text: "수정일",
           value: "modifyDate",
           sortable: false,
-        },
-        {
-          text: "좋아요",
-          value: "likes",
-          sortable: false,
+          width: "30%",
         },
       ],
+
       posts: [],
+      comments: [],
     };
   },
 
@@ -91,9 +135,27 @@ export default {
       this.posts = res;
       console.log(this.posts);
     });
+
+    this.$store.dispatch("QUERY_GET_USER_COMMENT_LIST").then((res) => {
+      this.comments = res;
+      console.log(this.comments);
+    });
   },
   methods: {
-    clickItem() {},
+    clickPostItem(item) {
+      this.$router.push("/posts/" + item.id);
+    },
+    clickCommentItem(item) {
+      this.$router.push("/posts/" + item.postId);
+    },
   },
 };
 </script>
+<style>
+.truncate {
+  max-width: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>

@@ -1,139 +1,181 @@
 package com.example.restapi.web;
 
+import com.example.restapi.config.AppProperties;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
+import com.example.restapi.service.user.UserService;
 import com.example.restapi.web.common.BaseControllerTest;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.example.restapi.web.common.TestDescription;
+import com.example.restapi.web.dto.UserSaveRequestDto;
+import com.example.restapi.web.dto.UserSaveResponseDto;
+import org.aspectj.lang.annotation.After;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
-import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.headers.HeaderDocumentation.*;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.*;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class LoginControllerTest extends BaseControllerTest {
 
     @Autowired
     private UserRepository userRepository;
 
-    private RestDocumentationResultHandler document;
+    @Autowired
+    private UserService userService;
 
+    @Autowired
+    private AppProperties appProperties;
 
-    @Before
-    public void setUp() {
-        this.document = document(
-                "{class-name}/{method-name}",
-                preprocessResponse(prettyPrint())
-        );
-    }
-
-    @Before
-    public void setup() throws Exception {
-        getAuthUser();
-    }
-
-    @After
+    @AfterEach
     public void cleanUp() {
-        this.userRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
-    public void expect_success_join() throws Exception {
-        long epochTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond();
-
+    @TestDescription("회원가입이 성공한다")
+    public void success_join() throws Exception {
         // given
-        User userSaveDto = User.builder()
-                .email("px2007@naver.com")
-                .password(passwordEncoder.encode("aa1aa1"))
-                .detailProfiles(detailProfiles())
-                .build();
-
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto();
 
         // when && then
         mockMvc.perform(post("/v1/join")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .accept(MediaTypes.HAL_JSON)
+                .accept(MediaTypes.HAL_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(userSaveDto))
         )
-                .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.resultCode").value(0));
-                /*.andDo(document("join",
+                .andExpect(jsonPath("$.email").value(userSaveDto.getEmail()))
+                .andDo(document("user-join",
                         links(
-//                                linkWithRel("login").description("로그인 링크"),
-//                                linkWithRel("profile").description("RestDocs 링크")
-
+                                linkWithRel("login").description("로그인 링크"),
+                                linkWithRel("profile").description("RestDocs 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.ACCEPT).description("ACCEPT HEADER: HAL_JSON"),
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("CONTENT_TYPE: APPLICAITON_JSON_UTF")
                         ),
                         requestFields(
-                                fieldWithPath("id").description("회원의 권한"),
-                                fieldWithPath("email").description("회원의 학번"),
+
+                                fieldWithPath("email").description("회원의 이메일"),
                                 fieldWithPath("password").description("회원의 비밀번호"),
-                                fieldWithPath("name").description("회원의 이름"),
-                                fieldWithPath("roles").description("회원의 권한"),
-                                fieldWithPath("posts").description("회원의 권한"),
-                                fieldWithPath("comments").description("회원의 권한"),
-                                fieldWithPath("createdDate").description("회원의 권한"),
-                                fieldWithPath("modifiedDate").description("회원의 권한")
+                                fieldWithPath("nickName").description("회원의 닉네임"),
+                                subsectionWithPath("detailProfiles").description("회원의 상세 프로필"),
+                                subsectionWithPath("dreamProfiles").description("회원의 이상형 프로필"),
+                                fieldWithPath("kakaoId").description("회원의 카카오톡 ID")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("CONTENT_TYPE: APPLICAITON_JSON_VALUE")
                         ),
                         responseFields(
-
-
-                                fieldWithPath("data.id").description("회원의 PRIMARY KEY ID"),
-                                fieldWithPath("data.password").description("회원의 비밀번호"),
-                                fieldWithPath("data.comments").description("회원의 이름")
+                                fieldWithPath("email").description("회원의 이메일"),
+                                fieldWithPath("nickName").description("회원의 닉네임"),
+                                fieldWithPath("_links.login.href").description("로그인 링크"),
+                                fieldWithPath("_links.profile.href").description("Rest Docs 링크")
                         )
-                ));*/
+                ));
 
     }
 
-    // 중복회원가입
     @Test
-    public void expect_redundant_join() throws Exception {
-        long epochTime = LocalDateTime.now().atZone(ZoneId.systemDefault()).toEpochSecond();
+    @TestDescription("이미 가입된 이메일로 회원가입 한다.")
+    public void redundant_join() throws Exception {
 
         // given
-        User userSaveDto = User.builder()
-                .email("px2008@naver.com")
-                .password(passwordEncoder.encode("aa1aa1"))
-                .detailProfiles(detailProfiles())
-                .build();
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto();
 
         // when && then
+        userRepository.save(userSaveDto.toEntity());
+
         mockMvc.perform(post("/v1/join")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)
                 .content(objectMapper.writeValueAsString(userSaveDto))
         )
                 .andDo(print())
-                .andExpect(status().is5xxServerError())
+                .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.resultCode").value(ResponseStatus.REDUNTANT_DATA_ERROR.getResultCode()));
     }
 
+    @Test
+    @TestDescription("로그인에 성공한다.")
+    public void success_login() throws Exception {
+
+        // given
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto();
+        userService.join(userSaveDto);
+
+        //when && then
+        this.mockMvc.perform(post("/oauth/token")
+                .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
+                .param("username", userSaveDto.getEmail())
+                .param("password", userSaveDto.getPassword())
+                .param("grant_type", "password")
+        )
+                .andExpect(status().isOk())
+                .andDo(document("oauth-token",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.AUTHORIZATION).description("Authorizaiton: Basic")
+                        ),
+                        requestParameters(
+                                parameterWithName("username").description("사용자 Email"),
+                                parameterWithName("password").description("사용자 password"),
+                                parameterWithName("grant_type").description("Grant_Type")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CACHE_CONTROL).description("Cache-Control"),
+                                headerWithName(HttpHeaders.PRAGMA).description("Pragma"),
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("Content-Type")
+                        ),
+                        responseFields(
+                                fieldWithPath("access_token").description("Access_Token"),
+                                fieldWithPath("token_type").description("Token_Type"),
+                                fieldWithPath("refresh_token").description("Refresh_Token"),
+                                fieldWithPath("expires_in").description("Expires_in"),
+                                fieldWithPath("scope").description("Scope"),
+                                fieldWithPath("jti").description("Jti")
+                        )
+                ));
+    }
+
+    @Test
+    @TestDescription("회원이 아닌데 토큰을 받으려고 할때")
+    public void getOAuthToekn_BadRequest() throws Exception {
+        //when && then
+        this.mockMvc.perform(post("/oauth/token")
+                .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
+                .param("username", "null")
+                .param("password", "null")
+                .param("grant_type", "password")
+        )
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    private UserSaveRequestDto getUserSaveRequestDto() {
+        return UserSaveRequestDto.builder()
+                .email("px2007@naver.com")
+                .password("password123")
+                .detailProfiles(detailProfiles())
+                .dreamProfiles(dreamProfiles())
+                .nickName("피엑스맛나")
+                .kakaoId("dlrlem")
+                .build();
+    }
 
 }

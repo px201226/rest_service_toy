@@ -5,6 +5,7 @@ import com.example.restapi.domain.user.UserAdapter;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
 import com.example.restapi.exception.high.RedundantDataException;
+import com.example.restapi.web.dto.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -47,5 +48,17 @@ public class UserService implements UserDetailsService {
                 .password(passwordEncoder.encode(user.getPassword()))
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build());
+    }
+
+    public User join(UserSaveRequestDto user){
+        Optional<User> byEmail = userRepository.findByEmail(user.getEmail());
+        if(byEmail.isPresent()){
+            throw new RedundantDataException("이메일이 중복됩니다");
+        }
+
+        User saveUser = user.toEntity();
+        saveUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(saveUser);
+        return saveUser;
     }
 }

@@ -12,7 +12,6 @@ import com.example.restapi.domain.auth.TokenWrapper;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
-import com.example.restapi.domain.user.GuestResource;
 import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.DreamProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
@@ -21,7 +20,13 @@ import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.exception.exceptions.EmailSigninFailedException;
 import com.example.restapi.service.matching.MatchingService;
 import com.example.restapi.service.user.UserService;
+import com.example.restapi.web.dto.UserSaveRequestDto;
+import com.example.restapi.web.dto.UserSaveResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.Errors;
@@ -34,12 +39,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/v1")
+@RequestMapping(value = "/v1", produces = {MediaTypes.HAL_JSON_VALUE, "application/hal+json"})
 public class LoginController {
 
 
@@ -68,7 +73,7 @@ public class LoginController {
         List<MatchingResult> results = matchingResultRepository.findAll();
         int afterWaitEntities = waits.size();
         int afterMatchingEntity = results.size();
-        
+
     }
 
     public void userSetting() {
@@ -78,7 +83,7 @@ public class LoginController {
 
         System.out.println("0000000000000");
         List<Participant> matchingWaitEntities = new ArrayList<>();
-        for(int i=0; i<10; i++){
+        for (int i = 0; i < 10; i++) {
             Participant build = Participant.builder()
                     .user(users.get(i))
                     .nextMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
@@ -90,12 +95,13 @@ public class LoginController {
         participantRepository.saveAll(matchingWaitEntities);
         System.out.println("2222222222");
     }
-    public List<User> getAuthUsers(int size){
+
+    public List<User> getAuthUsers(int size) {
         List<User> users = new ArrayList<>();
-        System.out.println("usercount="+ userRepository.findAll().size());
+        System.out.println("usercount=" + userRepository.findAll().size());
         for (int i = 0; i < size; i++) {
             User build = User.builder()
-                    .email("px100"+ i + "@naver.com")
+                    .email("px100" + i + "@naver.com")
                     .password(passwordEncoder.encode("aa1aa1"))
                     .dreamProfiles(dreamProfiles())
                     .detailProfiles(detailProfiles())
@@ -105,7 +111,7 @@ public class LoginController {
         }
 
         userRepository.saveAll(users);
-        System.out.println("usercount="+ userRepository.findAll().size());
+        System.out.println("usercount=" + userRepository.findAll().size());
         return users;
     }
 
@@ -117,7 +123,7 @@ public class LoginController {
                 .build();
     }
 
-    public DreamProfiles dreamProfiles(){
+    public DreamProfiles dreamProfiles() {
         return DreamProfiles.builder()
                 .bodyType(BodyType.SKINNY)
                 .locationCategory(LocationCategory.BUSAN)
@@ -126,7 +132,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity signin( @RequestBody User reqUser) {
+    public ResponseEntity signin(@RequestBody User reqUser) {
 
         User user = userRepository.findByEmail(reqUser.getEmail()).orElseThrow(EmailSigninFailedException::new);
         if (!passwordEncoder.matches(reqUser.getPassword(), user.getPassword()))
@@ -144,18 +150,20 @@ public class LoginController {
 
     @PostMapping(value = "/join")
     public ResponseEntity join(
-            @Valid @RequestBody User user,
+            @Valid @RequestBody UserSaveRequestDto user,
             Errors errors) {
 
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
             ResponseData<Errors> response = responseService.create(ResponseStatus.INVALID_REQUEST_PARAMETER_ERROR, errors);
             return ResponseEntity.badRequest().body(response);
         }
 
         User joinUser = userService.join(user);
-        GuestResource resource = new GuestResource(joinUser);
-       ResponseData<GuestResource> response = responseService.create(ResponseStatus.SUCCESS, resource);;
-        return ResponseEntity.ok(joinUser);
+        EntityModel<UserSaveResponseDto> entityModel = EntityModel.of(new UserSaveResponseDto(joinUser));
+        entityModel.add(linkTo(LoginController.class).slash("login").withRel("login"));
+        entityModel.add(Link.of("/docs/index.html#user-join").withRel("profile"));
+
+        return ResponseEntity.ok(entityModel);
     }
 
 }

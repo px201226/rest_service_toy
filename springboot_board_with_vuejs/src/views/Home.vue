@@ -52,7 +52,7 @@
     <v-col class="text-right">
       <v-btn color="primary" @click="routePostArticle">게시글 작성</v-btn>
     </v-col>
-    <modal @pass="deleteEmit" />
+    <modal @deletePost="deleteEmit" />
   </div>
 </template>
 

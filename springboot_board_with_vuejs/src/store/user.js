@@ -103,7 +103,7 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getCommentList();
-      return response;
+      return response.data.content;;
     } catch (e) {
       context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
     } 
