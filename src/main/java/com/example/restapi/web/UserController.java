@@ -1,29 +1,20 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.AuthUser;
-import com.example.restapi.domain.comments.CommentAdapter;
+import com.example.restapi.domain.comments.CommentResponseDto;
 import com.example.restapi.domain.comments.CommentAssembler;
-import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.posts.PostAdapter;
 import com.example.restapi.domain.posts.PostAdapterAssembler;
-import com.example.restapi.domain.posts.PostAssembler;
 import com.example.restapi.domain.response.ResponseData;
 import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.domain.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
-import com.example.restapi.domain.user.UserAdapter;
 import com.example.restapi.domain.user.UserAssembler;
 import com.example.restapi.domain.user.UserRepository;
-import com.example.restapi.domain.user.profile.DetailProfiles;
-import com.example.restapi.domain.user.profile.DetailProfilesResource;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
-import com.example.restapi.service.posts.PostsService;
+import com.example.restapi.web.dto.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.RepresentationModelProcessor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +22,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RequiredArgsConstructor
@@ -50,20 +40,19 @@ public class UserController {
 
         return userRepository.findByEmail(user.getEmail())
                 .map(userAssembler::toModel)
-                .map( (u) -> responseService.create( ResponseStatus.SUCCESS, u))
                 .map(ResponseEntity::ok)
                 .orElseThrow(UserNotFoundException::new);
     }
 
 
     @PutMapping
-    public ResponseEntity updateUserProfile(@RequestBody User reqeustUpdateUserDto,
+    public ResponseEntity updateUserProfile(@RequestBody UserUpdateRequestDto userUpdateRequestDto,
                                             @AuthUser User user) {
 
         return userRepository.findByEmail(user.getEmail())
-                .map( (u) -> u.updateUser(reqeustUpdateUserDto))
+                .map( (u) -> u.updateUser(userUpdateRequestDto))
                 .map(userAssembler::toModel)
-                .map( (u) -> responseService.create( ResponseStatus.SUCCESS, u))
+               // .map( (u) -> responseService.create( ResponseStatus.SUCCESS, u))
                 .map(ResponseEntity::ok)
                 .orElseThrow(UserNotFoundException::new);
     }
@@ -87,8 +76,8 @@ public class UserController {
 
         User find = userRepository.findByEmail(user.getEmail()).orElseThrow(UserNotFoundException::new);
 
-        List<CommentAdapter> collect = find.getComments().stream()
-                .map(p -> p.toAdapter(Optional.ofNullable(user)))
+        List<CommentResponseDto> collect = find.getComments().stream()
+                .map(c -> new CommentResponseDto(c,Optional.ofNullable(user)))
                 .collect(Collectors.toList());
 
         ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toCollectionModel(collect));

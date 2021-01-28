@@ -6,13 +6,11 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import java.time.format.DateTimeFormatter;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class CommentAssembler extends RepresentationModelAssemblerSupport<CommentAdapter, CommentModel> {
+public class CommentAssembler extends RepresentationModelAssemblerSupport<CommentResponseDto, CommentModel> {
 
 
     public CommentAssembler() {
@@ -20,7 +18,7 @@ public class CommentAssembler extends RepresentationModelAssemblerSupport<Commen
     }
 
     @Override
-    public CommentModel toModel(CommentAdapter entity) {
+    public CommentModel toModel(CommentResponseDto entity) {
         return  CommentModel.builder()
                 .id(entity.getId())
                 .postId(entity.getPostId())
@@ -35,7 +33,7 @@ public class CommentAssembler extends RepresentationModelAssemblerSupport<Commen
     }
 
     @Override
-    public CollectionModel<CommentModel> toCollectionModel(Iterable<? extends CommentAdapter> entities)
+    public CollectionModel<CommentModel> toCollectionModel(Iterable<? extends CommentResponseDto> entities)
     {
         CollectionModel<CommentModel> models = super.toCollectionModel(entities);
         return models;

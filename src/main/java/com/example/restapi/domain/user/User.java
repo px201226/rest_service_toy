@@ -9,6 +9,7 @@ import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.posts.like.PostLike;
 import com.example.restapi.domain.user.profile.*;
 
+import com.example.restapi.web.dto.UserUpdateRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -33,7 +34,7 @@ public class User extends LocalDateTimeEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email(message="이메일 형식이 올바르지 않습니다.")
+    @Email(message = "이메일 형식이 올바르지 않습니다.")
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -57,7 +58,7 @@ public class User extends LocalDateTimeEntity
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY )
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Participant participant;
 
     @Embedded
@@ -92,7 +93,7 @@ public class User extends LocalDateTimeEntity
         return dreamProfiles.compareObjective(other.detailProfiles);
     }
 
-    public User updateMyDetailProfiles(DetailProfiles detailProfiles){
+    public User updateMyDetailProfiles(DetailProfiles detailProfiles) {
         this.detailProfiles = detailProfiles;
         return this;
     }
@@ -102,19 +103,27 @@ public class User extends LocalDateTimeEntity
         return this;
     }
 
-    public User updateUser(User reqeustUpdateUserDto) {
-        this.dreamProfiles = reqeustUpdateUserDto.getDreamProfiles();
-        this.detailProfiles = reqeustUpdateUserDto.getDetailProfiles();
-        this.kakaoId = kakaoId;
+    public User updateUser(UserUpdateRequestDto userUpdateRequestDto) {
+        if (userUpdateRequestDto.getDetailProfiles() != null)
+            this.detailProfiles = userUpdateRequestDto.getDetailProfiles();
+
+        if (userUpdateRequestDto.getDreamProfiles() != null)
+            this.dreamProfiles = userUpdateRequestDto.getDreamProfiles();
+
+        if (userUpdateRequestDto.getKakaoId() != null)
+            this.kakaoId = userUpdateRequestDto.getKakaoId();
+
+        if (userUpdateRequestDto.getNickName() != null)
+            this.nickName = userUpdateRequestDto.getNickName();
         return this;
     }
 
-    public User updateLastMatchingDate(LocalDate localDate){
+    public User updateLastMatchingDate(LocalDate localDate) {
         this.lastMatchingDate = localDate;
         return this;
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
 

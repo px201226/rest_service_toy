@@ -28,7 +28,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ExceptionResponse exceptionResponse = new ExceptionResponse(
-                LocalDateTime.now(), "Validation Failed", ex.getBindingResult().toString());
+                 "Validation Failed", ex.getBindingResult().toString());
 
         return new ResponseEntity(exceptionResponse,HttpStatus.BAD_REQUEST);
     }
@@ -36,7 +36,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(Exception.class)                  // Exception 클래스가 발생하면 실행된다.
     public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request){
             ExceptionResponse exceptionResponse =
-                    new ExceptionResponse(LocalDateTime.now(), ex.getMessage() +" dd" + ex.getCause(), request.getDescription(false));
+                    new ExceptionResponse( ex.getMessage() +" dd" + ex.getCause(), request.getDescription(false));
 
             return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -45,7 +45,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity invalidRequestParamaterException(WebRequest request, InvalidRequestParamaterException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.INVALID_REQUEST_PARAMETER_ERROR,
@@ -58,7 +58,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity notExistDataException(WebRequest request, NotExistURIException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_URI,
@@ -71,7 +71,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity notExistParameterException(WebRequest request, NotExistParameterException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_PARAMETER_ERROR,
@@ -83,7 +83,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity redundantDataException(WebRequest request, RedundantDataException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.REDUNTANT_DATA_ERROR,
@@ -97,7 +97,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ResponseEntity notExistDataException (WebRequest request, NotExistDataException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse(e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
@@ -110,7 +110,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ResponseStatus(HttpStatus.FORBIDDEN)
     protected ResponseEntity serviceAcessDeniedException(WebRequest request, ServiceAcessDeniedException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.SERVICE_ACCESS_DENIED_ERROR,
@@ -122,7 +122,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(UnauthorizedException.class)
     protected ResponseEntity unauthorizedException(WebRequest request, UnauthorizedException e) {
         ExceptionResponse exceptionResponse =
-                new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
+                new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
                 com.example.restapi.domain.response.ResponseStatus.UNAUTHORIZED,

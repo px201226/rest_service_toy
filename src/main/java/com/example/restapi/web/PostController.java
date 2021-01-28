@@ -45,17 +45,10 @@ public class PostController {
 
         Page<Post> posts = postsService.findAll(pageable);
 
-//        PagedModel<PostModel> postModels = Optional.ofNullable(user)
-//                .map(u -> posts.map(p -> p.toAdapter(null)))
-//                .map(postAdapters -> postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler))
-//                .orElse(postAssembler.toModel(posts, this.postAssembler));
-//
         Page<PostAdapter> postAdapters = posts.map(p -> p.toAdapter(Optional.ofNullable(user)));
         PagedModel<PostModel> postModels = postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler);
 
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postModels);
-
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok(postModels);
     }
 
     @GetMapping("/{id}")
@@ -65,9 +58,8 @@ public class PostController {
         Post post = postsService.findById(id);
 
         PostModel model = postAdapterAssembler.toModel(post.toAdapter(Optional.ofNullable(user)));
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
 
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok(model);
     }
 
 
@@ -85,17 +77,14 @@ public class PostController {
         Post save = postsService.save(postsSaveRequestDto, user.getEmail());
         PostModel model = postAssembler.toModel(save);
 
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
-
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok(model);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable Long id, @Valid @RequestBody PostsUpdateRequestDto requestDto, @AuthUser User user) {
         Post update = postsService.update(id, requestDto, user.getEmail());
         PostModel model = postAssembler.toModel(update);
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, model);
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok(model);
     }
 
     @DeleteMapping("/{id}")

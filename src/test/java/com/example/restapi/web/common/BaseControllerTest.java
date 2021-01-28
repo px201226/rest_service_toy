@@ -10,6 +10,8 @@ import com.example.restapi.domain.user.profile.DreamProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
 import com.example.restapi.domain.user.profile.category.LocationCategory;
 import com.example.restapi.domain.user.profile.category.TallType;
+import com.example.restapi.service.user.UserService;
+import com.example.restapi.web.dto.UserSaveRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -51,7 +53,7 @@ public class BaseControllerTest {
     protected ObjectMapper objectMapper;
 
     @Autowired
-    protected WebApplicationContext context;
+    protected UserService userService;
 
     @Autowired
     protected PasswordEncoder passwordEncoder;
@@ -69,66 +71,45 @@ public class BaseControllerTest {
     private AppProperties appProperties;
 
 
-    public final ResponseFieldsSnippet commonResponseFieldSnippet = responseFields(
-            fieldWithPath("resultCode").description("응답 코드"),
-            fieldWithPath("message").description("응답 메시지")
-    );
+    public UserSaveRequestDto getUserSaveRequestDto(String email, String password, String nickName, String kakaoId) {
+        return UserSaveRequestDto.builder()
+                .email(email)
+                .password(password)
+                .detailProfiles(detailProfiles())
+                .dreamProfiles(dreamProfiles())
+                .nickName(nickName)
+                .kakaoId(kakaoId)
+                .build();
+    }
 
-    private User user;
-    private final String EMAIL = "px2008@naver.com";
-    private final String PASSWORD = "aa1aa1";
-    private final String NAME = "nickName";
-    private final List<String> ROLES = Collections.singletonList("ROLE_USER");
+    public User getJoinUser(String email, String password, String nickName, String kakaoId) {
+        UserSaveRequestDto build = UserSaveRequestDto.builder()
+                .email(email)
+                .password(password)
+                .detailProfiles(detailProfiles())
+                .dreamProfiles(dreamProfiles())
+                .nickName(nickName)
+                .kakaoId(kakaoId)
+                .build();
+         userService.join(build);
+         return build.toEntity();
+    }
 
+    public String getAccessToken(User user) throws Exception {
+        ResultActions perform = mockMvc.perform(post("/oauth/token")
+                        .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
+                        .param("username", user.getEmail())
+                        .param("password", user.getPassword())
+                        .param("grant_type", "password"));
 
-    public String getAccessToken(String username, String password) throws Exception {
-        ResultActions perform = this.mockMvc.perform(post("/oauth/token")
-                .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret()))
-                .param("username", username)
-                .param("password", password)
-                .param("grant_type", "password")
-        );
         String contentAsString = perform.andReturn().getResponse().getContentAsString();
+        System.out.println("dd");
+        System.out.println(contentAsString);
         Jackson2JsonParser parser = new Jackson2JsonParser();
         return "Bearer " + parser.parseMap(contentAsString).get("access_token").toString();
     }
 
-    public User getAuthUser() {
-        user = userRepository.save(User.builder()
-                .email(EMAIL)
-                .password(passwordEncoder.encode(PASSWORD))
-                .detailProfiles(detailProfiles())
-                .dreamProfiles(dreamProfiles())
-                .roles(ROLES)
-                .build());
-        return user;
-    }
-
-    public String getJwtToken(User user) {
-        return jwtTokenProvider.createToken(user.getEmail(), user.getRoles());
-    }
-
-    public List<User> getAuthUsers(int size) {
-        List<User> users = new ArrayList<>();
-        System.out.println("usercount=" + userRepository.findAll().size());
-        for (int i = 0; i < size; i++) {
-            User build = User.builder()
-                    .email("px100" + i + "@naver.com")
-                    .password(passwordEncoder.encode(PASSWORD))
-                    .dreamProfiles(dreamProfiles())
-                    .detailProfiles(detailProfiles())
-                    .roles(ROLES)
-                    .lastMatchingDate(matchingManager.getNextMatchingDate(LocalDate.now()))
-                    .build();
-            users.add(build);
-        }
-
-        userRepository.saveAll(users);
-        System.out.println("usercount=" + userRepository.findAll().size());
-        return users;
-    }
-
-    public DetailProfiles detailProfiles() {
+    private DetailProfiles detailProfiles() {
         return DetailProfiles.builder()
                 .bodyType(BodyType.SKINNY)
                 .tallType(TallType.NORMAL)
@@ -136,11 +117,11 @@ public class BaseControllerTest {
                 .build();
     }
 
-    public DreamProfiles dreamProfiles() {
+    private DreamProfiles dreamProfiles() {
         return DreamProfiles.builder()
-                .bodyType(BodyType.SKINNY)
+                .bodyType(BodyType.CHUBBY)
                 .locationCategory(LocationCategory.BUSAN)
-                .tallType(TallType.SMALL)
+                .tallType(TallType.TALL)
                 .build();
     }
 

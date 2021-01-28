@@ -38,21 +38,4 @@ public class Comment extends LocalDateTimeEntity {
         this.content = content;
     }
 
-    public boolean isEqualUserEmail(Optional<User> loginUser){
-
-        return loginUser.map(u -> user.getEmail().equals(u.getEmail()))
-                .orElse(false);
-    }
-
-    public CommentAdapter toAdapter(Optional<User> loginUser){
-        return  CommentAdapter.builder()
-                .id(getId())
-                .postId(getPost().getId())
-                .content(getContent())
-                .userEmail(getUser().getEmail())
-                .userNickName(getUser().getNickName())
-                .modifyDate(getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")))
-                .isWriter(isEqualUserEmail(loginUser))
-                .build();
-    }
 }

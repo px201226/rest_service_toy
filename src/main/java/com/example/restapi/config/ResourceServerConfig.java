@@ -52,7 +52,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()    // 다음 리퀘스트에 대한 사용권한 체크
                 .antMatchers("/*/join", "/*/login", "/h2-console/**","/exception/**").permitAll()      //가입 및 인증 주소는 누구나 가능
                 .antMatchers(HttpMethod.GET, "/*/matching/nextDay","/*/posts/**").permitAll()
-                //.antMatchers(HttpMethod.GET,"/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/**").permitAll()
                 //.antMatchers(HttpMethod.GET, "/*/matching/**").authenticated()
                 .anyRequest().authenticated()
                 .and()

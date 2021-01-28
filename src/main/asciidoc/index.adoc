@@ -53,20 +53,34 @@
 | `400 Bad Request`
 | 잘못된 요청을 보낸 경우. 응답 본문에 더 오류에 대한 정보가 담겨있다.
 
+| `403 Forbidden`
+| 서버가 허용하지 않는 리소스를 사용자가 요청할 때 발생한다.
+
 | `404 Not Found`
 | 요청한 리소스가 없음.
 |===
 
 [[overview-errors]]
-== 오류
+== Error
 
-에러 응답이 발생했을 때 (상태 코드 >= 400), 본문에 해당 문제를 기술한 JSON 객체가 담겨있다. 에러 객체는 다음의 구조를 따른다.
+에러 응답이 발생했을 때 (상태 코드 >= 300), 본문에 해당 문제를 기술한 JSON 객체가 담겨있다. 에러 객체는 다음의 구조를 따른다.
 
-include::{snippets}/errors/response-fields.adoc[]
+==== Response fields
 
-예를 들어, 잘못된 요청으로 이벤트를 만들려고 했을 때 다음과 같은 `400 Bad Request` 응답을 받는다.
+include::{snippets}/error-response/response-fields.adoc[]
 
-include::{snippets}/errors/http-response.adoc[]
+
+예를 들어, 서버가 허용하지 않는 리소스를 사용자가 요청할 때 다음과 같은 `403 Forbidden` 응답을 받는다.
+
+==== Example response
+
+include::{snippets}/error-response/http-response.adoc[]
+
+=== Common Result Code
+
+에러 응답의 `resultCode` 필드의 명세는 다음과 같다.
+
+include::{snippets}/common/custom-response-fields.adoc[]
 
 [[overview-hypermedia]]
 == 하이퍼미디어
@@ -109,3 +123,48 @@ operation::user-join[snippets='request-headers,request-fields,http-request,respo
 `POST` 요청을 사용해서 OAuth-Token을 얻을 수 있다.
 
 operation::oauth-token[snippets='request-headers,request-parameters,http-request,response-headers,response-fields,http-response']
+
+
+=== Retrieve
+
+`GET` 요청을 사용해서 사용자 정보를 조회할 수 있다.
+
+operation::user-profile[snippets='request-headers,http-request,response-headers,response-fields,http-response,links']
+
+
+=== Modify
+
+`PUT` 요청을 사용해서 사용자 정보를 수정할 수 있다.
+
+operation::user-modify[snippets='request-headers,http-request,response-headers,response-fields,http-response,links']
+
+
+[[resources-post]]
+== Post
+
+유저가 작성한 게시물을 말한다.
+
+=== Retrive
+
+`GET` 요청을 사용해서 페이징된 게시물을 조회할 수 있다.
+
+operation::post-retreive[snippets='request-headers,request-parameters,http-request,response-headers,response-fields,http-response,links']
+
+=== Write
+
+`POST` 요청을 사용해서 게시물을 작성할 수 있다.
+
+operation::post-write[snippets='request-headers,request-fields,http-request,response-headers,response-fields,http-response,links']
+
+=== Update
+
+`PUT` 요청을 사용해서 작성한 게시물을 수정할 수 있다.
+
+operation::post-update[snippets='request-headers,path-parameters,request-fields,http-request,response-headers,response-fields,http-response,links']
+
+=== Delete
+
+`DELETE` 요청을 사용해서 작성한 게시물을 삭제할 수 있다.
+
+operation::post-delete[snippets='request-headers,http-request,response-headers,http-response']
+

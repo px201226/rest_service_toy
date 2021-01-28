@@ -44,7 +44,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/v1", produces = {MediaTypes.HAL_JSON_VALUE, "application/hal+json"})
+@RequestMapping(value = "/v1", produces = {MediaType.APPLICATION_JSON_VALUE, "application/hal+json"})
 public class LoginController {
 
 
@@ -158,10 +158,13 @@ public class LoginController {
             return ResponseEntity.badRequest().body(response);
         }
 
+
         User joinUser = userService.join(user);
         EntityModel<UserSaveResponseDto> entityModel = EntityModel.of(new UserSaveResponseDto(joinUser));
         entityModel.add(linkTo(LoginController.class).slash("login").withRel("login"));
         entityModel.add(Link.of("/docs/index.html#user-join").withRel("profile"));
+
+        //ResponseData<EntityModel> response = responseService.create(ResponseStatus.SUCCESS, entityModel);
 
         return ResponseEntity.ok(entityModel);
     }

@@ -21,8 +21,8 @@ public class UserModel extends RepresentationModel<UserModel> {
     private Long id;
     private String email;
     private String nickName;
-    private List<PostModel> posts;
-    private List<CommentModel> comments;
+    private Long posts;
+    private Long comments;
     private DetailProfiles detailProfiles;
     private DreamProfiles dreamProfiles;
     private LocalDate lastMatchingDate;

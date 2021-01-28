@@ -28,7 +28,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
     public UserModel toModel(User entity) {
 
         UserModel userModel = new UserModel();
-        userModel.setComments(toCommentModel(entity.getComments()));
+        userModel.setComments(Long.valueOf(entity.getComments().size()));
         userModel.setDetailProfiles(entity.getDetailProfiles());
         userModel.setDreamProfiles(entity.getDreamProfiles());
         userModel.setEmail(entity.getEmail());
@@ -36,14 +36,18 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
         userModel.setNickName(entity.getNickName());
         userModel.setKakaoId(entity.getKakaoId());
         userModel.setLastMatchingDate(entity.getLastMatchingDate());
-        userModel.setPosts(toPostModel(entity.getPosts()));
+        userModel.setPosts(Long.valueOf(entity.getPosts().size()));
         userModel.add(linkTo(UserController.class).slash("").withSelfRel())
-                .add(linkTo(methodOn(UserDetailProfilesController.class).getUserProfile(null)).withRel("detailProfiles"))
-                .add(linkTo(methodOn(UserDreamProfilesController.class).getDreamProfile(null)).withRel("dreamProfiles"));
+                .add(linkTo(methodOn(UserController.class).getPostList(null)).withRel("posts"))
+                .add(linkTo(methodOn(UserController.class).getCommentList(null)).withRel("comments"));
 
         return userModel;
 
     }
+
+    /* 사용자의 Posts를 HAL로 표현한다.
+     *  Lazy Loding 으로 사용 안됨 */
+    @Deprecated
     private List<PostModel> toPostModel(List<Post> posts) {
         if (posts.isEmpty())
             return Collections.emptyList();
@@ -59,6 +63,10 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
                 .collect(Collectors.toList());
     }
 
+
+    /* 사용자의 Comment를 HAL로 표현한다.
+    *  Lazy Loding 으로 사용 안됨 */
+    @Deprecated
     private List<CommentModel> toCommentModel(List<Comment> comments){
         if(comments.isEmpty()) return Collections.emptyList();
 

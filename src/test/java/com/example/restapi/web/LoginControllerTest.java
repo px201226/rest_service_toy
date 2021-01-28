@@ -51,7 +51,7 @@ public class LoginControllerTest extends BaseControllerTest {
     @TestDescription("회원가입이 성공한다")
     public void success_join() throws Exception {
         // given
-        UserSaveRequestDto userSaveDto = getUserSaveRequestDto();
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007");
 
         // when && then
         mockMvc.perform(post("/v1/join")
@@ -75,8 +75,12 @@ public class LoginControllerTest extends BaseControllerTest {
                                 fieldWithPath("email").description("회원의 이메일"),
                                 fieldWithPath("password").description("회원의 비밀번호"),
                                 fieldWithPath("nickName").description("회원의 닉네임"),
-                                subsectionWithPath("detailProfiles").description("회원의 상세 프로필"),
-                                subsectionWithPath("dreamProfiles").description("회원의 이상형 프로필"),
+                                fieldWithPath("detailProfiles.tallType").description("회원의 신장"),
+                                fieldWithPath("detailProfiles.bodyType").description("회원의 체격"),
+                                fieldWithPath("detailProfiles.locationCategory").description("회원의 거주지"),
+                                fieldWithPath("dreamProfiles.tallType").description("이상형의 신장"),
+                                fieldWithPath("dreamProfiles.bodyType").description("이상형의 체격"),
+                                fieldWithPath("dreamProfiles.locationCategory").description("이상형의 거주지"),
                                 fieldWithPath("kakaoId").description("회원의 카카오톡 ID")
                         ),
                         responseHeaders(
@@ -97,7 +101,7 @@ public class LoginControllerTest extends BaseControllerTest {
     public void redundant_join() throws Exception {
 
         // given
-        UserSaveRequestDto userSaveDto = getUserSaveRequestDto();
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007");
 
         // when && then
         userRepository.save(userSaveDto.toEntity());
@@ -117,7 +121,7 @@ public class LoginControllerTest extends BaseControllerTest {
     public void success_login() throws Exception {
 
         // given
-        UserSaveRequestDto userSaveDto = getUserSaveRequestDto();
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007");
         userService.join(userSaveDto);
 
         //when && then
@@ -167,15 +171,6 @@ public class LoginControllerTest extends BaseControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
-    private UserSaveRequestDto getUserSaveRequestDto() {
-        return UserSaveRequestDto.builder()
-                .email("px2007@naver.com")
-                .password("password123")
-                .detailProfiles(detailProfiles())
-                .dreamProfiles(dreamProfiles())
-                .nickName("피엑스맛나")
-                .kakaoId("dlrlem")
-                .build();
-    }
+
 
 }

@@ -3,12 +3,13 @@ package com.example.restapi.domain.response;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResponseData<T> {
+public class ResponseData<T> extends RepresentationModel<ResponseData<T>> {
     int resultCode;
     String message;
 

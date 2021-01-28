@@ -55,8 +55,7 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getPostsList(page);
-      console.log(response)
-      context.commit("ADD_POST_LIST", response.data.content);
+      context.commit("ADD_POST_LIST", response.data._embedded.postModels);
       context.commit("SET_PAGE", response.data.page);
       return  response.data.content;
     } catch (e) {
