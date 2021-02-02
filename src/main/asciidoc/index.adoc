@@ -76,7 +76,7 @@ include::{snippets}/error-response/response-fields.adoc[]
 
 include::{snippets}/error-response/http-response.adoc[]
 
-=== Common Result Code
+=== Result Code
 
 에러 응답의 `resultCode` 필드의 명세는 다음과 같다.
 
@@ -125,14 +125,14 @@ operation::user-join[snippets='request-headers,request-fields,http-request,respo
 operation::oauth-token[snippets='request-headers,request-parameters,http-request,response-headers,response-fields,http-response']
 
 
-=== Retrieve
+=== GET
 
 `GET` 요청을 사용해서 사용자 정보를 조회할 수 있다.
 
 operation::user-profile[snippets='request-headers,http-request,response-headers,response-fields,http-response,links']
 
 
-=== Modify
+=== UPDATE
 
 `PUT` 요청을 사용해서 사용자 정보를 수정할 수 있다.
 
@@ -144,13 +144,13 @@ operation::user-modify[snippets='request-headers,http-request,response-headers,r
 
 유저가 작성한 게시물을 말한다.
 
-=== Retrive
+=== GET
 
 `GET` 요청을 사용해서 페이징된 게시물을 조회할 수 있다.
 
 operation::post-retreive[snippets='request-headers,request-parameters,http-request,response-headers,response-fields,http-response,links']
 
-=== Write
+=== POST
 
 `POST` 요청을 사용해서 게시물을 작성할 수 있다.
 
@@ -168,3 +168,87 @@ operation::post-update[snippets='request-headers,path-parameters,request-fields,
 
 operation::post-delete[snippets='request-headers,http-request,response-headers,http-response']
 
+
+[[resources-comment]]
+== Comment
+
+유저가 작성한 댓글을 말한다.
+
+=== GET
+
+`GET` 요청을 사용해서 게시물의 작성된 댓글을 조회할 수 있다.
+
+operation::comment-retreive[snippets='request-headers,path-parameters,http-request,response-headers,response-fields,http-response,links']
+
+=== POST
+
+`POST` 요청을 사용해서 댓글을 작성할 수 있다.
+
+operation::comment-write[snippets='request-headers,path-parameters,request-fields,http-request,response-headers,response-fields,http-response,links']
+
+=== Update
+
+`PUT` 요청을 사용해서 작성한 게시물을 수정할 수 있다.
+
+operation::comment-update[snippets='request-headers,path-parameters,request-fields,http-request,response-headers,response-fields,http-response,links']
+
+=== Delete
+
+`DELETE` 요청을 사용해서 작성한 게시물을 삭제할 수 있다.
+
+operation::comment-delete[snippets='request-headers,http-request,response-headers,http-response']
+
+
+[[resources-postLike]]
+== PostLike
+
+유저가 작성한 게시물의 좋아요 상태를 말한다.
+
+=== GET
+
+`GET` 요청을 사용해서 특정 게시물의 좋아요 여부를 반환한다.
+
+operation::postLike-retreive[snippets='request-headers,path-parameters,http-request,response-headers,response-fields,http-response,links']
+
+=== POST
+
+`POST` 요청을 사용해서 게시물의 좋아요를 한다.
+
+operation::postLike-post[snippets='request-headers,path-parameters,http-request,response-headers,http-response']
+
+=== Delete
+
+`DELETE` 요청을 사용해서 게시물 좋아요를 취소한다.
+
+operation::postLike-delete[snippets='request-headers,path-parameters,http-request,response-headers,http-response']
+
+
+[[resources-participant]]
+== Participant
+
+소개팅에 참여한 유저를 말한다.
+
+=== Apply
+
+`POST` 요청을 사용해서 현재 회차의 소개팅에 참여할 수 있다.
+
+operation::participant-apply[snippets='request-headers,http-request,response-headers,http-response']
+
+=== Apply-Overlap
+
+만약 회원이 이미 소개팅에 참여하였으면, 다음과 같은 메시지를 얻는다.
+
+operation::participant-apply-overlap[snippets='http-response']
+
+=== Result
+
+`GET` 요청을 사용해서 마지막 소개팅 결과를 얻을 수 있다.
+
+operation::participant-result[snippets='request-headers,http-request,response-headers,http-response']
+
+
+=== Result-Exception
+
+만약 현재 날짜가 소개팅 매칭 날짜보다 이전이라면 다음과 같은 에러 메시지를 얻는다.
+
+operation::participant-result-exception[snippets='http-response']

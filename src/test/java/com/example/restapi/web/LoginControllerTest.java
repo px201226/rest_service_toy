@@ -1,18 +1,14 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.AppProperties;
-import com.example.restapi.domain.response.ResponseStatus;
-import com.example.restapi.domain.user.User;
+import com.example.restapi.domain.user.profile.category.SexType;
+import com.example.restapi.exception.response.ResponseStatus;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.service.user.UserService;
 import com.example.restapi.web.common.BaseControllerTest;
 import com.example.restapi.web.common.TestDescription;
 import com.example.restapi.web.dto.UserSaveRequestDto;
-import com.example.restapi.web.dto.UserSaveResponseDto;
-import org.aspectj.lang.annotation.After;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
@@ -51,7 +47,7 @@ public class LoginControllerTest extends BaseControllerTest {
     @TestDescription("회원가입이 성공한다")
     public void success_join() throws Exception {
         // given
-        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007");
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007", SexType.MAN);
 
         // when && then
         mockMvc.perform(post("/v1/join")
@@ -75,6 +71,7 @@ public class LoginControllerTest extends BaseControllerTest {
                                 fieldWithPath("email").description("회원의 이메일"),
                                 fieldWithPath("password").description("회원의 비밀번호"),
                                 fieldWithPath("nickName").description("회원의 닉네임"),
+                                fieldWithPath("sexType").description("회원의 성별"),
                                 fieldWithPath("detailProfiles.tallType").description("회원의 신장"),
                                 fieldWithPath("detailProfiles.bodyType").description("회원의 체격"),
                                 fieldWithPath("detailProfiles.locationCategory").description("회원의 거주지"),
@@ -101,7 +98,7 @@ public class LoginControllerTest extends BaseControllerTest {
     public void redundant_join() throws Exception {
 
         // given
-        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007");
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007", SexType.MAN);
 
         // when && then
         userRepository.save(userSaveDto.toEntity());
@@ -113,7 +110,7 @@ public class LoginControllerTest extends BaseControllerTest {
         )
                 .andDo(print())
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.resultCode").value(ResponseStatus.REDUNTANT_DATA_ERROR.getResultCode()));
+                .andExpect(jsonPath("$.resultCode").value(ResponseStatus.OVERLAPPING_DATA_ERROR.getResultCode()));
     }
 
     @Test
@@ -121,7 +118,7 @@ public class LoginControllerTest extends BaseControllerTest {
     public void success_login() throws Exception {
 
         // given
-        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007");
+        UserSaveRequestDto userSaveDto = getUserSaveRequestDto("px2007@naver.com","password123","피엑스맛나","px2007", SexType.MAN);
         userService.join(userSaveDto);
 
         //when && then

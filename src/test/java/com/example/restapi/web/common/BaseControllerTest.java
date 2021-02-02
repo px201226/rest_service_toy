@@ -9,6 +9,7 @@ import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.DreamProfiles;
 import com.example.restapi.domain.user.profile.category.BodyType;
 import com.example.restapi.domain.user.profile.category.LocationCategory;
+import com.example.restapi.domain.user.profile.category.SexType;
 import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.service.user.UserService;
 import com.example.restapi.web.dto.UserSaveRequestDto;
@@ -71,7 +72,7 @@ public class BaseControllerTest {
     private AppProperties appProperties;
 
 
-    public UserSaveRequestDto getUserSaveRequestDto(String email, String password, String nickName, String kakaoId) {
+    public UserSaveRequestDto getUserSaveRequestDto(String email, String password, String nickName, String kakaoId, SexType sexType) {
         return UserSaveRequestDto.builder()
                 .email(email)
                 .password(password)
@@ -79,10 +80,11 @@ public class BaseControllerTest {
                 .dreamProfiles(dreamProfiles())
                 .nickName(nickName)
                 .kakaoId(kakaoId)
+                .sexType(sexType)
                 .build();
     }
 
-    public User getJoinUser(String email, String password, String nickName, String kakaoId) {
+    public User getJoinUser(String email, String password, String nickName, String kakaoId, SexType sexType) {
         UserSaveRequestDto build = UserSaveRequestDto.builder()
                 .email(email)
                 .password(password)
@@ -90,6 +92,7 @@ public class BaseControllerTest {
                 .dreamProfiles(dreamProfiles())
                 .nickName(nickName)
                 .kakaoId(kakaoId)
+                .sexType(sexType)
                 .build();
          userService.join(build);
          return build.toEntity();

@@ -4,7 +4,7 @@ import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserAdapter;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
-import com.example.restapi.exception.high.RedundantDataException;
+import com.example.restapi.exception.high.OverlappingDataException;
 import com.example.restapi.web.dto.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
     public User join(User user){
         Optional<User> byEmail = userRepository.findByEmail(user.getEmail());
         if(byEmail.isPresent()){
-            throw new RedundantDataException("이메일이 중복됩니다");
+            throw new OverlappingDataException("이메일이 중복됩니다");
         }
 
         return userRepository.save(User.builder()
@@ -53,7 +53,7 @@ public class UserService implements UserDetailsService {
     public User join(UserSaveRequestDto user){
         Optional<User> byEmail = userRepository.findByEmail(user.getEmail());
         if(byEmail.isPresent()){
-            throw new RedundantDataException("이메일이 중복됩니다");
+            throw new OverlappingDataException("이메일이 중복됩니다");
         }
 
         User saveUser = user.toEntity();

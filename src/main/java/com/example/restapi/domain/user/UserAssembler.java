@@ -37,6 +37,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
         userModel.setKakaoId(entity.getKakaoId());
         userModel.setLastMatchingDate(entity.getLastMatchingDate());
         userModel.setPosts(Long.valueOf(entity.getPosts().size()));
+        userModel.setSexType(entity.getSexType());
         userModel.add(linkTo(UserController.class).slash("").withSelfRel())
                 .add(linkTo(methodOn(UserController.class).getPostList(null)).withRel("posts"))
                 .add(linkTo(methodOn(UserController.class).getCommentList(null)).withRel("comments"));

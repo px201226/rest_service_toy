@@ -1,5 +1,5 @@
 import store from '.';
-import {getNextMatchingDay, getApplyHistory, applyMatching, getMatchingResult } from "../api/matching_api";
+import {getNextMatchingDay, applyMatching, getMatchingResult } from "../api/matching_api";
 import router from "../router";
 
 // state

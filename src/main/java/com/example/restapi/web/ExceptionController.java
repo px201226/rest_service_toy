@@ -31,7 +31,7 @@ public class ExceptionController {
 
     @RequestMapping(value = "/other")
     public ResponseEntity entrypointException5() {
-        throw new UnauthorizedException("토큰에러");
+        throw new UnauthorizedException("토큰 에러");
     }
 
 }

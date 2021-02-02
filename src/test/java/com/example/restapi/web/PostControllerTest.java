@@ -4,6 +4,7 @@ import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.posts.PostRepository;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
+import com.example.restapi.domain.user.profile.category.SexType;
 import com.example.restapi.service.posts.PostsService;
 import com.example.restapi.web.common.BaseControllerTest;
 import com.example.restapi.web.common.TestDescription;
@@ -48,7 +49,7 @@ public class PostControllerTest extends BaseControllerTest {
     @TestDescription("게시물 목록 조회 성공")
     public void getPostList() throws Exception {
         // given
-        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007");
+        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007", SexType.MAN);
 
         for (int i = 1; i <= 10; i++) {
             PostsSaveRequestDto postsSaveRequestDto = getPostsSaveRequestDto("test Post" + i);
@@ -110,7 +111,7 @@ public class PostControllerTest extends BaseControllerTest {
     @TestDescription("게시물 작성 성공한다.")
     public void writePost() throws Exception {
         // given
-        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007");
+        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007",SexType.MAN);
 
         PostsSaveRequestDto postsSaveRequestDto = getPostsSaveRequestDto("Test Content1");
 
@@ -158,7 +159,7 @@ public class PostControllerTest extends BaseControllerTest {
     @TestDescription("게시물 수정 성공한다")
     public void updatePost() throws Exception {
         // given
-        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007");
+        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007",SexType.MAN);
 
         Long id = 0L;
         for (int i = 1; i <= 10; i++) {
@@ -171,10 +172,10 @@ public class PostControllerTest extends BaseControllerTest {
 
 
         /* Path Parameters 를 사용할 때는
-        * MockMvcRequestBuilders.put 이 아니라 RestDocumentationRequestBuilders.put 을 사용한다
-        * 컴파일 에러 뜸.. */
+         * MockMvcRequestBuilders.put 이 아니라 RestDocumentationRequestBuilders.put 을 사용한다
+         * 컴파일 에러 뜸.. */
         // when && then
-        mockMvc.perform(RestDocumentationRequestBuilders.put("/v1/posts/{id}",id)
+        mockMvc.perform(RestDocumentationRequestBuilders.put("/v1/posts/{id}", id)
                 .header(HttpHeaders.AUTHORIZATION, getAccessToken(joinUser))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(postsUpdateRequestDto))
@@ -219,21 +220,17 @@ public class PostControllerTest extends BaseControllerTest {
     @TestDescription("게시물을 삭제한다")
     public void deletePost() throws Exception {
         // given
-        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007");
+        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007",SexType.MAN);
 
-        Long id = 0L;
-        for (int i = 1; i <= 10; i++) {
-            PostsSaveRequestDto postsSaveRequestDto = getPostsSaveRequestDto("test Post" + i);
-            Post save = postsService.save(postsSaveRequestDto, joinUser.getEmail());
-            id = save.getId();
-        }
+        PostsSaveRequestDto postsSaveRequestDto = getPostsSaveRequestDto("test Post");
+        Post save = postsService.save(postsSaveRequestDto, joinUser.getEmail());
 
 
         /* Path Parameters 를 사용할 때는
          * MockMvcRequestBuilders.put 이 아니라 RestDocumentationRequestBuilders.put 을 사용한다
          * 컴파일 에러 뜸.. */
         // when && then
-        mockMvc.perform(RestDocumentationRequestBuilders.delete("/v1/posts/{id}",id)
+        mockMvc.perform(RestDocumentationRequestBuilders.delete("/v1/posts/{id}", save.getId())
                 .header(HttpHeaders.AUTHORIZATION, getAccessToken(joinUser))
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaTypes.HAL_JSON)

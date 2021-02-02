@@ -36,6 +36,7 @@ public class CommentAssembler extends RepresentationModelAssemblerSupport<Commen
     public CollectionModel<CommentModel> toCollectionModel(Iterable<? extends CommentResponseDto> entities)
     {
         CollectionModel<CommentModel> models = super.toCollectionModel(entities);
+
         return models;
     }
 

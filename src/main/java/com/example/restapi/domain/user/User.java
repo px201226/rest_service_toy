@@ -9,6 +9,8 @@ import com.example.restapi.domain.posts.Post;
 import com.example.restapi.domain.posts.like.PostLike;
 import com.example.restapi.domain.user.profile.*;
 
+import com.example.restapi.domain.user.profile.category.BodyType;
+import com.example.restapi.domain.user.profile.category.SexType;
 import com.example.restapi.web.dto.UserUpdateRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -66,6 +68,9 @@ public class User extends LocalDateTimeEntity
 
     @Embedded
     private DreamProfiles dreamProfiles;                              // 이상형 프로필
+
+    @Enumerated(EnumType.STRING)
+    private SexType SexType;
 
     private LocalDate lastMatchingDate;
 

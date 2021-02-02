@@ -1,10 +1,9 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.AuthUser;
-import com.example.restapi.domain.response.ResponseData;
-import com.example.restapi.domain.response.ResponseService;
-import com.example.restapi.domain.response.ResponseStatus;
-import com.example.restapi.domain.user.profile.DetailProfilesResource;
+import com.example.restapi.exception.response.ResponseData;
+import com.example.restapi.exception.response.ResponseService;
+import com.example.restapi.exception.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.domain.user.profile.DreamProfiles;

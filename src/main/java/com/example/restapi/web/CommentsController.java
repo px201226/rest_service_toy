@@ -7,9 +7,9 @@ import com.example.restapi.domain.comments.CommentModel;
 import com.example.restapi.domain.comments.CommentResponseDto;
 import com.example.restapi.domain.comments.CommentAssembler;
 import com.example.restapi.domain.posts.Post;
-import com.example.restapi.domain.response.ResponseData;
-import com.example.restapi.domain.response.ResponseService;
-import com.example.restapi.domain.response.ResponseStatus;
+import com.example.restapi.exception.response.ResponseData;
+import com.example.restapi.exception.response.ResponseService;
+import com.example.restapi.exception.response.ResponseStatus;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.service.comments.CommentsService;
 import com.example.restapi.service.posts.PostsService;
@@ -55,9 +55,8 @@ public class CommentsController {
                                    @AuthUser User user) {
 
         Comment byId = commentsService.findById(postId, commentId);
-        CommentResponseDto commentResponseDto = new CommentResponseDto(byId, Optional.ofNullable(user));
-
-        return ResponseEntity.ok(commentResponseDto);
+        CommentModel commentModel = commentAssembler.toModel(new CommentResponseDto(byId, Optional.ofNullable(user)));
+        return ResponseEntity.ok(commentModel);
     }
 
     @PostMapping("/v1/posts/{postId}/comments")
@@ -72,9 +71,9 @@ public class CommentsController {
         }
 
         Comment save = commentsService.save(requestDto, postId, user.getEmail());
-        CommentResponseDto commentResponseDto = new CommentResponseDto(save, Optional.ofNullable(user));
+        CommentModel commentModel = commentAssembler.toModel(new CommentResponseDto(save, Optional.ofNullable(user)));
 
-        return ResponseEntity.ok(commentResponseDto);
+        return ResponseEntity.ok(commentModel);
     }
 
     @PutMapping("/v1/posts/{postId}/comments/{commentId}")
@@ -90,9 +89,9 @@ public class CommentsController {
         }
 
         Comment update = commentsService.update(requestDto, postId, commentId, user.getEmail());
-        CommentResponseDto commentResponseDto = new CommentResponseDto(update, Optional.ofNullable(user));
+        CommentModel commentModel = commentAssembler.toModel(new CommentResponseDto(update, Optional.ofNullable(user)));
 
-        return ResponseEntity.ok(commentResponseDto);
+        return ResponseEntity.ok(commentModel);
     }
 
     @DeleteMapping("/v1/posts/{postId}/comments/{commentId}")

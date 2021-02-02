@@ -57,8 +57,9 @@ public class MatchingService {
         if(user.getLastMatchingDate() == null)
             throw new MatchedResultNotFoundException("참가한 적이 없습니다");
 
-//        if(LocalDate.now().isBefore(user.getLastMatchingDate()))
-//            throw new MatchedResultNotFoundException("조회기간이 아닙니다");
+
+        if(LocalDate.now().isBefore(user.getLastMatchingDate()))
+            throw new MatchedResultNotFoundException("조회기간이 아닙니다");
 
         MatchingResult matchingResult = matchingResultRepository.findByUserIdAndMatchingDate(user.getId(), user.getLastMatchingDate())
                 .orElseGet(() ->

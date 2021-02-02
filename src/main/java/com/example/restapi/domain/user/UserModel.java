@@ -4,6 +4,7 @@ import com.example.restapi.domain.comments.CommentModel;
 import com.example.restapi.domain.posts.PostModel;
 import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.DreamProfiles;
+import com.example.restapi.domain.user.profile.category.SexType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
@@ -27,4 +28,5 @@ public class UserModel extends RepresentationModel<UserModel> {
     private DreamProfiles dreamProfiles;
     private LocalDate lastMatchingDate;
     private String kakaoId;
+    private SexType sexType;
 }

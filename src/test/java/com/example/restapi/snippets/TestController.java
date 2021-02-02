@@ -1,11 +1,14 @@
 package com.example.restapi.snippets;
 
-import com.example.restapi.domain.response.ResponseStatus;
+import com.example.restapi.exception.response.ResponseStatus;
 import com.example.restapi.exception.exceptions.CAuthenticationEntryPointException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -15,15 +18,13 @@ public class TestController {
     @GetMapping("/resultCode")
     public ResponseEntity getResultCode(){
         ResponseStatus[] values = ResponseStatus.values();
-        StringBuilder builder = new StringBuilder("{");
+
+        Map<Integer, String> map = new HashMap<>();
         for(int i=0; i<values.length; i++){
             ResponseStatus value = values[i];
-            String format = String.format("\"%s\":\"%s\"", value.getResultCode(), value.getResultMsg());
-            builder.append(format);
-            if(i != values.length -1) builder.append(",");
+            map.put(value.getResultCode(), value.getResultMsg());
         }
-        builder.append("}");
-        return ResponseEntity.ok(builder.toString());
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping("/403error")

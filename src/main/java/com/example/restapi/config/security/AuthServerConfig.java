@@ -55,12 +55,16 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .refreshTokenValiditySeconds(6 * 10 * 60);
     }
 
+    /*
+    * https://stackoverflow.com/questions/45006285/spring-security-oauth-custom-format-for-oauth2exceptions/55868222#55868222
+    * OAuth Server Error Handling ref */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userService)
                 .tokenStore(tokenStore)
-                .accessTokenConverter(jwtAccessTokenConverter());
+                .accessTokenConverter(jwtAccessTokenConverter())
+                .exceptionTranslator(new CustomWebResponseExceptionTranslator());       // Auth Server Exception Handling
     }
 
     @Bean

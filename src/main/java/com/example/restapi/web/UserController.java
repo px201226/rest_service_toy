@@ -1,19 +1,23 @@
 package com.example.restapi.web;
 
 import com.example.restapi.config.AuthUser;
+import com.example.restapi.domain.comments.CommentModel;
 import com.example.restapi.domain.comments.CommentResponseDto;
 import com.example.restapi.domain.comments.CommentAssembler;
 import com.example.restapi.domain.posts.PostAdapter;
 import com.example.restapi.domain.posts.PostAdapterAssembler;
-import com.example.restapi.domain.response.ResponseData;
-import com.example.restapi.domain.response.ResponseService;
-import com.example.restapi.domain.response.ResponseStatus;
+
+import com.example.restapi.domain.posts.PostModel;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserAssembler;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
+import com.example.restapi.exception.response.ResponseData;
+import com.example.restapi.exception.response.ResponseService;
+import com.example.restapi.exception.response.ResponseStatus;
 import com.example.restapi.web.dto.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,9 +70,9 @@ public class UserController {
                 .map(p -> p.toAdapter(Optional.ofNullable(user)))
                 .collect(Collectors.toList());
 
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, postAdapterAssembler.toCollectionModel(collect));
+        CollectionModel<PostModel> models = postAdapterAssembler.toCollectionModel(collect);
 
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok(models);
     }
 
     @GetMapping("/comments")
@@ -80,8 +84,8 @@ public class UserController {
                 .map(c -> new CommentResponseDto(c,Optional.ofNullable(user)))
                 .collect(Collectors.toList());
 
-        ResponseData responseData = responseService.create(ResponseStatus.SUCCESS, commentAssembler.toCollectionModel(collect));
+        CollectionModel<CommentModel> commentModels = commentAssembler.toCollectionModel(collect);
 
-        return ResponseEntity.ok(responseData);
+        return ResponseEntity.ok(commentModels);
     }
 }

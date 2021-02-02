@@ -27,43 +27,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/dto/UserUpdateRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CommonSnippetsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/TestController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/CommentControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/CustomWebResponseExceptionTranslator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/category/SexType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomOauthExceptionSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/CustomOauthException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/MatchingControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/restapi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/security/AuthServerConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/comments/CommentAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/response/ResponseData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/response/ResponseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/response/ResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/response/ResponseStatus.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/ExceptionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/ExceptionResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/user/AdminUserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/user/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/user/UserDaoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/user/UserJpaController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/user/UserV2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/AlreadyApplyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/exceptions/AlreadyApplyException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/RedundantDataException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/exception/high/OverlappingDataException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingApplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/ParticipantService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/matching/MatchingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/service/user/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/CommentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/CommentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/ExceptionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/MatchingCotroller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/MatchingCotroller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostLikeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostLikeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CustomSnippetsUtill.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserDetailProfilesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserDetailProfilesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserDreamProfilesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserDreamProfilesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/dto/UserSaveRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/dto/UserSaveRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/dto/UserUpdateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/dto/UserUpdateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/messages.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CommonSnippetsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CommonSnippetsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/CommentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/CommentControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/LoginControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/LoginControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostLikeControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostLikeControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserDetailProfilesControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserDreamProfilesControllerTest.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/common/BaseControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/common/BaseControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/org/springframework/restdocs/templates/enum-fields.snippet" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/org/springframework/restdocs/templates/custom-response-fields.snippet" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseData$ResponseDataBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseData$ResponseDataBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/comments/CommentAssembler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseData$ResponseDataBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/response/ResponseStatus.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User$UserBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" afterDir="false" />
@@ -71,10 +84,20 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserModel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/CustomizedResponseEntityExceptionHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/ExceptionResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/ExceptionResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/AlreadyApplyException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/exceptions/AlreadyApplyException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/exception/high/RedundantDataException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingApplyService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/service/user/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/service/user/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/CommentsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/CommentsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/ExceptionController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/MatchingCotroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/MatchingCotroller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/PostController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserDetailProfilesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserDetailProfilesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserDreamProfilesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserDreamProfilesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/messages.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/LoginControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/LoginControllerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/common/BaseControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/restapi/web/common/BaseControllerTest.class" afterDir="false" />
     </list>
@@ -110,7 +133,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
   </component>
@@ -133,13 +156,6 @@
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\test\resources\org\springframework\restdocs\templates" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.example.restapi.web" />
-      <recent name="com.example.restapi.web.dto" />
-      <recent name="com.example.restapi.exception.high" />
-      <recent name="com.example.restapi.config.security" />
-      <recent name="com.example.restapi.domain.matching.result" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\test\java\com\example\restapi\snippets" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\test\java\com\example\restapi\web\common" />
@@ -147,35 +163,29 @@
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main\java\com\example\restapi\config" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main\java\com\example\restapi\config\security" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.restapi.domain.user.profile.category" />
+      <recent name="com.example.restapi.web" />
+      <recent name="com.example.restapi.domain.posts.like" />
+      <recent name="com.example.restapi.web.dto" />
+      <recent name="com.example.restapi.exception.high" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.restapi.exception.high" />
       <recent name="com.example.restapi.snippets" />
       <recent name="com.example.restapi.domain.user" />
       <recent name="com.example.restapi.web.service.matching" />
       <recent name="com.example.restapi.domain.profile" />
-      <recent name="com.example.restapi.exception" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RestapiApplication">
-    <configuration name="RestapiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.RestapiApplication" />
-      <module name="restapi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.restapi.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.MatchingControllerTest.getMatchingResult">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <module name="restapi" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PostControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MatchingControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="restapi" />
       <extension name="coverage">
         <pattern>
@@ -184,13 +194,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.restapi.web" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.PostControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PostControllerTest.deletePost" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MatchingControllerTest.applyMatching" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="restapi" />
       <extension name="coverage">
         <pattern>
@@ -199,14 +209,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.restapi.web" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.PostControllerTest" />
-      <option name="METHOD_NAME" value="deletePost" />
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
+      <option name="METHOD_NAME" value="applyMatching" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PostControllerTest.writePost" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MatchingControllerTest.getMatchingResult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="restapi" />
       <extension name="coverage">
         <pattern>
@@ -215,24 +225,41 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.example.restapi.web" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.PostControllerTest" />
-      <option name="METHOD_NAME" value="writePost" />
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
+      <option name="METHOD_NAME" value="getMatchingResult" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RestapiApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MatchingControllerTest.getPostList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="restapi" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.restapi.*" />
+          <option name="PATTERN" value="com.example.restapi.web.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.example.restapi" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.RestapiApplicationTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.example.restapi.web" />
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
+      <option name="METHOD_NAME" value="getPostList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MatchingControllerTest.reduntApplyMatching" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="restapi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.restapi.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.restapi.web" />
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
+      <option name="METHOD_NAME" value="reduntApplyMatching" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -286,19 +313,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Unnamed" />
-      <item itemvalue="JUnit.PostControllerTest" />
-      <item itemvalue="JUnit.PostControllerTest.writePost" />
-      <item itemvalue="JUnit.PostControllerTest.deletePost" />
-      <item itemvalue="Application.RestapiApplication" />
-      <item itemvalue="JUnit.RestapiApplicationTests" />
+      <item itemvalue="JUnit.MatchingControllerTest.getPostList" />
+      <item itemvalue="JUnit.MatchingControllerTest" />
+      <item itemvalue="JUnit.MatchingControllerTest.reduntApplyMatching" />
+      <item itemvalue="JUnit.MatchingControllerTest.applyMatching" />
+      <item itemvalue="JUnit.MatchingControllerTest.getMatchingResult" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RestapiApplication" />
-        <item itemvalue="JUnit.RestapiApplicationTests" />
-        <item itemvalue="JUnit.PostControllerTest.deletePost" />
-        <item itemvalue="JUnit.PostControllerTest.writePost" />
-        <item itemvalue="JUnit.PostControllerTest" />
+        <item itemvalue="JUnit.MatchingControllerTest.getMatchingResult" />
+        <item itemvalue="JUnit.MatchingControllerTest" />
+        <item itemvalue="JUnit.MatchingControllerTest.applyMatching" />
+        <item itemvalue="JUnit.MatchingControllerTest.reduntApplyMatching" />
+        <item itemvalue="JUnit.MatchingControllerTest.getPostList" />
       </list>
     </recent_temporary>
   </component>
@@ -368,14 +395,14 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="691" y="16" key="#com.intellij.ide.util.MemberChooser/0.0.1280.689@0.0.1280.689" timestamp="1610779927272" />
-    <state x="246" y="268" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1610610476859">
+    <state x="246" y="268" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1612237828867">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="246" y="268" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1280.689@0.0.1280.689" timestamp="1610610476859" />
-    <state x="423" y="212" width="577" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1610696149956">
+    <state x="246" y="268" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1280.689@0.0.1280.689" timestamp="1612237828867" />
+    <state x="423" y="212" width="577" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1612233271927">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="423" y="212" width="577" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.689@0.0.1280.689" timestamp="1610696149956" />
+    <state x="423" y="212" width="577" height="272" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.689@0.0.1280.689" timestamp="1612233271927" />
     <state x="432" y="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages" timestamp="1610508965116">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -384,50 +411,50 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="423" y="212" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1280.689@0.0.1280.689" timestamp="1608279704833" />
-    <state x="76" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1611818456169">
+    <state x="76" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1612245359955">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="76" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.689@0.0.1280.689" timestamp="1611818456169" />
+    <state x="76" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.689@0.0.1280.689" timestamp="1612245359955" />
     <state x="371" y="92" width="538" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1611632136029">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="371" y="92" width="538" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.689@0.0.1280.689" timestamp="1611632136029" />
-    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1610974136749">
+    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1612185857786">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1610974136749" />
-    <state width="1237" height="216" key="GridCell.Tab.0.bottom" timestamp="1611817284292">
+    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1612185857786" />
+    <state width="1237" height="222" key="GridCell.Tab.0.bottom" timestamp="1612249089742">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1611817284292" />
-    <state width="1237" height="216" key="GridCell.Tab.0.center" timestamp="1611817284292">
+    <state width="1237" height="222" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1612249089742" />
+    <state width="1237" height="222" key="GridCell.Tab.0.center" timestamp="1612249089742">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1611817284292" />
-    <state width="1237" height="216" key="GridCell.Tab.0.left" timestamp="1611817284292">
+    <state width="1237" height="222" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1612249089742" />
+    <state width="1237" height="222" key="GridCell.Tab.0.left" timestamp="1612249089742">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1611817284292" />
-    <state width="1237" height="216" key="GridCell.Tab.0.right" timestamp="1611817284292">
+    <state width="1237" height="222" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1612249089742" />
+    <state width="1237" height="222" key="GridCell.Tab.0.right" timestamp="1612249089742">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="216" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1611817284292" />
-    <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1611807278599">
+    <state width="1237" height="222" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1612249089742" />
+    <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.bottom/0.0.1280.689@0.0.1280.689" timestamp="1611807278599" />
-    <state width="1237" height="225" key="GridCell.Tab.1.center" timestamp="1611807278598">
+    <state width="1237" height="225" key="GridCell.Tab.1.bottom/0.0.1280.689@0.0.1280.689" timestamp="1612169091388" />
+    <state width="1237" height="225" key="GridCell.Tab.1.center" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.center/0.0.1280.689@0.0.1280.689" timestamp="1611807278598" />
-    <state width="1237" height="225" key="GridCell.Tab.1.left" timestamp="1611807278598">
+    <state width="1237" height="225" key="GridCell.Tab.1.center/0.0.1280.689@0.0.1280.689" timestamp="1612169091388" />
+    <state width="1237" height="225" key="GridCell.Tab.1.left" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.left/0.0.1280.689@0.0.1280.689" timestamp="1611807278598" />
-    <state width="1237" height="225" key="GridCell.Tab.1.right" timestamp="1611807278598">
+    <state width="1237" height="225" key="GridCell.Tab.1.left/0.0.1280.689@0.0.1280.689" timestamp="1612169091388" />
+    <state width="1237" height="225" key="GridCell.Tab.1.right" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="225" key="GridCell.Tab.1.right/0.0.1280.689@0.0.1280.689" timestamp="1611807278598" />
+    <state width="1237" height="225" key="GridCell.Tab.1.right/0.0.1280.689@0.0.1280.689" timestamp="1612169091388" />
     <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1611555620390">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -448,14 +475,14 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="412" y="140" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1280.689@0.0.1280.689" timestamp="1609811749339" />
-    <state x="15" y="104" key="extract.method.dialog" timestamp="1611814782820">
+    <state x="15" y="104" key="extract.method.dialog" timestamp="1612244804908">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="15" y="104" key="extract.method.dialog/0.0.1280.689@0.0.1280.689" timestamp="1611814782820" />
-    <state x="0" y="33" width="1280" height="602" key="find.popup" timestamp="1611818737463">
+    <state x="15" y="104" key="extract.method.dialog/0.0.1280.689@0.0.1280.689" timestamp="1612244804908" />
+    <state x="0" y="33" width="1280" height="602" key="find.popup" timestamp="1612248605663">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="0" y="33" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1611818737463" />
+    <state x="0" y="33" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1612248605663" />
     <state x="37" y="0" key="new project wizard" timestamp="1607926175349">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -468,10 +495,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1611818162611" />
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1611817447143">
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1612243729402">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1611817447143" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1612243729402" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

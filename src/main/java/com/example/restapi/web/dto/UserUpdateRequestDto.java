@@ -4,6 +4,7 @@ package com.example.restapi.web.dto;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.profile.DetailProfiles;
 import com.example.restapi.domain.user.profile.DreamProfiles;
+import com.example.restapi.domain.user.profile.category.SexType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +26,7 @@ public class UserUpdateRequestDto {
     private DreamProfiles dreamProfiles;
 
     private DetailProfiles detailProfiles;
+
+    private SexType sexType;
 
 }

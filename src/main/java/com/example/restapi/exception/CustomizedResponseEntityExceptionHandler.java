@@ -1,8 +1,8 @@
 package com.example.restapi.exception;
 
-import com.example.restapi.domain.response.ResponseData;
-import com.example.restapi.domain.response.ResponseService;
 import com.example.restapi.exception.high.*;
+import com.example.restapi.exception.response.ResponseData;
+import com.example.restapi.exception.response.ResponseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
@@ -48,7 +46,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.INVALID_REQUEST_PARAMETER_ERROR,
+                com.example.restapi.exception.response.ResponseStatus.INVALID_REQUEST_PARAMETER_ERROR,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,7 +59,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_URI,
+                com.example.restapi.exception.response.ResponseStatus.NOT_EXIST_URI,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -74,19 +72,19 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_PARAMETER_ERROR,
+                com.example.restapi.exception.response.ResponseStatus.NOT_EXIST_PARAMETER_ERROR,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @ExceptionHandler(RedundantDataException.class)
+    @ExceptionHandler(OverlappingDataException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    protected ResponseEntity redundantDataException(WebRequest request, RedundantDataException e) {
+    protected ResponseEntity overlappingException(WebRequest request, OverlappingDataException e) {
         ExceptionResponse exceptionResponse =
                 new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.REDUNTANT_DATA_ERROR,
+                com.example.restapi.exception.response.ResponseStatus.OVERLAPPING_DATA_ERROR,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -100,7 +98,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse(e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                com.example.restapi.exception.response.ResponseStatus.NOT_EXIST_DATA,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -113,7 +111,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.SERVICE_ACCESS_DENIED_ERROR,
+                com.example.restapi.exception.response.ResponseStatus.SERVICE_ACCESS_DENIED_ERROR,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.FORBIDDEN);
@@ -125,7 +123,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse( e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.UNAUTHORIZED,
+                com.example.restapi.exception.response.ResponseStatus.UNAUTHORIZED,
                 exceptionResponse);
         return new ResponseEntity(responseData, HttpStatus.UNAUTHORIZED);
     }
@@ -138,7 +136,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                com.example.restapi.exception.response.ResponseStatus.NOT_EXIST_DATA,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.NOT_FOUND);
@@ -151,7 +149,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse(LocalDateTime.now(), e.getMessage(), request.getDescription(false));
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.NOT_EXIST_DATA,
+                com.example.restapi.exception.response.ResponseStatus.NOT_EXIST_DATA,
                 exceptionResponse);
 
         return new ResponseEntity(responseData, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -164,7 +162,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 new ExceptionResponse(LocalDateTime.now(), "100", "권한이 없습니다");
 
         ResponseData<ExceptionResponse> responseData = responseService.create(
-                com.example.restapi.domain.response.ResponseStatus.UNKNOWN_ERROR,
+                com.example.restapi.exception.response.ResponseStatus.UNKNOWN_ERROR,
                 exceptionResponse);
         System.out.println("완료");
         return new ResponseEntity(responseData, HttpStatus.BAD_REQUEST);
