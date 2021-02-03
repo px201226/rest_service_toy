@@ -44,7 +44,10 @@ public class ParticipantService {
         return participantRepository.save(build);
     }
 
-    @Deprecated(since = "[2021-02-02] /apply, /result에 대체 됨")
+    /*
+     * @deprecated "[2021-02-02] /apply, /result에 대체 됨".
+     */
+    @Deprecated
     @Transactional
     public Participant getLastApplyHistory(String userEmail){
         User user = userRepository.findByEmail(userEmail).orElseThrow(UserNotFoundException::new);
