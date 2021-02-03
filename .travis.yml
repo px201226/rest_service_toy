@@ -1,0 +1,18 @@
+language: java
+jdk:
+  - openjdk8
+
+branches:
+  only:
+    - master
+
+# Travis CI 서버의 Home
+cache:
+  directories:
+    - $HOME/.m2
+
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - px201226@gmail.com
