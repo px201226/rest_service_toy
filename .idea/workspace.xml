@@ -27,7 +27,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/appspec.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,11 +86,11 @@
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\test\java\com\example\restapi\snippets" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\test\java\com\example\restapi\web\common" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main" />
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main\java\com\example\restapi\config" />
-      <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main\java\com\example\restapi\config\security" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.restapi.domain.user.profile.category" />
