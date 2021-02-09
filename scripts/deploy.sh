@@ -34,4 +34,4 @@ chmod +x $JAR_NAME
 echo "> $JAR_NAME 실행"
 
 nohup java -jar \
-    $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+    $JAR_NAME > $REPOSITORY/log.out 2>&1 &
