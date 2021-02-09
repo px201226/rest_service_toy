@@ -11,6 +11,8 @@ spring:
   h2:
     console:
       enabled: true
+      settings:
+        web-allow-others: true
   messages:
     basename: messages
   datasource:
