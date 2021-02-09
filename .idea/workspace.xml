@@ -26,7 +26,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="" />
+    <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/service/matching/MatchingService.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,9 +64,12 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/matching" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../StudyRoomBot" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.48735633" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -104,7 +112,20 @@
       <recent name="com.example.restapi.domain.profile" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MatchingControllerTest.getMatchingResult">
+  <component name="RunManager" selected="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar">
+    <configuration name="RestapiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.RestapiApplication" />
+      <module name="restapi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.restapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <module name="restapi" />
       <method v="2">
@@ -158,37 +179,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MatchingControllerTest.getPostList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="restapi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.restapi.web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.restapi.web" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
-      <option name="METHOD_NAME" value="getPostList" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MatchingControllerTest.reduntApplyMatching" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="restapi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.restapi.web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.restapi.web" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
-      <option name="METHOD_NAME" value="reduntApplyMatching" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="rest-servic-0.0.1-SNAPSHOT.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/target/rest-servic-0.0.1-SNAPSHOT.jar" />
+      <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <option name="VM_PARAMETERS" />
@@ -239,19 +232,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Unnamed" />
-      <item itemvalue="JUnit.MatchingControllerTest.getPostList" />
       <item itemvalue="JUnit.MatchingControllerTest" />
-      <item itemvalue="JUnit.MatchingControllerTest.reduntApplyMatching" />
       <item itemvalue="JUnit.MatchingControllerTest.applyMatching" />
       <item itemvalue="JUnit.MatchingControllerTest.getMatchingResult" />
+      <item itemvalue="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar" />
+      <item itemvalue="Application.RestapiApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar" />
+        <item itemvalue="Application.RestapiApplication" />
         <item itemvalue="JUnit.MatchingControllerTest.getMatchingResult" />
         <item itemvalue="JUnit.MatchingControllerTest" />
         <item itemvalue="JUnit.MatchingControllerTest.applyMatching" />
-        <item itemvalue="JUnit.MatchingControllerTest.reduntApplyMatching" />
-        <item itemvalue="JUnit.MatchingControllerTest.getPostList" />
       </list>
     </recent_temporary>
   </component>
@@ -301,6 +294,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="267" y="24" key="#Inspections/0.0.1280.689@0.0.1280.689" timestamp="1611818597826" />
+    <state x="121" y="0" key="#Project_Structure" timestamp="1612684782134">
+      <screen x="0" y="0" width="1280" height="689" />
+    </state>
+    <state x="121" y="0" key="#Project_Structure/0.0.1280.689@0.0.1280.689" timestamp="1612684782134" />
     <state x="371" y="100" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1610767343724">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -353,26 +350,26 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="171" y="0" key="DBNavigator.ProjectSettingsDialog/0.0.1280.689@0.0.1280.689" timestamp="1612331956295" />
-    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1612185857786">
+    <state x="421" y="100" key="FileChooserDialogImpl" timestamp="1612695965603">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1612185857786" />
-    <state width="1237" height="222" key="GridCell.Tab.0.bottom" timestamp="1612329571996">
+    <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1612695965603" />
+    <state width="1237" height="222" key="GridCell.Tab.0.bottom" timestamp="1612845803273">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1612329571996" />
-    <state width="1237" height="222" key="GridCell.Tab.0.center" timestamp="1612329571996">
+    <state width="1237" height="222" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1612845803273" />
+    <state width="1237" height="222" key="GridCell.Tab.0.center" timestamp="1612845803273">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1612329571996" />
-    <state width="1237" height="222" key="GridCell.Tab.0.left" timestamp="1612329571996">
+    <state width="1237" height="222" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1612845803273" />
+    <state width="1237" height="222" key="GridCell.Tab.0.left" timestamp="1612845803273">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1612329571996" />
-    <state width="1237" height="222" key="GridCell.Tab.0.right" timestamp="1612329571996">
+    <state width="1237" height="222" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1612845803273" />
+    <state width="1237" height="222" key="GridCell.Tab.0.right" timestamp="1612845803273">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="222" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1612329571996" />
+    <state width="1237" height="222" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1612845803273" />
     <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -393,10 +390,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="171" y="0" key="Maven.ArtifactSearchDialog/0.0.1280.689@0.0.1280.689" timestamp="1611555620390" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1609480232903">
+    <state x="142" y="0" key="SettingsEditor" timestamp="1612714007794">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.689@0.0.1280.689" timestamp="1609480232903" />
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.689@0.0.1280.689" timestamp="1612714007794" />
     <state x="436" y="123" key="chooseDestDirectoryDialog" timestamp="1610520532621">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -413,10 +410,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="15" y="104" key="extract.method.dialog/0.0.1280.689@0.0.1280.689" timestamp="1612244804908" />
-    <state x="0" y="33" width="1280" height="602" key="find.popup" timestamp="1612248605663">
+    <state x="0" y="33" width="1280" height="602" key="find.popup" timestamp="1612802016955">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="0" y="33" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1612248605663" />
+    <state x="0" y="33" width="1280" height="602" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1612802016955" />
     <state x="37" y="0" key="new project wizard" timestamp="1607926175349">
       <screen x="0" y="0" width="1280" height="689" />
     </state>

@@ -8,6 +8,9 @@ logging:
     #org.hibernate.type: trace # 쿼리 파라미터 출력
 
 spring:
+  h2:
+    console:
+      enabled: true
   messages:
     basename: messages
   datasource:
