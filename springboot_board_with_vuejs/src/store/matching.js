@@ -55,7 +55,7 @@ const actions = {
   async QUERY_NEXT_MATCHING_DAY(context) {
     try {
       const response = await getNextMatchingDay();
-      context.commit("SET_MATCHING_DAY", response.data);
+      context.commit("SET_MATCHING_DAY", response.data.nextDay);
       return response.data;
     } catch (e) {
       return Promise.reject(e);

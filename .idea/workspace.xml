@@ -107,7 +107,7 @@
       <recent name="com.example.restapi.domain.profile" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar">
+  <component name="RunManager" selected="Application.RestapiApplication">
     <configuration name="RestapiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.restapi.RestapiApplication" />
       <module name="restapi" />
@@ -142,22 +142,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MatchingControllerTest.applyMatching" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="restapi" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.restapi.web.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.restapi.web" />
-      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
-      <option name="METHOD_NAME" value="applyMatching" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MatchingControllerTest.getMatchingResult" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="restapi" />
       <extension name="coverage">
@@ -170,6 +154,20 @@
       <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.MatchingControllerTest" />
       <option name="METHOD_NAME" value="getMatchingResult" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.example.restapi in restapi" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="restapi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.restapi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.restapi" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -228,18 +226,18 @@
     <list>
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="JUnit.MatchingControllerTest" />
-      <item itemvalue="JUnit.MatchingControllerTest.applyMatching" />
       <item itemvalue="JUnit.MatchingControllerTest.getMatchingResult" />
       <item itemvalue="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar" />
       <item itemvalue="Application.RestapiApplication" />
+      <item itemvalue="JUnit.com.example.restapi in restapi" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="Application.RestapiApplication" />
+        <item itemvalue="JUnit.com.example.restapi in restapi" />
+        <item itemvalue="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar" />
         <item itemvalue="JUnit.MatchingControllerTest.getMatchingResult" />
         <item itemvalue="JUnit.MatchingControllerTest" />
-        <item itemvalue="JUnit.MatchingControllerTest.applyMatching" />
       </list>
     </recent_temporary>
   </component>

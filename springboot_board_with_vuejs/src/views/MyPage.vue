@@ -12,7 +12,7 @@
             <span class="">{{ nickName }}</span>
           </v-row>
           <v-row>
-            <span class="text-caption">카카오 ID</span>
+            <span class="text-caption">{{ kakaoId }}</span>
           </v-row>
         </v-col>
       </v-row>

@@ -35,7 +35,7 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getCommentList(page);
-      context.commit("SET_COMMENS", response.data);
+      context.commit("SET_COMMENS", response.data._embedded.commentModels);
       return  response.data;
     } catch (e) {
       return Promise.reject(e);

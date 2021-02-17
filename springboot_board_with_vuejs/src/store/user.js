@@ -92,7 +92,7 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getPostList();
-      return response.data.content;
+      return response.data._embedded.postModels;
     } catch (e) {
       context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
     } 
@@ -103,7 +103,7 @@ const actions = {
     try {
       context.commit('START_LOADING')
       const response = await getCommentList();
-      return response.data.content;;
+      return response.data._embedded.commentModels;
     } catch (e) {
       context.commit('OPEN_MODAL', {title: '에러', content: e.response.data.message, option1: '닫기',});
     } 
