@@ -41,6 +41,7 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
         userModel.add(linkTo(UserController.class).slash("").withSelfRel())
                 .add(linkTo(methodOn(UserController.class).getPostList(null)).withRel("posts"))
                 .add(linkTo(methodOn(UserController.class).getCommentList(null)).withRel("comments"));
+             //   .add(linkTo("/docs/index.html#resources-user").withRel("documentation_url"));
 
         return userModel;
 
@@ -60,25 +61,25 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
                         .likes(Long.valueOf(post.getLike().size()))
                         .build()
                         .add(linkTo(
-                                methodOn(PostController.class).findById(post.getId(),null)).withSelfRel()))
+                                methodOn(PostController.class).findById(post.getId(), null)).withSelfRel()))
                 .collect(Collectors.toList());
     }
 
 
     /* 사용자의 Comment를 HAL로 표현한다.
-    *  Lazy Loding 으로 사용 안됨 */
+     *  Lazy Loding 으로 사용 안됨 */
     @Deprecated
-    private List<CommentModel> toCommentModel(List<Comment> comments){
-        if(comments.isEmpty()) return Collections.emptyList();
+    private List<CommentModel> toCommentModel(List<Comment> comments) {
+        if (comments.isEmpty()) return Collections.emptyList();
 
         return comments.stream()
                 .map(comment -> CommentModel.builder()
-                .id(comment.getId())
-                .content(comment.getContent())
-                .postId(comment.getPost().getId())
-                .userNickName(comment.getUser().getNickName())
+                        .id(comment.getId())
+                        .content(comment.getContent())
+                        .postId(comment.getPost().getId())
+                        .userNickName(comment.getUser().getNickName())
                         .userEmail(comment.getUser().getEmail())
-                .build().add(linkTo(methodOn(CommentsController.class).findById(comment.getPost().getId(), comment.getId(),null)).withSelfRel()))
+                        .build().add(linkTo(methodOn(CommentsController.class).findById(comment.getPost().getId(), comment.getId(), null)).withSelfRel()))
                 .collect(Collectors.toList());
     }
 }

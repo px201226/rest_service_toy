@@ -13,7 +13,6 @@ import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -22,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,14 +37,14 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity getPageableList(Pageable pageable,
-                                          PagedResourcesAssembler<PostAdapter> postAdapterAssembler,
-                                          PagedResourcesAssembler<Post> postAssembler,
+                                          PagedPostAssemblerAdapter pagedPostAssemblerAdapter,
                                           @AuthUser User user) {
 
         Page<Post> posts = postsService.findAll(pageable);
 
         Page<PostAdapter> postAdapters = posts.map(p -> p.toAdapter(Optional.ofNullable(user)));
-        PagedModel<PostModel> postModels = postAdapterAssembler.toModel(postAdapters, this.postAdapterAssembler);
+
+        PagedModel<PostModel> postModels = pagedPostAssemblerAdapter.toModel(postAdapters, this.postAdapterAssembler);
 
         return ResponseEntity.ok(postModels);
     }

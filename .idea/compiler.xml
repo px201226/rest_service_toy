@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="restapi" target="11" />
+      <module name="restapi" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

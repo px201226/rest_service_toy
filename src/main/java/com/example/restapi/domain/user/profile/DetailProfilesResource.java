@@ -19,7 +19,6 @@ public class DetailProfilesResource {
 
     public DetailProfilesResource(DetailProfiles content, Link... links) {
         entityModel = EntityModel.of(content, links)
-
                 .add(linkTo(methodOn(UserDetailProfilesController.class).getUserProfile(null)).withRel("show"))
                 .add(linkTo(methodOn(UserDetailProfilesController.class).updateUserProfile(null,null,null)).withRel("update"));
     }

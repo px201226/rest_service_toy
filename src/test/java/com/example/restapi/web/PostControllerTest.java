@@ -64,6 +64,7 @@ public class PostControllerTest extends BaseControllerTest {
                 .andDo(document("post-retreive",
                         links(
                                 linkWithRel("self").description("Self link"),
+                                linkWithRel("documentation_url").description("문서 URL"),
                                 linkWithRel("first").description("첫번째 페이지 링크").optional(),
                                 linkWithRel("next").description("다음 페이지 링크").optional(),
                                 linkWithRel("last").description("마지막 페이지 링크").optional()
@@ -94,6 +95,7 @@ public class PostControllerTest extends BaseControllerTest {
                                 fieldWithPath("_embedded.postModels.[]._links.self.href").description("게시물 Self link"),
                                 fieldWithPath("_embedded.postModels.[]._links.comments.href").description("게시물 댓글 조회 link"),
                                 fieldWithPath("_links.self.href").description("Self link"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 URL"),
                                 fieldWithPath("_links.first.href").description("첫번째 페이지 링크").optional(),
                                 fieldWithPath("_links.next.href").description("다음 페이지 링크").optional(),
                                 fieldWithPath("_links.last.href").description("마지막 페이지 링크").optional(),

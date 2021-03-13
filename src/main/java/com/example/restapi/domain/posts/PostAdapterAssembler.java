@@ -37,6 +37,7 @@ public class PostAdapterAssembler extends RepresentationModelAssemblerSupport<Po
     public CollectionModel<PostModel> toCollectionModel(Iterable<? extends PostAdapter> entities)
     {
         CollectionModel<PostModel> models = super.toCollectionModel(entities);
+        models.add(linkTo("/docs/index.html#resources-post").withRel("documentation_url"));
         return models;
     }
 }
