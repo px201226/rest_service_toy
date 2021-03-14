@@ -19,19 +19,4 @@ public class ExceptionController {
     }
 
 
-    @RequestMapping(value = "/invalid")
-    public ResponseEntity entrypointException3() {
-        throw new UnauthorizedException("토큰이 유효하지 않습니다.");
-    }
-
-    @RequestMapping(value = "/expired")
-    public ResponseEntity entrypointException4() {
-        throw new UnauthorizedException("토큰 유효기간이 지났습니다");
-    }
-
-    @RequestMapping(value = "/other")
-    public ResponseEntity entrypointException5() {
-        throw new UnauthorizedException("토큰 에러");
-    }
-
 }

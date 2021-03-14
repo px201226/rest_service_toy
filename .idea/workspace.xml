@@ -27,16 +27,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PagedPostAssemblerAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/restapi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/restapi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/RestapiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/RestapiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapterAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/posts/PostAdapterAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/UserAssembler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/DetailProfilesResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/DetailProfilesResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/PostControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/RestapiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/RestapiApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/common/ErrorsSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/common/ErrorsSerializer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/CustomAuthenticationEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/config/security/CustomAuthenticationEntryPoint.class" afterDir="false" />
@@ -192,7 +183,7 @@
       <recent name="com.example.restapi.domain.profile" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PostControllerTest">
+  <component name="RunManager" selected="Application.RestapiApplication">
     <configuration name="RestapiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.restapi.RestapiApplication" />
       <module name="restapi" />
@@ -306,9 +297,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RestapiApplication" />
         <item itemvalue="JUnit.PostControllerTest" />
         <item itemvalue="JUnit.All in restapi" />
-        <item itemvalue="Application.RestapiApplication" />
         <item itemvalue="JUnit.com.example.restapi in restapi" />
         <item itemvalue="JAR Application.rest-servic-0.0.1-SNAPSHOT.jar" />
       </list>
@@ -420,22 +411,22 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1615302614324" />
-    <state width="1237" height="143" key="GridCell.Tab.0.bottom" timestamp="1615635268909">
+    <state width="1237" height="143" key="GridCell.Tab.0.bottom" timestamp="1615726220091">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="143" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1615635268909" />
-    <state width="1237" height="143" key="GridCell.Tab.0.center" timestamp="1615635268909">
+    <state width="1237" height="143" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1615726220091" />
+    <state width="1237" height="143" key="GridCell.Tab.0.center" timestamp="1615726220091">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="143" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1615635268909" />
-    <state width="1237" height="143" key="GridCell.Tab.0.left" timestamp="1615635268908">
+    <state width="1237" height="143" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1615726220091" />
+    <state width="1237" height="143" key="GridCell.Tab.0.left" timestamp="1615726220091">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="143" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1615635268908" />
-    <state width="1237" height="143" key="GridCell.Tab.0.right" timestamp="1615635268909">
+    <state width="1237" height="143" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1615726220091" />
+    <state width="1237" height="143" key="GridCell.Tab.0.right" timestamp="1615726220091">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="143" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1615635268909" />
+    <state width="1237" height="143" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1615726220091" />
     <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
