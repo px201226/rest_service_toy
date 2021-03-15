@@ -1,6 +1,7 @@
 package com.example.restapi.domain.user.profile.category;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Getter;
 
 import java.util.Map;
 import java.util.Objects;
@@ -8,6 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
 
+@Getter
 public enum TallType {
     SMALL(0, "작음"),
     LITTEL_SMLL(1, "살짝 작음"),

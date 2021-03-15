@@ -1,6 +1,7 @@
 package com.example.restapi.domain.user.profile.category;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Getter;
 
 import java.util.Map;
 import java.util.Objects;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toMap;
 
 
+@Getter
 public enum BodyType {
     SKINNY(0, "날씬"),
     SLIM(1, "슬림"),

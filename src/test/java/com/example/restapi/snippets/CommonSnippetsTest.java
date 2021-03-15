@@ -1,6 +1,9 @@
 package com.example.restapi.snippets;
 
 
+import com.example.restapi.domain.user.profile.category.BodyType;
+import com.example.restapi.domain.user.profile.category.LocationCategory;
+import com.example.restapi.domain.user.profile.category.TallType;
 import com.example.restapi.exception.response.ResponseStatus;
 import com.example.restapi.web.common.RestDocsConfiguration;
 import com.example.restapi.web.common.TestDescription;
@@ -62,10 +65,10 @@ public class CommonSnippetsTest {
 
     @Test
     @TestDescription("resultCode snippets 생성 테스트")
-    public void commons() throws Exception {
+    public void generateCommonCodeSnippets() throws Exception {
 
         this.mockMvc.perform(
-                get("/resultCode")
+                get("/result_code")
                         .accept(MediaType.APPLICATION_JSON)
         )
                 .andExpect(status().isOk())
@@ -77,13 +80,86 @@ public class CommonSnippetsTest {
                 ));
     }
 
+    @Test
+    @TestDescription("bodyType snippets 생성 테스트")
+    public void generateBodyTypeSnippets() throws Exception {
+
+        this.mockMvc.perform(
+                get("/body_type")
+                        .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andDo(document("body-type",
+                        customResponseFields("custom-response", null,
+                                Attributes.attributes(Attributes.key("title").value("BodyType Code")),
+                                enumConvertFieldDescriptor(BodyType.values())
+                        )
+                ));
+    }
+
+
+    @Test
+    @TestDescription("LocationCategory snippets 생성 테스트")
+    public void generateLocationCategorySnippets() throws Exception {
+
+        this.mockMvc.perform(
+                get("/location_category")
+                        .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andDo(document("location-category",
+                        customResponseFields("custom-response", null,
+                                Attributes.attributes(Attributes.key("title").value("LocationCategory Code")),
+                                enumConvertFieldDescriptor(LocationCategory.values())
+                        )
+                ));
+    }
+
+
+    @Test
+    @TestDescription("TallType snippets 생성 테스트")
+    public void generateTallTypeSnippets() throws Exception {
+
+        this.mockMvc.perform(
+                get("/tall_type")
+                        .accept(MediaType.APPLICATION_JSON)
+        )
+                .andExpect(status().isOk())
+                .andDo(document("tall-type",
+                        customResponseFields("custom-response", null,
+                                Attributes.attributes(Attributes.key("title").value("TallType Code")),
+                                enumConvertFieldDescriptor(TallType.values())
+                        )
+                ));
+    }
+
+
     private FieldDescriptor[] enumConvertFieldDescriptor(ResponseStatus[] enumTypes) {
         return Arrays.stream(enumTypes)
                 .map(enumType -> fieldWithPath(String.valueOf(enumType.getResultCode())).description(enumType.getResultMsg()))
                 .toArray(FieldDescriptor[]::new);
     }
 
-    public static CustomResponseFieldsSnippet customResponseFields(String type,
+    private FieldDescriptor[] enumConvertFieldDescriptor(TallType[] enumTypes) {
+        return Arrays.stream(enumTypes)
+                .map(enumType -> fieldWithPath(String.valueOf(enumType.toString())).description(enumType.getDescription()))
+                .toArray(FieldDescriptor[]::new);
+    }
+
+    private FieldDescriptor[] enumConvertFieldDescriptor(LocationCategory[] enumTypes) {
+        return Arrays.stream(enumTypes)
+                .map(enumType -> fieldWithPath(String.valueOf(enumType.toString())).description(enumType.getDescription()))
+                .toArray(FieldDescriptor[]::new);
+    }
+
+    private FieldDescriptor[] enumConvertFieldDescriptor(BodyType[] enumTypes) {
+        return Arrays.stream(enumTypes)
+                .map(enumType -> fieldWithPath(String.valueOf(enumType.toString())).description(enumType.getDescription()))
+                .toArray(FieldDescriptor[]::new);
+    }
+
+
+    private static CustomResponseFieldsSnippet customResponseFields(String type,
                                                                    PayloadSubsectionExtractor<?> subsectionExtractor,
                                                                    Map<String, Object> attributes, FieldDescriptor... descriptors) {
         return new CustomResponseFieldsSnippet(type, subsectionExtractor, Arrays.asList(descriptors), attributes
