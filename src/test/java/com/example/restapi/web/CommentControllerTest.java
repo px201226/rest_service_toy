@@ -79,6 +79,7 @@ public class CommentControllerTest extends BaseControllerTest {
         )
                 .andDo(document("comment-retreive",
                         links(
+                                linkWithRel("documentation_url").description("문서 링크")
                                 //linkWithRel("self").description("Self link"),
                         ),
                         requestHeaders(
@@ -100,7 +101,8 @@ public class CommentControllerTest extends BaseControllerTest {
                                 fieldWithPath("_embedded.commentModels.[].userNickName").description("댓글 작성자 닉네임"),
                                 fieldWithPath("_embedded.commentModels.[].modifyDate").description("댓글의 마지막 수정일"),
                                 fieldWithPath("_embedded.commentModels.[].isWriter").description("댓글 작성자 여부"),
-                                fieldWithPath("_embedded.commentModels.[]._links.self.href").description("댓글 Self link")
+                                fieldWithPath("_embedded.commentModels.[]._links.self.href").description("댓글 Self link"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());
@@ -126,7 +128,8 @@ public class CommentControllerTest extends BaseControllerTest {
         )
                 .andDo(document("comment-write",
                         links(
-                                linkWithRel("self").description("Self link")
+                                linkWithRel("self").description("Self link"),
+                                linkWithRel("documentation_url").description("문서 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -151,7 +154,8 @@ public class CommentControllerTest extends BaseControllerTest {
                                 fieldWithPath("userNickName").description("댓글 작성자 닉네임"),
                                 fieldWithPath("modifyDate").description("댓글의 마지막 수정일"),
                                 fieldWithPath("isWriter").description("댓글 작성자 여부"),
-                                fieldWithPath("_links.self.href").description("댓글 Self link")
+                                fieldWithPath("_links.self.href").description("댓글 Self link"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());
@@ -183,7 +187,8 @@ public class CommentControllerTest extends BaseControllerTest {
         )
                 .andDo(document("comment-update",
                         links(
-                                linkWithRel("self").description("Self link")
+                                linkWithRel("self").description("Self link"),
+                                linkWithRel("documentation_url").description("문서 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -209,7 +214,8 @@ public class CommentControllerTest extends BaseControllerTest {
                                 fieldWithPath("userNickName").description("댓글 작성자 닉네임"),
                                 fieldWithPath("modifyDate").description("댓글의 마지막 수정일"),
                                 fieldWithPath("isWriter").description("댓글 작성자 여부"),
-                                fieldWithPath("_links.self.href").description("댓글 Self link")
+                                fieldWithPath("_links.self.href").description("댓글 Self link"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());

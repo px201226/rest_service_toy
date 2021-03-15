@@ -124,7 +124,9 @@ public class MatchingControllerTest extends BaseControllerTest {
                 .accept(MediaTypes.HAL_JSON)
         )
                 .andDo(document("participant-apply-overlap",
-
+                        links(
+                                linkWithRel("documentation_url").description("문서 링크")
+                        ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
                                 headerWithName(HttpHeaders.AUTHORIZATION).description("Bearer Token")
@@ -136,7 +138,8 @@ public class MatchingControllerTest extends BaseControllerTest {
                         responseFields(
                                 fieldWithPath("resultCode").type(JsonFieldType.NUMBER).description("결과코드"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("결과메시지"),
-                                fieldWithPath("details").type(JsonFieldType.STRING).description("에러상세설명")
+                                fieldWithPath("details").type(JsonFieldType.STRING).description("에러상세설명"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().is5xxServerError());
@@ -197,7 +200,9 @@ public class MatchingControllerTest extends BaseControllerTest {
                 .accept(MediaTypes.HAL_JSON)
         )
                 .andDo(document("participant-result-exception",
-
+                        links(
+                                linkWithRel("documentation_url").description("문서 링크")
+                        ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
                                 headerWithName(HttpHeaders.AUTHORIZATION).description("Bearer Token")
@@ -209,7 +214,8 @@ public class MatchingControllerTest extends BaseControllerTest {
                         responseFields(
                                 fieldWithPath("resultCode").type(JsonFieldType.NUMBER).description("결과코드"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("결과메시지"),
-                                fieldWithPath("details").type(JsonFieldType.STRING).description("에러상세설명")
+                                fieldWithPath("details").type(JsonFieldType.STRING).description("에러상세설명"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().is5xxServerError());

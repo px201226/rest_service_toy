@@ -60,7 +60,7 @@ public class LoginControllerTest extends BaseControllerTest {
                 .andDo(document("user-join",
                         links(
                                 linkWithRel("login").description("로그인 링크"),
-                                linkWithRel("profile").description("RestDocs 링크")
+                                linkWithRel("documentation_url").description("문서 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.ACCEPT).description("ACCEPT HEADER: HAL_JSON"),
@@ -87,7 +87,7 @@ public class LoginControllerTest extends BaseControllerTest {
                                 fieldWithPath("email").description("회원의 이메일"),
                                 fieldWithPath("nickName").description("회원의 닉네임"),
                                 fieldWithPath("_links.login.href").description("로그인 링크"),
-                                fieldWithPath("_links.profile.href").description("Rest Docs 링크")
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ));
 

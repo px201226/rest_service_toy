@@ -1,6 +1,7 @@
 package com.example.restapi.web;
 
 
+import com.example.restapi.common.DocumentLinkToRef;
 import com.example.restapi.config.AuthUser;
 import com.example.restapi.exception.response.ResponseService;
 import com.example.restapi.domain.user.User;
@@ -44,7 +45,7 @@ public class PostLikeController {
         map.put("isLike", byUserEmailAndPostId);
         EntityModel<Map> entityModel = EntityModel.of(map);
         entityModel.add(linkTo(PostLikeController.class).slash(postId).withSelfRel());
-
+        entityModel.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_get_4").withRel("documentation_url"));
         return ResponseEntity.ok(entityModel);
     }
 }

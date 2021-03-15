@@ -17,6 +17,8 @@ import org.springframework.restdocs.payload.PayloadSubsectionExtractor;
 import org.springframework.restdocs.snippet.Attributes;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
+import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
@@ -48,10 +50,12 @@ public class CommonSnippetsTest {
         )
                 .andExpect(status().is4xxClientError())
                 .andDo(document("error-response",
+
                         responseFields(
                                 fieldWithPath("resultCode").type(JsonFieldType.NUMBER).description("결과코드"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("결과메시지"),
-                                fieldWithPath("details").type(JsonFieldType.STRING).description("에러상세설명")
+                                fieldWithPath("details").type(JsonFieldType.STRING).description("에러상세설명"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         ))
                 );
     }

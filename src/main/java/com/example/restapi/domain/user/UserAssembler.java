@@ -1,6 +1,7 @@
 package com.example.restapi.domain.user;
 
 
+import com.example.restapi.common.DocumentLinkToRef;
 import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.comments.CommentModel;
 import com.example.restapi.domain.posts.PostModel;
@@ -40,9 +41,8 @@ public class UserAssembler extends RepresentationModelAssemblerSupport<User, Use
         userModel.setSexType(entity.getSexType());
         userModel.add(linkTo(UserController.class).slash("").withSelfRel())
                 .add(linkTo(methodOn(UserController.class).getPostList(null)).withRel("posts"))
-                .add(linkTo(methodOn(UserController.class).getCommentList(null)).withRel("comments"));
-             //   .add(linkTo("/docs/index.html#resources-user").withRel("documentation_url"));
-
+                .add(linkTo(methodOn(UserController.class).getCommentList(null)).withRel("comments"))
+                .add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_get").withRel("documentation_url"));
         return userModel;
 
     }

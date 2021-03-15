@@ -1,6 +1,7 @@
 package com.example.restapi.web;
 
 
+import com.example.restapi.common.DocumentLinkToRef;
 import com.example.restapi.config.AuthUser;
 import com.example.restapi.domain.comments.Comment;
 import com.example.restapi.domain.comments.CommentModel;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 @RestController
 @RequiredArgsConstructor
 public class CommentsController {
@@ -45,7 +48,7 @@ public class CommentsController {
                 .collect(Collectors.toList());
 
         CollectionModel<CommentModel> commentModels = commentAssembler.toCollectionModel(collect);
-
+        commentModels.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_get_3").withRel("documentation_url"));
         return ResponseEntity.ok(commentModels);
     }
 
@@ -72,7 +75,7 @@ public class CommentsController {
 
         Comment save = commentsService.save(requestDto, postId, user.getEmail());
         CommentModel commentModel = commentAssembler.toModel(new CommentResponseDto(save, Optional.ofNullable(user)));
-
+        commentModel.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_post_2").withRel("documentation_url"));
         return ResponseEntity.ok(commentModel);
     }
 
@@ -90,7 +93,7 @@ public class CommentsController {
 
         Comment update = commentsService.update(requestDto, postId, commentId, user.getEmail());
         CommentModel commentModel = commentAssembler.toModel(new CommentResponseDto(update, Optional.ofNullable(user)));
-
+        commentModel.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_update_3").withRel("documentation_url"));
         return ResponseEntity.ok(commentModel);
     }
 

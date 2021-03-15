@@ -1,6 +1,5 @@
 package com.example.restapi;
 
-import com.example.restapi.domain.posts.PagedPostAssemblerAdapter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -26,11 +25,6 @@ public class RestapiApplication {
         SessionLocaleResolver localeResolver = new SessionLocaleResolver();
         localeResolver.setDefaultLocale(Locale.KOREA);
         return localeResolver;
-    }
-
-    @Bean
-    public PagedPostAssemblerAdapter pagedResourceAssemblerAdapter(){
-        return new PagedPostAssemblerAdapter(new HateoasPageableHandlerMethodArgumentResolver(),null);
     }
 
     @Bean

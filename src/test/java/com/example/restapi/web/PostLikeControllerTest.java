@@ -69,7 +69,8 @@ public class PostLikeControllerTest extends BaseControllerTest {
         )
                 .andDo(document("postLike-retreive",
                         links(
-                                linkWithRel("self").description("Self link")
+                                linkWithRel("self").description("Self link"),
+                                linkWithRel("documentation_url").description("문서 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -85,7 +86,8 @@ public class PostLikeControllerTest extends BaseControllerTest {
                         ),
                         responseFields(
                                 fieldWithPath("isLike").description("게시물 좋아요 여부"),
-                                fieldWithPath("_links.self.href").description("Self link")
+                                fieldWithPath("_links.self.href").description("Self link"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());

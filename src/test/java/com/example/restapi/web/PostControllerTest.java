@@ -127,7 +127,9 @@ public class PostControllerTest extends BaseControllerTest {
                 .andDo(document("post-write",
                         links(
                                 linkWithRel("self").description("Self link"),
-                                linkWithRel("comments").description("댓글 목록 조회 링크").optional()
+                                linkWithRel("comments").description("댓글 목록 조회 링크").optional(),
+                                linkWithRel("documentation_url").description("문서 링크")
+
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -150,7 +152,8 @@ public class PostControllerTest extends BaseControllerTest {
                                 fieldWithPath("modifyDate").description("게시물의 마지막 수정일"),
                                 fieldWithPath("comments").description("게시물 댓글 수"),
                                 fieldWithPath("_links.self.href").description("Self link"),
-                                fieldWithPath("_links.comments.href").description("첫번째 페이지 링크").optional()
+                                fieldWithPath("_links.comments.href").description("첫번째 페이지 링크").optional(),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());
@@ -186,7 +189,8 @@ public class PostControllerTest extends BaseControllerTest {
                 .andDo(document("post-update",
                         links(
                                 linkWithRel("self").description("Self link"),
-                                linkWithRel("comments").description("댓글 목록 조회 링크").optional()
+                                linkWithRel("comments").description("댓글 목록 조회 링크").optional(),
+                                linkWithRel("documentation_url").description("문서 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -212,7 +216,8 @@ public class PostControllerTest extends BaseControllerTest {
                                 fieldWithPath("modifyDate").description("게시물의 마지막 수정일"),
                                 fieldWithPath("comments").description("게시물 댓글 수"),
                                 fieldWithPath("_links.self.href").description("Self link"),
-                                fieldWithPath("_links.comments.href").description("첫번째 페이지 링크").optional()
+                                fieldWithPath("_links.comments.href").description("첫번째 페이지 링크").optional(),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());

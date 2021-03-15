@@ -1,5 +1,6 @@
 package com.example.restapi.web;
 
+import com.example.restapi.common.DocumentLinkToRef;
 import com.example.restapi.domain.matching.result.MatchingResult;
 import com.example.restapi.domain.matching.result.MatchingResultRepository;
 import com.example.restapi.domain.matching.participant.Participant;
@@ -24,7 +25,6 @@ import com.example.restapi.web.dto.UserSaveRequestDto;
 import com.example.restapi.web.dto.UserSaveResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -161,7 +161,7 @@ public class LoginController {
         User joinUser = userService.join(user);
         EntityModel<UserSaveResponseDto> entityModel = EntityModel.of(new UserSaveResponseDto(joinUser));
         entityModel.add(linkTo(LoginController.class).slash("login").withRel("login"));
-        entityModel.add(Link.of("/docs/index.html#user-join").withRel("profile"));
+        entityModel.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#user-join").withRel("documentation_url"));
 
         //ResponseData<EntityModel> response = responseService.create(ResponseStatus.SUCCESS, entityModel);
 

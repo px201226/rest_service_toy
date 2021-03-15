@@ -10,6 +10,7 @@ import com.example.restapi.domain.posts.PostAdapterAssembler;
 import com.example.restapi.domain.posts.PostModel;
 import com.example.restapi.domain.user.User;
 import com.example.restapi.domain.user.UserAssembler;
+import com.example.restapi.domain.user.UserModel;
 import com.example.restapi.domain.user.UserRepository;
 import com.example.restapi.exception.exceptions.UserNotFoundException;
 import com.example.restapi.exception.response.ResponseData;
@@ -42,10 +43,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity getUserProfile(@AuthUser User user) {
 
-        return userRepository.findByEmail(user.getEmail())
+        ResponseEntity<UserModel> userModelResponseEntity = userRepository.findByEmail(user.getEmail())
                 .map(userAssembler::toModel)
                 .map(ResponseEntity::ok)
                 .orElseThrow(UserNotFoundException::new);
+
+        return userModelResponseEntity;
     }
 
 

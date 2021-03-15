@@ -17,12 +17,17 @@ import org.junit.jupiter.api.AfterEach;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URL;
 import java.time.LocalDate;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
@@ -46,6 +51,7 @@ public class UserControllerTest extends BaseControllerTest {
         userRepository.deleteAll();
     }
 
+
     @Test
     @TestDescription("유저 정보 조회")
     public void successShowUserProfile() throws Exception {
@@ -62,7 +68,8 @@ public class UserControllerTest extends BaseControllerTest {
                         links(
                                 linkWithRel("self").description("Self link"),
                                 linkWithRel("posts").description("내가 쓴 게시물 목록"),
-                                linkWithRel("comments").description("내가 쓴 댓글 목록")
+                                linkWithRel("comments").description("내가 쓴 댓글 목록"),
+                                linkWithRel("documentation_url").description("문서 링크")
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -90,7 +97,8 @@ public class UserControllerTest extends BaseControllerTest {
                                 fieldWithPath("sexType").description("회원의 성별"),
                                 fieldWithPath("_links.self.href").description("Self link"),
                                 fieldWithPath("_links.posts.href").description("내가 쓴 게시물 조회 링크"),
-                                fieldWithPath("_links.comments.href").description("내가 쓴 댓글 조회 링크")
+                                fieldWithPath("_links.comments.href").description("내가 쓴 댓글 조회 링크"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk())
@@ -134,7 +142,9 @@ public class UserControllerTest extends BaseControllerTest {
                         links(
                                 linkWithRel("self").description("Self link"),
                                 linkWithRel("posts").description("내가 쓴 게시물 목록"),
-                                linkWithRel("comments").description("내가 쓴 댓글 목록")
+                                linkWithRel("comments").description("내가 쓴 댓글 목록"),
+                                linkWithRel("documentation_url").description("문서 링크")
+
                         ),
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON"),
@@ -169,7 +179,8 @@ public class UserControllerTest extends BaseControllerTest {
                                 fieldWithPath("kakaoId").description("회원의 카카오톡 ID"),
                                 fieldWithPath("_links.self.href").description("Self link"),
                                 fieldWithPath("_links.posts.href").description("내가 쓴 게시물 조회 링크"),
-                                fieldWithPath("_links.comments.href").description("내가 쓴 댓글 조회 링크")
+                                fieldWithPath("_links.comments.href").description("내가 쓴 댓글 조회 링크"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
                         )
                 ))
                 .andExpect(status().isOk());

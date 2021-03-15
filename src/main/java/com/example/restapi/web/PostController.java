@@ -1,6 +1,7 @@
 package com.example.restapi.web;
 
 
+import com.example.restapi.common.DocumentLinkToRef;
 import com.example.restapi.config.AuthUser;
 import com.example.restapi.domain.posts.*;
 import com.example.restapi.exception.response.ResponseData;
@@ -13,6 +14,7 @@ import com.example.restapi.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -37,14 +39,15 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity getPageableList(Pageable pageable,
-                                          PagedPostAssemblerAdapter pagedPostAssemblerAdapter,
+                                          PagedResourcesAssembler pagedResourcesAssembler,
                                           @AuthUser User user) {
 
         Page<Post> posts = postsService.findAll(pageable);
 
         Page<PostAdapter> postAdapters = posts.map(p -> p.toAdapter(Optional.ofNullable(user)));
 
-        PagedModel<PostModel> postModels = pagedPostAssemblerAdapter.toModel(postAdapters, this.postAdapterAssembler);
+        PagedModel<PostModel> postModels = pagedResourcesAssembler.toModel(postAdapters, this.postAdapterAssembler);
+        postModels.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#resources-post").withRel("documentation_url"));
 
         return ResponseEntity.ok(postModels);
     }
@@ -55,9 +58,9 @@ public class PostController {
 
         Post post = postsService.findById(id);
 
-        PostModel model = postAdapterAssembler.toModel(post.toAdapter(Optional.ofNullable(user)));
+        PostModel postModel = postAdapterAssembler.toModel(post.toAdapter(Optional.ofNullable(user)));
 
-        return ResponseEntity.ok(model);
+        return ResponseEntity.ok(postModel);
     }
 
 
@@ -74,7 +77,7 @@ public class PostController {
         // 영속성 유지 안됨 (save 객체) -> getComment가 안됨.
         Post save = postsService.save(postsSaveRequestDto, user.getEmail());
         PostModel model = postAssembler.toModel(save);
-
+        model.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_post").withRel("documentation_url"));
         return ResponseEntity.ok(model);
     }
 
@@ -82,6 +85,7 @@ public class PostController {
     public ResponseEntity update(@PathVariable Long id, @Valid @RequestBody PostsUpdateRequestDto requestDto, @AuthUser User user) {
         Post update = postsService.update(id, requestDto, user.getEmail());
         PostModel model = postAssembler.toModel(update);
+        model.add(linkTo(DocumentLinkToRef.class).slash("docs/index.html#_update_2").withRel("documentation_url"));
         return ResponseEntity.ok(model);
     }
 
@@ -89,5 +93,6 @@ public class PostController {
     public ResponseEntity delete(@PathVariable Long id, @AuthUser User user) {
         postsService.delete(id, user.getEmail());
         return ResponseEntity.noContent().build();
+
     }
 }
