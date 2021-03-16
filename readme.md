@@ -58,7 +58,7 @@
 - Vue 와 Spring boot 서버가 통신하기 위해 REST API 설계
 - /v1/posts, /v1/comments, /v1/matching 와 같이 API 버전 관리
 - Spring Rest Docs과 테스트 코드를 이용하여 최신화된 API Document 제공
-- [Rest API Document 바로가기](http://ec2-13-125-170-210.ap-northeast-2.compute.amazonaws.com:8080/docs/index.html#overview)
+- [Rest API Document 바로가기](https://px201226.github.io/rest_service_toy/)
 
 ### [4] 매칭 알고리즘 구현
 
