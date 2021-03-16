@@ -144,6 +144,13 @@ operation::user-profile[snippets='request-headers,http-request,response-headers,
 operation::user-modify[snippets='request-headers,http-request,response-headers,response-fields,http-response,links']
 
 
+=== email
+
+`email' 리소스를 통해 사용자 이메일의 존재 여부를 알 수 있다.
+
+operation::user-find[snippets='path-parameters,curl-request,response-fields,http-response,links']
+
+
 [[resources-post]]
 == Post
 

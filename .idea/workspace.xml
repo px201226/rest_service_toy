@@ -29,12 +29,12 @@
     <list default="true" id="1beea696-f4ba-4d31-a32c-fbbd5314eae6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/asciidoc/index.adoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/category/BodyType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/category/BodyType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/category/TallType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/domain/user/profile/category/TallType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CommonSnippetsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CommonSnippetsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/snippets/CommonCodeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/profile/category/BodyType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/profile/category/BodyType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/profile/category/TallType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/profile/category/TallType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/config/ResourceServerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/restapi/web/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/restapi/web/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/UserAssembler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/profile/DetailProfilesResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/domain/user/profile/DetailProfilesResource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/restapi/web/UserController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +116,7 @@
       <recent name="C:\Users\Lee-Gi-Su\IdeaProjects\restapi\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CommonSnippetsTest (1)">
+  <component name="RunManager" selected="JUnit.UserControllerTest.successFindUserEmail">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <module name="restapi" />
       <method v="2">
@@ -134,17 +134,6 @@
       <option name="PACKAGE_NAME" value="com.example.restapi.snippets" />
       <option name="MAIN_CLASS_NAME" value="com.example.restapi.snippets.CommonSnippetsTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommonSnippetsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="restapi" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="uniqueId" />
-      <uniqueIds>
-        <uniqueId value="[engine:junit-jupiter]/[class:com.example.restapi.snippets.CommonSnippetsTest]" />
-      </uniqueIds>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,6 +164,22 @@
       <option name="PACKAGE_NAME" value="com.example.restapi.web" />
       <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.UserControllerTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserControllerTest.successFindUserEmail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="restapi" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.restapi.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.restapi.web" />
+      <option name="MAIN_CLASS_NAME" value="com.example.restapi.web.UserControllerTest" />
+      <option name="METHOD_NAME" value="successFindUserEmail" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -243,18 +248,18 @@
     <list>
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="JUnit.UserControllerTest" />
-      <item itemvalue="JUnit.CommonSnippetsTest" />
       <item itemvalue="JUnit.LoginControllerTest" />
       <item itemvalue="JUnit.com.example.restapi.web in restapi" />
       <item itemvalue="JUnit.CommonSnippetsTest (1)" />
+      <item itemvalue="JUnit.UserControllerTest.successFindUserEmail" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserControllerTest.successFindUserEmail" />
         <item itemvalue="JUnit.CommonSnippetsTest (1)" />
         <item itemvalue="JUnit.LoginControllerTest" />
         <item itemvalue="JUnit.com.example.restapi.web in restapi" />
         <item itemvalue="JUnit.UserControllerTest" />
-        <item itemvalue="JUnit.CommonSnippetsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -348,10 +353,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="76" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.689@0.0.1280.689" timestamp="1612245359955" />
-    <state x="371" y="92" width="538" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1615786324900">
+    <state x="371" y="92" width="538" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1615799319829">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="371" y="92" width="538" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.689@0.0.1280.689" timestamp="1615786324900" />
+    <state x="371" y="92" width="538" height="503" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.689@0.0.1280.689" timestamp="1615799319829" />
     <state x="371" y="268" key="DBNavigator.CreateRenameConsoleDialog" timestamp="1612329870362">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -364,22 +369,22 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="421" y="100" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1615302614324" />
-    <state width="1237" height="156" key="GridCell.Tab.0.bottom" timestamp="1615795008337">
+    <state width="1237" height="192" key="GridCell.Tab.0.bottom" timestamp="1615875742457">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="156" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1615795008337" />
-    <state width="1237" height="156" key="GridCell.Tab.0.center" timestamp="1615795008337">
+    <state width="1237" height="192" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1615875742457" />
+    <state width="1237" height="192" key="GridCell.Tab.0.center" timestamp="1615875742457">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="156" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1615795008337" />
-    <state width="1237" height="156" key="GridCell.Tab.0.left" timestamp="1615795008337">
+    <state width="1237" height="192" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1615875742457" />
+    <state width="1237" height="192" key="GridCell.Tab.0.left" timestamp="1615875742457">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="156" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1615795008337" />
-    <state width="1237" height="156" key="GridCell.Tab.0.right" timestamp="1615795008337">
+    <state width="1237" height="192" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1615875742457" />
+    <state width="1237" height="192" key="GridCell.Tab.0.right" timestamp="1615875742457">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state width="1237" height="156" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1615795008337" />
+    <state width="1237" height="192" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1615875742457" />
     <state width="1237" height="225" key="GridCell.Tab.1.bottom" timestamp="1612169091388">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -420,10 +425,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="15" y="104" key="extract.method.dialog/0.0.1280.689@0.0.1280.689" timestamp="1612244804908" />
-    <state x="0" y="33" width="1280" height="630" key="find.popup" timestamp="1615791729333">
+    <state x="0" y="33" width="1280" height="630" key="find.popup" timestamp="1615876166013">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="0" y="33" width="1280" height="630" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1615791729333" />
+    <state x="0" y="33" width="1280" height="630" key="find.popup/0.0.1280.689@0.0.1280.689" timestamp="1615876166013" />
     <state x="37" y="0" key="new project wizard" timestamp="1607926175349">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -436,10 +441,10 @@
       <screen x="0" y="0" width="1280" height="689" />
     </state>
     <state x="297" y="153" key="run.anything.popup/0.0.1280.689@0.0.1280.689" timestamp="1611818162611" />
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1612509006649">
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1615798847809">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1612509006649" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.689@0.0.1280.689" timestamp="1615798847809" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

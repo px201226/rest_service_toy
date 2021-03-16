@@ -22,6 +22,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URL;
@@ -34,7 +35,7 @@ import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.li
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -186,5 +187,39 @@ public class UserControllerTest extends BaseControllerTest {
                 .andExpect(status().isOk());
 
     }
+    @Test
+    @TestDescription("유저 이메일 조회")
+    public void successFindUserEmail() throws Exception {
+        // given
+        User joinUser = getJoinUser("px2007@naver.com", "password123", "피엑스맛나", "px2007", SexType.MAN);
 
+        // when && then
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/v1/user/email/{id}",  "px2007@naver.com")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaTypes.HAL_JSON)
+        )
+                .andDo(document("user-find",
+                        links(
+                                linkWithRel("self").description("Self link"),
+                                linkWithRel("documentation_url").description("문서 링크")
+                        ),
+                        pathParameters(
+                          parameterWithName("id").description("찾을 유저 Email")
+                        ),
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("JSON")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CACHE_CONTROL).description("Cache-Control"),
+                                headerWithName(HttpHeaders.PRAGMA).description("Pragma"),
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("Content-Type")
+                        ),
+                        responseFields(
+                                fieldWithPath("found").description("결과"),
+                                fieldWithPath("_links.self.href").description("Self link"),
+                                fieldWithPath("_links.documentation_url.href").description("문서 링크")
+                        )
+                ))
+                .andExpect(status().isOk());
+    }
 }
